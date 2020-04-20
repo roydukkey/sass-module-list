@@ -1,0 +1,37 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group tests
+////
+
+@use 'src'
+@use 'true'
+
+
+@include true.describe('@function src.join')
+
+	@include true.it('Automatically selects space for glue')
+		$assert: src.join([10px 20px 'a'])
+		$expected: '10px 20px a'
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Automatically selects comma for glue')
+		$assert: src.join([10px, 20px 'a'])
+		$expected: '10px,20px,a'
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Use specified string for glue')
+		$assert: src.join([10px 20px 'a'], '-')
+		$expected: '10px-20px-a'
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Include nested lists')
+		$assert: src.join([10px 20px 'a' (#fff, rgb(127, 127, 127), #000)], ' ?? ')
+		$expected: '10px ?? 20px ?? a ?? #fff ?? #7f7f7f ?? #000'
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Convert the glue to a string')
+		$assert: src.join([10px, 20px 'a'], rgb(127, 127, 127))
+		$expected: '10px#7f7f7f20px#7f7f7fa'
+		@include true.assert-equal($assert, $expected)

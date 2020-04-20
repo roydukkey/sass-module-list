@@ -1,0 +1,58 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group tests
+////
+
+@use 'sass:list'
+@use 'sass:meta'
+@use 'src'
+@use 'true'
+
+
+@function _greater-than-ten($item, $index...)
+	@return $item > 10
+
+@function _greater-than-index($item, $index, $list)
+	@return $item > $index
+
+@function _equals-2n-plus-index($item, $index, $list)
+	$length: list.length($list)
+	$n: $index + 2
+
+	@if $n > $length
+		$n: $n - $length + $length % 2
+
+	@return $item == list.nth($list, $n)
+
+
+@include true.describe('@function src.some')
+
+	@include true.it('Predicate matches some items in a list')
+		$assert: src.some(2 4 6 8 16, meta.get-function('_greater-than-ten'))
+		$expected: true
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Predicate does not match any items in a list')
+		$assert: src.some(2 4 6 8, meta.get-function('_greater-than-ten'))
+		$expected: false
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Predicate receives the item indexes')
+		$assert: src.some(2 4 6 8 16, meta.get-function('_greater-than-index'))
+		$expected: true
+		@include true.assert-equal($assert, $expected, '[2 4 6 8 16]')
+
+		$assert: src.some(1 1 1 1 1, meta.get-function('_greater-than-index'))
+		$expected: false
+		@include true.assert-equal($assert, $expected, '[1 1 1 1 1]')
+
+	@include true.it('Predicate receives the calling list')
+		$assert: src.some(1 2 3 1 2 1 4 5, meta.get-function('_equals-2n-plus-index'))
+		$expected: true
+		@include true.assert-equal($assert, $expected, '[1 2 3 1 2 1 4 5]')
+
+		$assert: src.some(2 1 1 2 2 1 1 2, meta.get-function('_equals-2n-plus-index'))
+		$expected: false
+		@include true.assert-equal($assert, $expected, '[2 1 1 2 2 1 1 2]')

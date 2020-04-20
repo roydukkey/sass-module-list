@@ -1,0 +1,44 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group internal
+////
+
+@use 'sass:list'
+
+
+///
+/// Initialise a new list matching the bracket style of another list.
+///
+/// @param {List} $list - The list to match.
+/// @return {List}
+///
+/// @access public
+///
+@function init($list)
+	@return if(list.is-bracketed($list), [], ())
+
+
+///
+/// Returns a copy of a list with the specified value inserted into the list at a given index.
+///
+/// @param {List} $list - The list to which the value is to be inserted.
+/// @param {Number} $index - The index at which the value is to be inserted.
+/// @param {*} $value - The value which is to be inserted.
+/// @param {String} $separator [auto] - The type of separator to be used by the copied list.
+/// @return {List}
+///
+/// @access public
+///
+@function insert-nth($list, $index, $value, $separator: list.separator($list))
+	$result: init($list)
+
+	@for $n from 1 through list.length($list)
+
+		@if $n == $index
+			$result: list.append($result, $value, $separator)
+
+		$result: list.append($result, list.nth($list, $n))
+
+	@return $result

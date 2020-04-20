@@ -1,0 +1,51 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group api
+////
+
+@use 'sass:list'
+@use 'sass:meta'
+@use '../internal'
+
+
+///
+/// Creates a new list with all item from a list that satisfy the test implemented by the specified function.
+///
+/// @param {List} $list - The list from which items will be tested.
+/// @param {Function} $predicate - The function that tests each item for a condition. The first parameter is the current item being processed in the list. The second parameter is the index of the current item being processed in the list. The third parameter is the list being processed. The returned value will be compared for truthiness.
+/// @param {String} $separator [auto] - The type of separator to be used by the extracted list.
+/// @param {ArgList} $args - Additional parameters which are provided to predicate function.
+/// @return {List}
+///
+/// @throw `#{$predicate}` is not a function.
+/// @throw Must be "space", "comma", or "auto".
+///
+/// @access public
+/// @require internal.$exception-function
+/// @require internal.exception-separator
+/// @require internal.exception-type
+/// @require internal.init
+/// @require internal.param-separator-is-invalid
+///
+@function filter($list, $predicate, $separator: list.separator($list), $args...)
+	internal.$exception-function: 'filter'
+
+	@if meta.type-of($predicate) != 'function'
+		@error internal.exception-type('predicate', $predicate, 'function')
+
+	@if internal.param-separator-is-invalid($separator)
+		@error internal.exception-separator()
+
+	$result: internal.init($list)
+	$index: 1
+
+	@each $item in $list
+
+		@if meta.call($predicate, $item, $index, $list, $args...)
+			$result: list.append($result, $item, $separator)
+
+		$index: $index + 1
+
+	@return $result

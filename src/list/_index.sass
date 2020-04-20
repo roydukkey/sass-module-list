@@ -1,0 +1,42 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group api
+////
+
+@use 'sass:list'
+@use 'sass:meta'
+@use '../internal'
+
+
+///
+/// Returns the first index at which a specified item can be found in a list; otherwise, 0 is returned, indicating that the item is not present.
+///
+/// @param {List} $list - The list from which the value is to be located.
+/// @param {*} $value - The value to locate in the list.
+/// @param {Number} $from-index [1] - The index at which to begin the search. A negative index can be used, indicating an offset from the end of the list.
+/// @return {Number}
+///
+/// @throw `#{$from-index}` is not a number.
+/// @throw List index may not be 0.
+/// @throw Invalid index #{$from-index} for a list with #{$length} elements.
+///
+/// @access public
+/// @require internal.$exception-function
+/// @require internal.param-validate-index
+///
+@function index($list, $value, $from-index: 1)
+	internal.$exception-function: 'index'
+
+	$length: list.length($list)
+	$from-index: internal.param-validate-index('from-index', $from-index, $length)
+
+	@if meta.type-of($from-index) != 'number'
+		@error $from-index
+
+	@for $index from $from-index through $length
+		@if list.nth($list, $index) == $value
+			@return $index
+
+	@return 0

@@ -1,0 +1,39 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group api
+////
+
+@use 'sass:list'
+@use 'sass:meta'
+@use 'map'
+
+
+///
+/// Reverses a list in place. The first item becomes the last, and the last item becomes the first.
+///
+/// @param {List} $list - The list to reverse.
+/// @return {List}
+///
+/// @access public
+/// @require _replace-transformer
+/// @require map.map
+///
+@function replace($list, $value, $replacement)
+	@return map.map($list, meta.get-function('_replace-transformer'), $value, $replacement)
+
+
+///
+/// A filter function that tests equality of the current item's index to the index of the first instance of current item in the list.
+///
+/// @param {*} $item - The current item being processed in the list.
+/// @param {Number} $index - The index of the current item being processed in the list.
+/// @param {List} $list - The list being processed.
+/// @param {ArgList} $args - Additional parameters which are provided to transform function.
+/// @return {*}
+///
+/// @access private
+///
+@function _replace-transformer($item, $index, $list, $args...)
+	@return if($item == list.nth($args, 1), list.nth($args, 2), $item)

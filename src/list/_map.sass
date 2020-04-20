@@ -1,0 +1,41 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group api
+////
+
+@use 'sass:list'
+@use 'sass:meta'
+@use '../internal'
+
+
+///
+/// Creates a new list populated with the results of calling a specified function on every item in a list.
+///
+/// @param {List} $list - The list from which items will be processed.
+/// @param {Function} $transformer - The transform function to apply to each item. The first parameter is the current item being processed in the list. The second parameter is the index of the current item being processed in the list. The third parameter is the list being processed. The returned value may be any type.
+/// @param {ArgList} $args - Additional parameters which are provided to transform function.
+///
+/// @return {List}
+///
+/// @throw `#{$transformer}` is not a function.
+///
+/// @access public
+/// @require internal.$exception-function
+/// @require internal.exception-type
+///
+@function map($list, $transformer, $args...)
+	internal.$exception-function: 'map'
+
+	@if meta.type-of($transformer) != 'function'
+		@error internal.exception-type('transformer', $transformer, 'function')
+
+	$source: $list
+	$index: 1
+
+	@each $item in $list
+		$list: list.set-nth($list, $index, meta.call($transformer, $item, $index, $source, $args...))
+		$index: $index + 1
+
+	@return $list

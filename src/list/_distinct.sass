@@ -1,0 +1,50 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group api
+////
+
+@use 'sass:list'
+@use 'sass:meta'
+@use 'filter'
+@use '../internal'
+
+
+///
+/// Creates a new list with all distinct items from a list.
+///
+/// @param {List} $list - The list from which items distinct items will be selected.
+/// @param {String} $separator [auto] - The type of separator to be used by the extracted list.
+/// @return {List}
+///
+/// @throw Must be "space", "comma", or "auto".
+///
+/// @access public
+/// @require _distinct-predicate
+/// @require filter.filter
+/// @require internal.$exception-function
+/// @require internal.exception-separator
+/// @require internal.param-separator-is-invalid
+///
+@function distinct($list, $separator: list.separator($list))
+	internal.$exception-function: 'distinct'
+
+	@if internal.param-separator-is-invalid($separator)
+		@error internal.exception-separator()
+
+	@return filter.filter($list, meta.get-function('_distinct-predicate'), $separator)
+
+
+///
+/// A filter function that tests equality of the current item's index to the index of the first instance of current item in the list.
+///
+/// @param {*} $item - The current item being processed in the list.
+/// @param {Number} $index - The index of the current item being processed in the list.
+/// @param {List} $list - The list being processed.
+/// @return {Boolean}
+///
+/// @access private
+///
+@function _distinct-predicate($item, $index, $list)
+	@return list.index($list, $item) == $index

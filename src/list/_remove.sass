@@ -1,0 +1,30 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group api
+////
+
+@use 'sass:list'
+@use 'remove-nth'
+
+
+///
+/// Returns a copy of a list without the specified value.
+///
+/// @param {List} $list - The list to which the value is to be removed.
+/// @param {Number} $value - The value to be removed.
+/// @return {List}
+///
+/// @access public
+/// @require remove-nth.remove-nth
+///
+@function remove($list, $value)
+
+	$index: list.index($list, $value)
+
+	@while $index
+		$list: remove-nth.remove-nth($list, $index)
+		$index: list.index($list, $value)
+
+	@return $list

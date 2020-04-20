@@ -1,0 +1,48 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group api
+////
+
+@use 'sass:list'
+@use '../internal'
+
+
+///
+/// Merges two or more lists into a new list.
+///
+/// @param {ArgList} $values - The lists or single values to concatenate.
+/// @param {String} $separator [auto] - The type of separator to be used by the extracted list. Must be passed by name.
+/// @param {Boolean | String} $bracketed [auto] - The type of brackets to be used by the extracted list. Must be passed by name.
+/// @return {List}
+///
+/// @throw Must be "space", "comma", or "auto".
+/// @throw The beginning index is not less than the length of the list.
+///
+/// @access public
+/// @require internal.$exception-function
+/// @require internal.exception-param
+/// @require internal.exception-separator
+/// @require internal.init
+/// @require internal.param-get
+/// @require internal.param-separator-is-invalid
+///
+@function concat($values...)
+	internal.$exception-function: 'concat'
+
+	$separator: internal.param-get($values, 'separator', auto)
+	$bracketed: internal.param-get($values, 'bracketed', auto)
+
+	@if internal.param-separator-is-invalid($separator)
+		@error internal.exception-separator()
+
+	@if list.length($values) < 2
+		@error internal.exception-param('Two values or more are required', 'values')
+
+	$result: internal.init(list.nth($values, 1))
+
+	@each $value in $values
+		$result: list.join($result, $value, $separator, $bracketed)
+
+	@return $result

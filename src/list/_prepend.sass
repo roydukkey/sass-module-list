@@ -1,0 +1,34 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group api
+////
+
+@use 'sass:list'
+@use '../internal'
+
+
+///
+/// Returns a copy of a list with the specified value added to the beginning.
+///
+/// @param {List} $list - The list to which the value is to be prepended.
+/// @param {*} $value - The value which is to be prepended.
+/// @param {String} $separator [auto] - The type of separator to be used by the copied list.
+/// @return {List}
+///
+/// @throw Must be "space", "comma", or "auto".
+///
+/// @access public
+/// @require internal.$exception-function
+/// @require internal.exception-separator
+/// @require internal.insert-nth
+/// @require internal.param-separator-is-invalid
+///
+@function prepend($list, $value, $separator: list.separator($list))
+	internal.$exception-function: 'prepend'
+
+	@if internal.param-separator-is-invalid($separator)
+		@error internal.exception-separator()
+
+	@return internal.insert-nth($list, 1, $value, $separator)

@@ -1,0 +1,72 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group tests
+////
+
+@use 'src'
+@use 'true'
+
+
+@include true.describe('@function src.sort')
+
+	@include true.it('Order string values in ascending order')
+		$assert: src.sort('Three' 'Two' 'Five' 'Six' 'Four' 'One')
+		$expected: 'Five' 'Four' 'One' 'Six' 'Three' 'Two'
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Order string values in descending order')
+		$assert: src.sort('Three' 'Two' 'Five' 'Six' 'Four' 'One', src.$compare-desc)
+		$expected: 'Two' 'Three' 'Six' 'One' 'Four' 'Five'
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Order simple mixed values in ascending order')
+		$assert: src.sort('Three' 100 false 'Two' 'Five' true 9 'Six' 80 'four' 1 'One')
+		$expected: 1 100 80 9 'Five' 'One' 'Six' 'Three' 'Two' false 'four' true
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Order simple mixed values in descending order')
+		$assert: src.sort('Three' 100 false 'Two' 'Five' true 9 'Six' 80 'four' 1 'One', src.$compare-desc)
+		$expected: true 'four' false 'Two' 'Three' 'Six' 'One' 'Five' 9 80 100 1
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Order list values in ascending order')
+		$assert: src.sort((3 4) (1 3) (2 1) (1 2 3) (2 'a'))
+		$expected: (1 2 3) (1 3) (2 1) (2 'a') (3 4)
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Order list values in descending order')
+		$assert: src.sort((3 4) (1 3) (2 1) (1 2 3) (2 'a'), src.$compare-desc)
+		$expected: (3 4) (2 'a') (2 1) (1 3) (1 2 3)
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Order null items last')
+		$assert: src.sort('Three' null 'Two' 'Five' null 'Six' 'Four' 'One')
+		$expected: 'Five' 'Four' 'One' 'Six' 'Three' 'Two' null null
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Order unsupported characters last')
+		$assert: src.sort('Three' '¿' 'Two' 1 'F¿ive' false 'Six' true 'Four' null 'One')
+		$expected: 1 'Four' 'F¿ive' 'One' 'Six' 'Three' 'Two' false true '¿' null
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Order numbers with numeric sort in ascending order')
+		$assert: src.sort(1 -9 3 5 0 6 4 2 60 5 7, src.$compare-numeric)
+		$expected: -9 0 1 2 3 4 5 5 6 7 60
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Order numbers with numeric sort in descending order')
+		$assert: src.sort(1 -9 3 5 0 6 4 2 60 5 7, src.$compare-numeric-desc)
+		$expected: 60 7 6 5 5 4 3 2 1 0 -9
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Order items keeping bracket style')
+		$assert: src.sort(['Three' 'Two' 'Five' 'Six' 'Four' 'One'])
+		$expected: ['Five' 'Four' 'One' 'Six' 'Three' 'Two']
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Order items keeping the same separator')
+		$assert: src.sort(('Three', 'Two', 'Five', 'Six', 'Four', 'One'))
+		$expected: 'Five', 'Four', 'One', 'Six', 'Three', 'Two'
+		@include true.assert-equal($assert, $expected)

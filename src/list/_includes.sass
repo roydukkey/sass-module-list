@@ -1,0 +1,39 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group api
+////
+
+@use 'sass:list'
+@use 'sass:meta'
+@use 'index'
+@use '../internal'
+
+
+///
+/// Determines whether a list includes a certain value among its items, returning true or false as appropriate.
+///
+/// @param {List} $list - The list to be check.
+/// @param {*} $value - The value to search for in the list.
+/// @param {Number} $start-at [1] - The index in this list at which to begin searching for value. A negative index can be used, indicating an offset from the end of the list.
+/// @return {Boolean}
+///
+/// @throw `#{$start-at}` is not a number.
+/// @throw List index may not be 0.
+/// @throw Invalid index #{$start-at} for a list with #{$length} elements.
+///
+/// @access public
+/// @require index.index
+/// @require internal.$exception-function
+/// @require internal.param-validate-index
+///
+@function includes($list, $value, $start-at: 1)
+	internal.$exception-function: 'includes'
+
+	$start-at: internal.param-validate-index('start-at', $start-at, list.length($list))
+
+	@if meta.type-of($start-at) != 'number'
+		@error $start-at
+
+	@return index.index($list, $value, $start-at) > 0

@@ -1,0 +1,28 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group tests
+////
+
+@use 'src'
+@use 'true'
+
+
+@include true.describe('@function src.insert-nth')
+	$list: ['ant', 'bison', 'camel', 'duck', 'elephant']
+
+	@include true.it('Insert an item at a positive (+) index')
+		$assert: src.insert-nth($list, 2, 'deer')
+		$expected: ['ant', 'deer', 'bison', 'camel', 'duck', 'elephant']
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Insert an item at a negative (-) index')
+		$assert: src.insert-nth($list, -2, 'deer')
+		$expected: ['ant', 'bison', 'camel', 'deer', 'duck', 'elephant']
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Insert a list')
+		$assert: src.insert-nth($list, 3, (1 2 3))
+		$expected: ['ant', 'bison', (1 2 3), 'camel', 'duck', 'elephant']
+		@include true.assert-equal($assert, $expected)

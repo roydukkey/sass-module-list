@@ -1,0 +1,40 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group api
+////
+
+@use 'sass:list'
+@use 'sass:meta'
+@use '../internal'
+
+
+///
+/// Returns a copy of a list with the specified value inserted into the list at a given index.
+///
+/// @param {List} $list - The list to which the value is to be inserted.
+/// @param {Number} $index - The index at which the value is to be inserted. A negative index can be used, indicating an offset from the end of the list.
+/// @param {*} $value - The value which is to be inserted.
+/// @return {List}
+///
+/// @throw `#{$index}` is not a number.
+/// @throw List index may not be 0.
+/// @throw Invalid index #{$index} for a list with #{$length} elements.
+///
+/// @access public
+/// @require internal.$exception-function
+/// @require internal.param-validate-index
+/// @require internal.insert-nth
+///
+@function insert-nth($list, $index, $value)
+	internal.$exception-function: 'insert-nth'
+
+	$index: internal.param-validate-index('index', $index, list.length($list))
+
+	@if meta.type-of($index) != 'number'
+		@error $index
+
+	@return internal.insert-nth($list, $index, $value)
+
+

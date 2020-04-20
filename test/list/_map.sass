@@ -1,0 +1,47 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group tests
+////
+
+@use 'sass:list'
+@use 'sass:meta'
+@use 'src'
+@use 'true'
+
+
+@function _add-one($item, $index...)
+	@return $item + 1
+
+
+@function _add-index($item, $index, $list)
+	@return $index
+
+
+@function _add-2n-plus-index($item, $index, $list)
+	$length: list.length($list)
+	$n: $index + 2
+
+	@if $n > $length
+		$n: $n - $length + $length % 2
+
+	@return $item + list.nth($list, $n)
+
+
+@include true.describe('@function src.map')
+
+	@include true.it('Transform the items in a list')
+		$assert: src.map(2 4 6 8 16, meta.get-function('_add-one'))
+		$expected: 3 5 7 9 17
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Transformer receives the item indexes')
+		$assert: src.map(2 4 6 8 16, meta.get-function('_add-index'))
+		$expected: 1 2 3 4 5
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Transformer receives the calling list')
+		$assert: src.map(1 2 1 2 1 2 1 2, meta.get-function('_add-2n-plus-index'))
+		$expected: 2 4 2 4 2 4 2 4
+		@include true.assert-equal($assert, $expected)

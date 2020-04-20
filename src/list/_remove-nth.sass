@@ -1,0 +1,48 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group api
+////
+
+@use 'sass:list'
+@use 'sass:meta'
+@use 'slice'
+@use '../internal'
+
+
+///
+/// Returns a copy of a list without the value at a given index.
+///
+/// @param {List} $list - The list to which the value is to be removed.
+/// @param {Number} $index - The index at which the value is to be removed. A negative index can be used, indicating an offset from the end of the list.
+/// @return {List}
+///
+/// @throw `#{$index}` is not a number.
+/// @throw List index may not be 0.
+/// @throw Invalid index #{$index} for a list with #{$length} elements.
+///
+/// @access public
+/// @require internal.$exception-function
+/// @require internal.init
+/// @require internal.param-validate-index
+/// @require slice.slice
+///
+@function remove-nth($list, $index)
+	internal.$exception-function: 'remove-nth'
+
+	$length: list.length($list)
+	$index: internal.param-validate-index('index', $index, $length)
+
+	@if meta.type-of($index) != 'number'
+		@error $index
+
+	@if $index == 1
+		@return slice.slice($list, $index + 1)
+
+	@if $index == $length
+		@return slice.slice($list, 1, $length - 1)
+
+	@return list.join(slice.slice($list, 1, $index - 1), slice.slice($list, $index + 1))
+
+

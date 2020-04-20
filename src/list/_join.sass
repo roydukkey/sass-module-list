@@ -1,0 +1,30 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group api
+////
+
+@use 'sass:list'
+
+
+///
+/// Concatenates all of the items in an list to a string, separated by the list's separator or a specified glue string. If the list has only one item, then that item will be returned without using the glue.
+///
+/// @param {List} $list - The list to join.
+/// @param {String} $glue [if(list.separator($list) == space, ' ', ',')] - The string to separate each pair of adjacent items of the list. The value is converted to a string if necessary.
+/// @return {String}
+///
+/// @access public
+///
+@function join($list, $glue: if(list.separator($list) == space, ' ', ','))
+	$result: ''
+	$last-item: list.nth($list, -1)
+
+	@each $item in $list
+		$result: $result + if(list.length($item) > 1, join($item, $glue), $item)
+
+		@if $item != $last-item
+			$result: $result + $glue
+
+	@return $result

@@ -1,0 +1,55 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group tests
+////
+
+@use 'sass:list'
+@use 'sass:meta'
+@use 'src'
+@use 'true'
+
+
+@function _add($accumulator, $item, $index...)
+	@return if($accumulator == null, 0, $accumulator) + $item
+
+
+@function _add-then-multiply($accumulator, $item, $index, $list)
+	$accumulator: if($accumulator == null, 0, $accumulator)
+	@return if($index % 2 > 0, $accumulator + $item, $accumulator * $item)
+
+
+@function _add-then-multiply-plus-2n($accumulator, $item, $index, $list)
+	$accumulator: if($accumulator == null, 0, $accumulator)
+
+	$length: list.length($list)
+	$n: $index + 2
+
+	@if $n > $length
+		$n: $n - $length + $length % 2
+
+	@return if($index % 2 > 0, $accumulator + $item, $accumulator * $item) + list.nth($list, $n)
+
+
+@include true.describe('@function src.reduce-right')
+
+	@include true.it('Reduce the items in a list')
+		$assert: src.reduce-right(2 4 6 8 16, meta.get-function('_add'))
+		$expected: 2 + 4 + 6 + 8 + 16
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Transformer receives the item indexes')
+		$assert: src.reduce-right(2 4 6 8 16, meta.get-function('_add-then-multiply'))
+		$expected: ((((0 + 16) * 8) + 6) * 4) + 2
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Transformer receives the calling list')
+		$assert: src.reduce-right(1 2 3 4 5, meta.get-function('_add-then-multiply-plus-2n'))
+		$expected: (((((0 + 5 + 3) * 4 + 2) + 3 + 5) * 2 + 4) + 1 + 3)
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Transformer receives an initial value')
+		$assert: src.reduce-right(2 4 6 8 16, meta.get-function('_add'), 20)
+		$expected: 20 + 2 + 4 + 6 + 8 + 16
+		@include true.assert-equal($assert, $expected)

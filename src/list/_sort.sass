@@ -1,0 +1,238 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group api
+////
+
+@use 'sass:list'
+@use 'sass:math'
+@use 'sass:meta'
+@use 'sass:string'
+@use 'slice'
+@use '../internal'
+
+
+///
+/// The list that define the sort order for UTF-16 code units.
+///
+/// @type {List}
+///
+/// @access private
+///
+$_order: '' ' ' '!' '"' '#' '$' '%' '&' "'" '(' ')' '*' '+' ',' '-' '.' '/'
+$_order: list.join($_order, '0' '1' '2' '3' '4' '5' '6' '7' '8' '9')
+$_order: list.join($_order, ':' ';' '<' '=' '>' '?' '@')
+$_order: list.join($_order, 'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J' 'K' 'L' 'M' 'N' 'O' 'P' 'Q' 'R' 'S' 'T' 'U' 'V' 'W' 'X' 'Y' 'Z')
+$_order: list.join($_order, '[' '\\' ']' '^' '_' '`')
+$_order: list.join($_order, 'a' 'b' 'c' 'd' 'e' 'f' 'g' 'h' 'i' 'j' 'k' 'l' 'm' 'n' 'o' 'p' 'q' 'r' 's' 't' 'u' 'v' 'w' 'x' 'y' 'z')
+$_order: list.join($_order, '{' '|' '}' '~')
+
+
+///
+/// Sorts the items of a list in place. The default sort order is ascending, built upon converting the items into strings, then comparing their sequences of UTF-16 code units values.
+///
+/// @param {List} $list - The list to sort.
+/// @param {Function} $compare [$compare] - The function that defines the sort order. The first parameter is the first item for comparison. The second parameter is the second item for comparison. The returned value must be a number.
+/// @return {List}
+///
+/// @throw `#{$compare}` is not a function.
+///
+/// @access public
+/// @require $compare
+/// @require _order
+/// @require internal.$exception-function
+/// @require internal.exception-type
+/// @require slice.slice
+///
+@function sort($list, $compare: $compare)
+	internal.$exception-function: 'sort'
+
+	@if meta.type-of($compare) != 'function'
+		@error internal.exception-type('compare', $compare, 'function')
+
+	$length: list.length($list)
+
+	@if $length < 2
+		@return $list
+
+	$middle: math.floor($length / 2)
+	$left: slice.slice($list, 1, $middle)
+	$right: slice.slice($list, $middle + 1)
+
+	@return _order(sort($left, $compare), sort($right, $compare), $compare)
+
+
+///
+/// Orders and merges the items for a subset of a list.
+///
+/// @param {List} $left - The left side of the list being sorted.
+/// @param {List} $right - The right side of the list being sorted.
+/// @param {Function} $compare - The function that defines the sort order.
+/// @return {List}
+///
+/// @access private
+/// @require internal.init
+/// @require slice.slice
+///
+@function _order($left, $right, $compare)
+	$result: internal.init($left)
+	$left-index: 1
+	$right-index: 1
+	$left-length: list.length($left)
+	$right-length: list.length($right)
+
+	@while $left-index <= $left-length and $right-index <= $right-length
+		$left-value: list.nth($left, $left-index)
+		$right-value: list.nth($right, $right-index)
+
+		@if meta.call($compare, $left-value, $right-value) < 0
+			$result: list.append($result, $left-value)
+			$left-index: $left-index + 1
+
+		@else
+			$result: list.append($result, $right-value)
+			$right-index: $right-index + 1
+
+	$remainder: if($left-index < $right-index, slice.slice($left, $left-index), slice.slice($right, $right-index))
+
+	@return list.join($result, $remainder, $separator: list.separator($left))
+
+
+///
+/// Compares two non-null list items by converting them to strings and comparing strings in ascending UTF-16 code units order from `feff0020` to `feff007e`. For example, 'banana' comes before 'cherry'. In a numeric sort, 9 comes before 80, but because numbers are converted to strings, '80' comes before '9' in the Unicode order. All null items are sorted to the end of the list.
+///
+/// @param {*} $first-item - The first item for the comparison.
+/// @param {*} $second-item - The second item for the comparison.
+/// @return {Number}
+///
+/// @access private
+/// @require $_order
+///
+@function _default-compare($first-item, $second-item)
+
+	@if $first-item == null
+		@return 1
+
+	@if $second-item == null
+		@return -1
+
+	$first-item: '"#{$first-item}"'
+	$second-item: '"#{$second-item}"'
+
+	@for $i from 1 through math.min(string.length($first-item), string.length($second-item))
+		$first-index: list.index($_order, string.slice($first-item, $i, $i))
+		$second-index: list.index($_order, string.slice($second-item, $i, $i))
+
+		// The first item is not with the support UTF-16 range.
+		@if not $first-index
+			@return 1
+
+		// The second item is not with the support UTF-16 range.
+		@if not $second-index
+			@return -1
+
+		// Both items are found in the range, return the difference of the indexes of the characters.
+		@if $first-index != $second-index
+			@return $first-index - $second-index
+
+	// Both items are equal
+	@return 0
+
+
+///
+/// Compares two non-null list items by converting them to strings and comparing strings in descending UTF-16 code units order from `feff0020` to `feff007e`. For example, 'banana' comes before 'cherry'. In a numeric sort, 9 comes before 80, but because numbers are converted to strings, '80' comes before '9' in the Unicode order. All null items are sorted to the end of the list.
+///
+/// @param {*} $first-item - The first item for the comparison.
+/// @param {*} $second-item - The second item for the comparison.
+/// @return {Number}
+///
+/// @access private
+/// @require _default-compare
+///
+@function _default-compare-desc($first-item, $second-item)
+	@return _default-compare($second-item, $first-item)
+
+
+///
+/// Compares two list items as numbers in ascending sort.
+///
+/// @param {*} $first-item - The first item for the comparison.
+/// @param {*} $second-item - The second item for the comparison.
+/// @return {Number}
+///
+/// @throw `#{$first-item}` is not a number.
+/// @throw `#{$second-item}` is not a number.
+///
+/// @access private
+/// @require internal.$exception-function
+/// @require internal.exception-type
+///
+@function _numeric-compare($first-item, $second-item)
+	internal.$exception-function: 'compare-numeric'
+
+	@if meta.type-of($first-item) != 'number'
+		@error internal.exception-type('first-item', $first-item, 'number')
+
+	@if meta.type-of($second-item) != 'number'
+		@error internal.exception-type('second-item', $second-item, 'number')
+
+	@return $first-item - $second-item
+
+
+///
+/// Compares two list items as numbers in descending sort.
+///
+/// @param {*} $first-item - The first item for the comparison.
+/// @param {*} $second-item - The second item for the comparison.
+/// @return {Number}
+///
+/// @access private
+/// @require _numeric-compare
+///
+@function _numeric-compare-desc($first-item, $second-item)
+	@return _numeric-compare($second-item, $first-item)
+
+
+///
+/// The default comparison function used by the sort function.
+///
+/// @type {Function}
+///
+/// @access public
+/// @require _default-compare
+///
+$compare: meta.get-function('_default-compare')
+
+
+///
+/// The default descending comparison function used by the sort function.
+///
+/// @type {Function}
+///
+/// @access public
+/// @require _default-compare-desc
+///
+$compare-desc: meta.get-function('_default-compare-desc')
+
+
+///
+/// The numeric comparison function used by the sort function.
+///
+/// @type {Function}
+///
+/// @access public
+/// @require _numeric-compare
+///
+$compare-numeric: meta.get-function('_numeric-compare')
+
+
+///
+/// The numeric descending comparison function used by the sort function.
+///
+/// @type {Function}
+///
+/// @access public
+/// @require _numeric-compare-desc
+///
+$compare-numeric-desc: meta.get-function('_numeric-compare-desc')

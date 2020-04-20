@@ -1,0 +1,67 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group tests
+////
+
+@use 'src'
+@use 'true'
+
+
+@include true.describe('@function src.concat')
+
+	@include true.it('Concatenate two values')
+		$assert: src.concat(10px, 20px)
+		$expected: 10px 20px
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Concatenate three values')
+		$assert: src.concat(10px, 20px, 'duke')
+		$expected: 10px 20px duke
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Concatenate lists and values')
+		$assert: src.concat((10px, 20px), 'duke')
+		$expected: 10px, 20px, duke
+		@include true.assert-equal($assert, $expected, "[(10px, 20px), 'duke']")
+
+		$assert: src.concat([10px, 20px], duke, 100)
+		$expected: [10px, 20px, duke, 100]
+		@include true.assert-equal($assert, $expected, "[[10px, 20px], duke, 100]")
+
+		$assert: src.concat([10px, 20px], 'duke', (100, puke))
+		$expected: [10px, 20px, duke, 100, 'puke']
+		@include true.assert-equal($assert, $expected, "[[10px, 20px], 'duke', 100, 'puke']")
+
+	@include true.it('Preserve nested lists')
+		$assert: src.concat([10px, 20px], ('duke', [100, puke]))
+		$expected: [10px, 20px, duke, [100, 'puke']]
+		@include true.assert-equal($assert, $expected, "[10px, 20px], ('duke', [100, puke])")
+
+	@include true.it('Concatenate lists and values changing the separator')
+		$assert: src.concat((10px 20px), 30px, $separator: comma)
+		$expected: 10px, 20px, 30px
+		@include true.assert-equal($assert, $expected, '[comma]')
+
+		$assert: src.concat($expected, ('a', 'b'), $separator: space)
+		$expected: 10px 20px 30px 'a' 'b'
+		@include true.assert-equal($assert, $expected, '[space]')
+
+	@include true.it('Concatenate lists and values changing the bracket style')
+		$assert: src.concat((10px 20px), 30px, $bracketed: true)
+		$expected: [10px 20px 30px]
+		@include true.assert-equal($assert, $expected, '[true]')
+
+		$assert: src.concat($expected, ['a', 'b'], $bracketed: false)
+		$expected: 10px 20px 30px 'a' 'b'
+		@include true.assert-equal($assert, $expected, '[false]')
+
+	@include true.it('Concatenate lists and values changing the separator and bracket style')
+		$assert: src.concat((10px 20px), 30px, $separator: comma, $bracketed: true)
+		$expected: [10px, 20px, 30px]
+		@include true.assert-equal($assert, $expected, '[comma, true]')
+
+		$assert: src.concat($expected, ['a', 'b'], $separator: space, $bracketed: false)
+		$expected: 10px 20px 30px 'a' 'b'
+		@include true.assert-equal($assert, $expected, '[space, false]')

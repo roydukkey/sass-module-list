@@ -1,0 +1,19 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group tests
+////
+
+@use 'sass:meta'
+@use 'src'
+@use 'true'
+
+
+@include true.describe('@function src.replace')
+	$list: 9 1 -2 38 4 9 38 -2 2
+
+	@include true.it('Replace values in a list')
+		$assert: src.replace($list, 38, 'replaced')
+		$expected: 9 1 -2 'replaced' 4 9 'replaced' -2 2
+		@include true.assert-equal($assert, $expected)

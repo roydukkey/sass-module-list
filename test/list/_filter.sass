@@ -1,0 +1,52 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group tests
+////
+
+@use 'sass:list'
+@use 'sass:meta'
+@use 'src'
+@use 'true'
+
+
+@function _not-number($item, $args...)
+	@return meta.type-of($item) != 'number'
+
+
+@function _even-index($item, $index, $list)
+	@return $index % 2 > 0
+
+
+@function _greater-than-1n-plus-index($item, $index, $list)
+	$n: if($index == list.length($list), 1, $index + 1)
+	@return $item > list.nth($list, $n)
+
+
+@include true.describe('@function src.filter')
+	$list: 'a' true 1 'b' null 2 4 'c' 10 false
+
+	@include true.it('Filter the items from a list')
+		$assert: src.filter($list, meta.get-function('_not-number'))
+		$expected: 'a' true 'b' null 'c' false
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Transformer receives the item indexes')
+		$assert: src.filter($list, meta.get-function('_even-index'))
+		$expected: 'a' 1 null 4 10
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Transformer receives the calling list')
+		$assert: src.filter(2 1 1 3 2 5 8 -3 10, meta.get-function('_greater-than-1n-plus-index'))
+		$expected: 2 3 8 10
+		@include true.assert-equal($assert, $expected, '[2 1 1 3 2 5 8 -3 10]')
+
+	@include true.it('Filter a list with a different separator')
+		$assert: src.filter($list, meta.get-function('_not-number'), $separator: comma)
+		$expected: 'a', true, 'b', null, 'c', false
+		@include true.assert-equal($assert, $expected, '[comma]')
+
+		$assert: src.filter($expected, meta.get-function('_even-index'), $separator: space)
+		$expected: 'a' 'b' 'c'
+		@include true.assert-equal($assert, $expected, '[space]')
