@@ -27,9 +27,19 @@
 	},
 	"main": "./index.sass",
 	"scripts": {
-		"test": "jest"
+		"test": "jest",
+		"prepack": "npm run test --  --verbose=false && npm run prepack:package-json",
+		"prepack:package-json": "node ./build/prepack.js"
 	},
+	"releasePackageOmit": [
+		"jest",
+		"releasePackageOmit",
+		"scripts"
+	],
 	"jest": {
-		"testEnvironment": "node"
+		"testEnvironment": "node",
+		"verbose": true,
+		"coverageDirectory": ".jest/coverage",
+		"cacheDirectory": ".jest/cache"
 	}
 }
