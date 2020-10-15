@@ -21,6 +21,7 @@
 		"slice"
 	],
 	"devDependencies": {
+		"clean-package": "^1.0.1",
 		"jest": "^25.1.0",
 		"sass": "^1.23.0",
 		"sass-true": "^5.0.0"
@@ -28,14 +29,18 @@
 	"main": "./index.sass",
 	"scripts": {
 		"test": "jest",
-		"prepack": "npm run test --  --verbose=false && npm run prepack:package-json",
-		"prepack:package-json": "node ./build/prepack.js"
+		"prepack": "npm run test -- --verbose=false && clean-package",
+		"new:pack": "npm pack && clean-package restore",
+		"new:publish": "npm publish && clean-package restore"
 	},
-	"releasePackageOmit": [
-		"jest",
-		"releasePackageOmit",
-		"scripts"
-	],
+	"clean-package": {
+		"indent": "\t",
+		"remove": [
+			"clean-package",
+			"jest",
+			"scripts"
+		]
+	},
 	"jest": {
 		"testEnvironment": "node",
 		"verbose": true,
