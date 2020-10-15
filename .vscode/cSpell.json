@@ -2,6 +2,7 @@
 	"ignorePaths": [
 		"node_modules/**/{.*/**/,.*/**/.,,.}*",
 		"*-lock.json",
+		"*.tgz",
 		".DS_Store",
 		".git",
 		".jest"
