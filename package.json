@@ -22,12 +22,15 @@
 	],
 	"devDependencies": {
 		"clean-package": "^1.0.1",
+		"cspell": "^4.1.0",
 		"jest": "^26.5.3",
 		"sass": "^1.27.0",
 		"sass-true": "^6.0.0"
 	},
 	"main": "./index.sass",
 	"scripts": {
+		"lint": "cspell --config './.vscode/cSpell.json' '**/{.*/**/,.*/**/.,,.}*'",
+		"pretest": "npm run lint",
 		"test": "jest",
 		"prepack": "npm run test -- --verbose=false && clean-package",
 		"new:pack": "npm pack && clean-package restore",
