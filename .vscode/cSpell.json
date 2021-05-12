@@ -1,11 +1,14 @@
 {
+	"version": "0.1",
 	"ignorePaths": [
-		"node_modules/**/{.*/**/,.*/**/.,,.}*",
-		"*-lock.json",
-		"*.tgz",
-		".DS_Store",
+		"node_modules",
 		".git",
-		".jest"
+		".jest",
+		"**/.DS_Store",
+		"*.lock.json",
+		"*-lock.json",
+		"*.lock",
+		"*.tgz"
 	],
 	"words": [
 		"concat",
