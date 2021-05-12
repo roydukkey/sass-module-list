@@ -25,16 +25,17 @@
 		"cspell": "^5.4.1",
 		"jest": "^26.6.3",
 		"sass": "^1.27.0",
-		"sass-true": "^6.0.1"
+		"sass-true": "^6.0.1",
+		"yarpm": "^1.1.1"
 	},
 	"main": "./index.sass",
 	"scripts": {
 		"lint": "cspell --config './.vscode/cSpell.json' --no-progress '**/{.*/**/,.*/**/.,,.}*'",
-		"pretest": "npm run lint",
+		"pretest": "yarpm run lint",
 		"test": "jest",
-		"prepack": "npm run test -- --verbose=false && clean-package",
-		"new:pack": "npm pack && clean-package restore",
-		"new:publish": "npm publish && clean-package restore"
+		"prepack": "yarpm run test -- --verbose=false && clean-package",
+		"new:pack": "yarpm pack && clean-package restore",
+		"new:publish": "yarpm publish && clean-package restore"
 	},
 	"clean-package": {
 		"indent": "\t",
