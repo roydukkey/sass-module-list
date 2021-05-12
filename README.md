@@ -102,3 +102,18 @@ Depending on your setup, you may need to use the module by its full path:
   <dd>Returns a string representing the specified list and its items.</dd>
 
 </dl>
+
+## Combined API
+
+In order to avoid constantly declaring both the native 'sass:list' module and this library, the combined API has been added which merges the two.
+
+```scss
+// Rather than using both modules separately...
+@use 'sass-list';
+@use 'sass:list';
+
+// ...this statement will accomplish the same thing.
+@use 'sass-list/list';
+```
+
+*Note:* Since their functionality is duplicated by this library, the combined API hides the native `join` and `index` functions.

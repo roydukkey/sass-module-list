@@ -1,0 +1,26 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group tests
+////
+
+@use '../list'
+@use 'sass:map'
+@use 'sass:meta'
+@use 'true'
+
+
+@include true.describe('Combined API')
+
+	$module-functions: meta.module-functions('list')
+
+	@include true.it('Has access to native list.append() as module function')
+		$assert: map.has-key($module-functions, 'append')
+		$expected: true
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Has access to native src.prepend() as module function')
+		$assert: map.has-key($module-functions, 'prepend')
+		$expected: true
+		@include true.assert-equal($assert, $expected)
