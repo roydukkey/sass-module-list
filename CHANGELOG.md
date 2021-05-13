@@ -3,7 +3,7 @@
 [//]: # (>>   The order of list items should be: Critical/Fixes, New, Update, Remove, Underpinnings   <<)
 [//]: # (>>   ## [UNRELEASED]https://github.com/roydukkey/sass-module-list/compare/v1.2.0...master   <<)
 
-## [1.2.0](https://github.com/roydukkey/sass-module-list/compare/v1.1.0...v.1.2.0)
+## [1.2.0](https://github.com/roydukkey/sass-module-list/compare/v1.1.0...v1.2.0)
 
 * New combined API has been added
 * New `empty()` to create empty lists as un/bracketed and a specific separator
