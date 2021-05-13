@@ -1,7 +1,7 @@
 {
 	"name": "sass-list",
 	"description": "This Sass module is for advanced list functions.",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"author": "roydukkey",
 	"license": "MIT",
 	"repository": {
