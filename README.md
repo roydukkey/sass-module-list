@@ -35,6 +35,9 @@ Depending on your setup, you may need to use the module by its full path:
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_distinct.sass"><code>distinct ( $list [, $separator] )</code></a></dt>
   <dd>Creates a new list with all distinct items from a list.</dd>
 
+  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_empty.sass"><code>empty ( [$separator] [, $bracketed] )</code></a></dt>
+  <dd>Creates an empty list with the specified characteristics.</dd>
+
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_every.sass"><code>every ( $list, $predicate [, $args...] )</code></a></dt>
   <dd>Tests whether all items in a list satisfy the test implemented by the specified function.</dd>
 

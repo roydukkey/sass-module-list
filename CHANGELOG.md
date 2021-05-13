@@ -6,6 +6,7 @@
 ## [UNRELEASED](https://github.com/roydukkey/holosun/compare/v1.1.0...master)
 
 * New combined API has been added
+* New `empty()` to create empty lists as un/bracketed and a specific separator
 
 ## [1.1.0](https://github.com/roydukkey/sass-module-list/compare/v1.0.0...v1.1.0)
 

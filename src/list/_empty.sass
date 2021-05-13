@@ -1,0 +1,29 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group api
+////
+
+@use 'sass:list'
+@use '../internal'
+
+
+///
+/// Creates an empty list with the specified characteristics.
+///
+/// @param {String} $separator [comma] - The type of separator to be used by the empty list.
+/// @param {Boolean} $bracketed [false] - The type of brackets to be used by the empty list.
+/// @return {List}
+///
+/// @throw Must be "space", "comma", or "auto".
+///
+/// @access public
+///
+@function empty($separator: comma, $bracketed: false)
+	internal.$exception-function: 'empty'
+
+	@if internal.param-separator-is-invalid($separator)
+		@error internal.exception-separator()
+
+	@return list.join([], [], $separator, $bracketed)

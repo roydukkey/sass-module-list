@@ -1,0 +1,92 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group tests
+////
+
+@use 'sass:list'
+@use 'src'
+@use 'true'
+
+
+@include true.describe('@function src.empty')
+
+	@include true.it('Creates an comma-separated, unbracketed list')
+		$result: src.empty()
+		$assert: list.separator($result) == comma and not list.is-bracketed($result)
+		$expected: true
+		@include true.assert-equal($assert, $expected)
+
+		$result: src.empty(comma)
+		$assert: list.separator($result) == comma and not list.is-bracketed($result)
+		$expected: true
+		@include true.assert-equal($assert, $expected)
+
+		$result: src.empty(comma, false)
+		$assert: list.separator($result) == comma and not list.is-bracketed($result)
+		$expected: true
+		@include true.assert-equal($assert, $expected)
+
+		$result: src.empty($bracketed: false)
+		$assert: list.separator($result) == comma and not list.is-bracketed($result)
+		$expected: true
+		@include true.assert-equal($assert, $expected)
+
+		$result: src.empty($bracketed: false, $separator: comma)
+		$assert: list.separator($result) == comma and not list.is-bracketed($result)
+		$expected: true
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Creates an comma-separated, bracketed list')
+		$result: src.empty(comma, true)
+		$assert: list.separator($result) == comma and list.is-bracketed($result)
+		$expected: true
+		@include true.assert-equal($assert, $expected)
+
+		$result: src.empty($bracketed: true)
+		$assert: list.separator($result) == comma and list.is-bracketed($result)
+		$expected: true
+		@include true.assert-equal($assert, $expected)
+
+		$result: src.empty($bracketed: 'auto_but-really-anything-else')
+		$assert: list.separator($result) == comma and list.is-bracketed($result)
+		$expected: true
+		@include true.assert-equal($assert, $expected)
+
+		$result: src.empty($bracketed: true, $separator: comma)
+		$assert: list.separator($result) == comma and list.is-bracketed($result)
+		$expected: true
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Creates an space-separated, unbracketed list')
+		$result: src.empty(space)
+		$assert: list.separator($result) == space and not list.is-bracketed($result)
+		$expected: true
+		@include true.assert-equal($assert, $expected)
+
+		$result: src.empty(space, false)
+		$assert: list.separator($result) == space and not list.is-bracketed($result)
+		$expected: true
+		@include true.assert-equal($assert, $expected)
+
+		$result: src.empty($bracketed: false, $separator: space)
+		$assert: list.separator($result) == space and not list.is-bracketed($result)
+		$expected: true
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Creates an space-separated, bracketed list')
+		$result: src.empty(space, true)
+		$assert: list.separator($result) == space and list.is-bracketed($result)
+		$expected: true
+		@include true.assert-equal($assert, $expected)
+
+		$result: src.empty(space, auto)
+		$assert: list.separator($result) == space and list.is-bracketed($result)
+		$expected: true
+		@include true.assert-equal($assert, $expected)
+
+		$result: src.empty($bracketed: true, $separator: space)
+		$assert: list.separator($result) == space and list.is-bracketed($result)
+		$expected: true
+		@include true.assert-equal($assert, $expected)
