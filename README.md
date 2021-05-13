@@ -119,4 +119,4 @@ In order to avoid constantly declaring both the native 'sass:list' module and th
 @use 'sass-list/list';
 ```
 
-*Note:* Since their functionality is duplicated by this library, the combined API hides the native `join` and `index` functions.
+*Note:* Since their functionality is enhanced by this library, the combined API hides the native `join` and `index` functions.
