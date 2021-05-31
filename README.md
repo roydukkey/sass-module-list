@@ -3,7 +3,7 @@
 [![Release Version](https://img.shields.io/npm/v/sass-list.svg)](https://www.npmjs.com/package/sass-list)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-This Sass module is for advanced list functions.
+This Sass module provides more advanced list functions.
 
 ## Install
 
