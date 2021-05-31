@@ -7,6 +7,10 @@ This Sass module is for advanced list functions.
 
 ## Install
 
+### Requires
+
+* Dart Sass: `>=1.33.0`
+
 Install the package:
 
 ```bash

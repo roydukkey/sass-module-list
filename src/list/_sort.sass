@@ -56,7 +56,7 @@ $_order: list.join($_order, '{' '|' '}' '~')
 	@if $length < 2
 		@return $list
 
-	$middle: math.floor($length / 2)
+	$middle: math.floor(math.div($length, 2))
 	$left: slice.slice($list, 1, $middle)
 	$right: slice.slice($list, $middle + 1)
 
