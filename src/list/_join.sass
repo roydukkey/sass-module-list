@@ -12,12 +12,12 @@
 /// Concatenates all of the items in an list to a string, separated by the list's separator or a specified glue string. If the list has only one item, then that item will be returned without using the glue.
 ///
 /// @param {List} $list - The list to join.
-/// @param {String} $glue [if(list.separator($list) == space, ' ', ',')] - The string to separate each pair of adjacent items of the list. The value is converted to a string if necessary.
+/// @param {String} $glue [if(list.separator($list) == space, ' ', if(list.separator($list) == comma, ',', '/'))] - The string to separate each pair of adjacent items of the list. The value is converted to a string if necessary.
 /// @return {String}
 ///
 /// @access public
 ///
-@function join($list, $glue: if(list.separator($list) == space, ' ', ','))
+@function join($list, $glue: if(list.separator($list) == space, ' ', if(list.separator($list) == comma, ',', '/')))
 	$result: ''
 	$last-item: list.nth($list, -1)
 
