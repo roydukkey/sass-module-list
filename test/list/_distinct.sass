@@ -5,6 +5,7 @@
 /// @group tests
 ////
 
+@use 'sass:list'
 @use 'sass:meta'
 @use 'src'
 @use 'true'
@@ -26,3 +27,7 @@
 		$assert: src.distinct($expected, $separator: space)
 		$expected: 9 1 -2 38 4 2
 		@include true.assert-equal($assert, $expected, '[space]')
+
+		$assert: src.distinct($expected, $separator: slash)
+		$expected: list.slash(9, 1, -2, 38, 4, 2)
+		@include true.assert-equal($assert, $expected, '[slash]')

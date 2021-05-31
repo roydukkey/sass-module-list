@@ -5,6 +5,7 @@
 /// @group tests
 ////
 
+@use 'sass:list'
 @use 'src'
 @use 'true'
 
@@ -48,6 +49,10 @@
 		$expected: 10px 20px 30px 'a' 'b'
 		@include true.assert-equal($assert, $expected, '[space]')
 
+		$assert: src.concat($expected, (50%, 25%), $separator: slash)
+		$expected: list.slash(10px, 20px, 30px, 'a', 'b', 50%, 25%)
+		@include true.assert-equal($assert, $expected, '[slash]')
+
 	@include true.it('Concatenate lists and values changing the bracket style')
 		$assert: src.concat((10px 20px), 30px, $bracketed: true)
 		$expected: [10px 20px 30px]
@@ -65,3 +70,7 @@
 		$assert: src.concat($expected, ['a', 'b'], $separator: space, $bracketed: false)
 		$expected: 10px 20px 30px 'a' 'b'
 		@include true.assert-equal($assert, $expected, '[space, false]')
+
+		$assert: src.concat($expected, 50% 25%, $separator: slash, $bracketed: true)
+		$expected: list.join(list.slash(10px, 20px, 30px, 'a', 'b', 50%, 25%), (), $bracketed: true)
+		@include true.assert-equal($assert, $expected, '[slash, true]')

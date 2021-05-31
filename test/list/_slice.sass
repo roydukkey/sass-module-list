@@ -5,6 +5,7 @@
 /// @group tests
 ////
 
+@use 'sass:list'
 @use 'src'
 @use 'true'
 
@@ -81,3 +82,7 @@
 		$assert: src.slice($expected, 2, $separator: comma)
 		$expected: ['camel', 'duck', 'elephant']
 		@include true.assert-equal($assert, $expected, '[comma]')
+
+		$assert: src.slice($expected, -2, -1, $separator: slash)
+		$expected: list.join(list.slash('duck', 'elephant'), (), $bracketed: true)
+		@include true.assert-equal($assert, $expected, '[slash]')

@@ -50,3 +50,7 @@
 		$assert: src.filter($expected, meta.get-function('_even-index'), $separator: space)
 		$expected: 'a' 'b' 'c'
 		@include true.assert-equal($assert, $expected, '[space]')
+
+		$assert: src.filter($list, meta.get-function('_even-index'), $separator: slash)
+		$expected: list.slash('a', 1, null, 4, 10)
+		@include true.assert-equal($assert, $expected, '[slash]')
