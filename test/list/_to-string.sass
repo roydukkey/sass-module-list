@@ -18,7 +18,7 @@
 		@include true.assert-equal($assert, $expected)
 
 	@include true.it('Return the comma-delimited representation of a list')
-		$assert: src.to-string([10px, 20px 'a'])
+		$assert: src.to-string([10px, 20px, 'a'])
 		$expected: '10px,20px,a'
 		@include true.assert-equal($assert, $expected)
 

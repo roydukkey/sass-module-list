@@ -22,7 +22,7 @@
 	$last-item: list.nth($list, -1)
 
 	@each $item in $list
-		$result: $result + if(list.length($item) > 1, join($item, $glue), $item)
+		$result: $result + $item
 
 		@if $item != $last-item
 			$result: $result + $glue
