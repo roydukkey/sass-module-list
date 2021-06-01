@@ -28,5 +28,27 @@
 		"sass": "^1.34.0",
 		"sass-true": "^6.0.1",
 		"yarpm": "^1.1.1"
+	},
+	"scripts": {
+		"lint": "cspell --config './.vscode/cSpell.json' --no-progress '**/{.*/**/,.*/**/.,,.}*'",
+		"pretest": "yarpm run lint",
+		"test": "jest",
+		"prepack": "yarpm run test -- --verbose=false && clean-package",
+		"new:pack": "yarpm pack && clean-package restore",
+		"new:publish": "yarpm publish && clean-package restore"
+	},
+	"clean-package": {
+		"indent": "\t",
+		"remove": [
+			"clean-package",
+			"jest",
+			"scripts"
+		]
+	},
+	"jest": {
+		"testEnvironment": "node",
+		"verbose": true,
+		"coverageDirectory": ".jest/coverage",
+		"cacheDirectory": ".jest/cache"
 	}
 }
