@@ -14,30 +14,24 @@
 
 	@include true.it('List includes a value')
 		$assert: src.includes($list, 'duck')
-		$expected: true
-		@include true.assert-equal($assert, $expected)
+		@include true.assert-true($assert)
 
 	@include true.it('List includes a value from a positive (+) index')
 		$assert: src.includes($list, 'camel', 3)
-		$expected: true
-		@include true.assert-equal($assert, $expected)
+		@include true.assert-true($assert)
 
 	@include true.it('List includes a value from a negative (-) index')
 		$assert: src.includes($list, 'camel', -3)
-		$expected: true
-		@include true.assert-equal($assert, $expected)
+		@include true.assert-true($assert)
 
 	@include true.it('List does not include a value')
 		$assert: src.includes($list, 'deer')
-		$expected: false
-		@include true.assert-equal($assert, $expected)
+		@include true.assert-false($assert)
 
 	@include true.it('List does not include a value from a positive (+) index')
 		$assert: src.includes($list, 'camel', 4)
-		$expected: false
-		@include true.assert-equal($assert, $expected)
+		@include true.assert-false($assert)
 
 	@include true.it('List does not include a value from a negative (-) index')
 		$assert: src.includes($list, 'camel', -2)
-		$expected: false
-		@include true.assert-equal($assert, $expected)
+		@include true.assert-false($assert)
