@@ -38,7 +38,7 @@
 		@error internal.exception-separator()
 
 	@if list.length($values) < 2
-		@error internal.exception-param('Two values or more are required', 'values')
+		@error internal.exception-param('Two or more values are required', 'values')
 
 	$result: internal.init(list.nth($values, 1))
 
