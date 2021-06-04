@@ -119,7 +119,7 @@ Depending on your setup, you may need to use the module by its full path:
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/compare/_string.sass"><code>compare-string()</code>, <code>compare-string-desc()</code></a></dt>
   <dd>The string comparison method used by the sort function.</dd>
 
-  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/compare/_numeric.sass"><code>compare-numeric()</code>, <code>compare-numeric-desc()</code></a></dt>
+  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/compare/_numeric.sass"><code>compare-numeric()</code>, <code>compare-numeric-desc()</code></a></dt>
   <dd>The numeric comparison method used by the sort function.</dd>
 
 </dl>
