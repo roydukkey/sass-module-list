@@ -9,6 +9,7 @@
 @use 'sass:math'
 @use 'sass:meta'
 @use 'sass:string'
+@use 'find'
 @use 'slice'
 @use '../internal'
 
@@ -34,18 +35,33 @@ $_order: list.join($_order, '{' '|' '}' '~')
 ///
 /// @param {List} $list - The list to sort.
 /// @param {Function} $compare [$compare] - The function that defines the sort order. The first parameter is the first item for comparison. The second parameter is the second item for comparison. The returned value must be a number.
+/// @param {Number | String} $center [auto] - For numeric comparison, the value indicating the center (zero) position between positive and negative values. Based on either the specified center value or the first non-unitless value in the source list or zero, incompatible values will be automatically transformed into compatibility for comparison.
 /// @return {List}
 ///
 /// @throw `#{$compare}` is not a function.
+/// @throw `#{$center}` is not a number.
+/// @throw Must be "auto" or zero with or without units.
+///
+/// @example scss
+/// 	sort(c b e d a f) //=> a b c d e f
+/// 	sort(c b e d a f, src.$compare-desc) //=> f e d c b a
+/// 	sort([6mm 2px 10mm -9mm 25px 1cm -4px -3cm], src.$compare-numeric) //=> [-3cm -9mm -4px 2px 6mm 25px 1cm 10mm]
+/// 	sort(1cm 5mm 1 1mm 2em, src.$compare-numeric-desc, auto) //=> 2em 1 1cm 5mm 1mm
+/// 	sort(1cm 5mm 1 1mm 2em, src.$compare-numeric-desc, 0mm) //=> 1cm 5mm 2em 1mm 1
+/// 	sort(1cm 5mm 1 1mm 2em, src.$compare-numeric-desc, 0) //=> 5mm 2em 1mm 1 1cm
+///
+/// @see @link https://github.com/roydukkey/sass-module-list/issues/7 for more information on `$center`.
 ///
 /// @access public
 /// @require $compare
 /// @require _order
 /// @require internal.$exception-function
+/// @require internal.exception-param
 /// @require internal.exception-type
+/// @require find.find
 /// @require slice.slice
 ///
-@function sort($list, $compare: $compare)
+@function sort($list, $compare: $compare, $center: auto)
 	internal.$exception-function: 'sort'
 
 	@if meta.type-of($compare) != 'function'
@@ -56,11 +72,23 @@ $_order: list.join($_order, '{' '|' '}' '~')
 	@if $length < 2
 		@return $list
 
+	@if $center != auto
+
+		@if meta.type-of($center) != 'number'
+			@error internal.exception-type('center', $center, 'number')
+
+		@if $center < 0 or $center > 0
+			@error internal.exception-param('Must be "auto" or zero with or without units', 'center')
+
+	@else
+		$item: find.find($list, meta.get-function('_is-number-and-not-unitless'))
+		$center: if($item == null, 0, $item - $item)
+
 	$middle: math.floor(math.div($length, 2))
 	$left: slice.slice($list, 1, $middle)
 	$right: slice.slice($list, $middle + 1)
 
-	@return _order(sort($left, $compare), sort($right, $compare), $compare)
+	@return _order(sort($left, $compare, $center), sort($right, $compare, $center), $compare, $center)
 
 
 ///
@@ -69,13 +97,14 @@ $_order: list.join($_order, '{' '|' '}' '~')
 /// @param {List} $left - The left side of the list being sorted.
 /// @param {List} $right - The right side of the list being sorted.
 /// @param {Function} $compare - The function that defines the sort order.
+/// @param {Number} $center - For numeric comparison, the value indicating the center (zero) position between positive and negative values.
 /// @return {List}
 ///
 /// @access private
 /// @require internal.init
 /// @require slice.slice
 ///
-@function _order($left, $right, $compare)
+@function _order($left, $right, $compare, $center)
 	$result: internal.init($left)
 	$left-index: 1
 	$right-index: 1
@@ -86,7 +115,7 @@ $_order: list.join($_order, '{' '|' '}' '~')
 		$left-value: list.nth($left, $left-index)
 		$right-value: list.nth($right, $right-index)
 
-		@if meta.call($compare, $left-value, $right-value) < 0
+		@if meta.call($compare, $left-value, $right-value, $center) < 0
 			$result: list.append($result, $left-value)
 			$left-index: $left-index + 1
 
@@ -100,16 +129,17 @@ $_order: list.join($_order, '{' '|' '}' '~')
 
 
 ///
-/// Compares two non-null list items by converting them to strings and comparing strings in ascending UTF-16 code units order from `feff0020` to `feff007e`. For example, 'banana' comes before 'cherry'. In a numeric sort, 9 comes before 80, but because numbers are converted to strings, '80' comes before '9' in the Unicode order. All null items are sorted to the end of the list.
+/// Used to compare two non-null list items by converting them to strings and comparing strings in ascending UTF-16 code units order from `feff0020` to `feff007e`. For example, 'banana' comes before 'cherry'. In a numeric sort, 9 comes before 80, but because numbers are converted to strings, '80' comes before '9' in the Unicode order. All null items are sorted to the end of the list.
 ///
 /// @param {*} $first-item - The first item for the comparison.
 /// @param {*} $second-item - The second item for the comparison.
+/// @ignore @param {Number} $center - Irrelevant for this function.
 /// @return {Number}
 ///
 /// @access private
 /// @require $_order
 ///
-@function _default-compare($first-item, $second-item)
+@function _default-compare($first-item, $second-item, $center)
 
 	@if $first-item == null
 		@return 1
@@ -141,24 +171,26 @@ $_order: list.join($_order, '{' '|' '}' '~')
 
 
 ///
-/// Compares two non-null list items by converting them to strings and comparing strings in descending UTF-16 code units order from `feff0020` to `feff007e`. For example, 'banana' comes before 'cherry'. In a numeric sort, 9 comes before 80, but because numbers are converted to strings, '80' comes before '9' in the Unicode order. All null items are sorted to the end of the list.
+/// Used to compare two non-null list items by converting them to strings and comparing strings in descending UTF-16 code units order from `feff0020` to `feff007e`. For example, 'banana' comes before 'cherry'. In a numeric sort, 9 comes before 80, but because numbers are converted to strings, '80' comes before '9' in the Unicode order. All null items are sorted to the end of the list.
 ///
 /// @param {*} $first-item - The first item for the comparison.
 /// @param {*} $second-item - The second item for the comparison.
+/// @ignore @param {Number} $center - Irrelevant for this function.
 /// @return {Number}
 ///
 /// @access private
 /// @require _default-compare
 ///
-@function _default-compare-desc($first-item, $second-item)
-	@return _default-compare($second-item, $first-item)
+@function _default-compare-desc($first-item, $second-item, $center)
+	@return _default-compare($second-item, $first-item, $center)
 
 
 ///
-/// Compares two list items as numbers in ascending sort.
+/// Used to compare two list items as numbers in ascending sort.
 ///
 /// @param {*} $first-item - The first item for the comparison.
 /// @param {*} $second-item - The second item for the comparison.
+/// @param {Number} $center - The value indicating the center (zero) position between positive and negative values.
 /// @return {Number}
 ///
 /// @throw `#{$first-item}` is not a number.
@@ -168,7 +200,7 @@ $_order: list.join($_order, '{' '|' '}' '~')
 /// @require internal.$exception-function
 /// @require internal.exception-type
 ///
-@function _numeric-compare($first-item, $second-item)
+@function _numeric-compare($first-item, $second-item, $center)
 	internal.$exception-function: 'compare-numeric'
 
 	@if meta.type-of($first-item) != 'number'
@@ -177,25 +209,37 @@ $_order: list.join($_order, '{' '|' '}' '~')
 	@if meta.type-of($second-item) != 'number'
 		@error internal.exception-type('second-item', $second-item, 'number')
 
+	$center-test: math.is-unitless($center)
+	$first-test: math.is-unitless($first-item)
+	$second-test: math.is-unitless($second-item)
+
+	// Strip units -OR- normalize units for incompatible and unitless numbers
+	@if $center-test and not $first-test or $first-test or not math.compatible($first-item, $center)
+		$first-item: math.div($first-item, $first-item * 0 + 1) * ($center + 1)
+
+	@if $center-test and not $second-test or $second-test or not math.compatible($second-item, $center)
+		$second-item: math.div($second-item, $second-item * 0 + 1) * ($center + 1)
+
 	@return $first-item - $second-item
 
 
 ///
-/// Compares two list items as numbers in descending sort.
+/// Used to compare two list items as numbers in descending sort.
 ///
 /// @param {*} $first-item - The first item for the comparison.
 /// @param {*} $second-item - The second item for the comparison.
+/// @param {Number} $center - The value indicating the center (zero) position between positive and negative values.
 /// @return {Number}
 ///
 /// @access private
 /// @require _numeric-compare
 ///
-@function _numeric-compare-desc($first-item, $second-item)
-	@return _numeric-compare($second-item, $first-item)
+@function _numeric-compare-desc($first-item, $second-item, $center)
+	@return _numeric-compare($second-item, $first-item, $center)
 
 
 ///
-/// The default comparison function used by the sort function.
+/// The default comparison method used by the sort function.
 ///
 /// @type Function
 ///
@@ -206,7 +250,7 @@ $compare: meta.get-function('_default-compare')
 
 
 ///
-/// The default descending comparison function used by the sort function.
+/// The default descending comparison method used by the sort function.
 ///
 /// @type Function
 ///
@@ -217,7 +261,7 @@ $compare-desc: meta.get-function('_default-compare-desc')
 
 
 ///
-/// The numeric comparison function used by the sort function.
+/// The numeric comparison method used by the sort function.
 ///
 /// @type Function
 ///
@@ -228,7 +272,7 @@ $compare-numeric: meta.get-function('_numeric-compare')
 
 
 ///
-/// The numeric descending comparison function used by the sort function.
+/// The numeric descending comparison method used by the sort function.
 ///
 /// @type Function
 ///
@@ -236,3 +280,14 @@ $compare-numeric: meta.get-function('_numeric-compare')
 /// @require _numeric-compare-desc
 ///
 $compare-numeric-desc: meta.get-function('_numeric-compare-desc')
+
+
+///
+/// Tests whether a value is a number and is not unitless.
+///
+/// @param {*} $value - The value to be tested.
+///
+/// @access private
+///
+@function _is-number-and-not-unitless($value, $args...)
+	@return meta.type-of($value) == 'number' and not math.is-unitless($value)

@@ -109,10 +109,10 @@ Depending on your setup, you may need to use the module by its full path:
   <dd>Returns a string representing the specified list and its items.</dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_sort.sass"><code>$compare</code>, <code>$compare-desc</code></a></dt>
-  <dd>The default comparison function used by the sort function.</dd>
+  <dd>The default comparison method used by the sort function.</dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_sort.sass"><code>$compare-numeric</code>, <code>$compare-numeric-desc</code></a></dt>
-  <dd>The numeric comparison function used by the sort function.</dd>
+  <dd>The numeric comparison method used by the sort function.</dd>
 
 </dl>
 
