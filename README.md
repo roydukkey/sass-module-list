@@ -104,7 +104,7 @@ Depending on your setup, you may need to use the module by its full path:
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_some.sass"><code>some ( $list, $predicate [, $args...] )</code></a></dt>
   <dd>Tests whether at least one item in a list satisfies the test implemented by the specified function.</dd>
 
-  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_sort.sass"><code>sort ( $list, $compare )</code></a></dt>
+  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_sort.sass"><code>sort ( $list, $compare [, $center] )</code></a></dt>
   <dd>Sorts the items of a list in place. The default sort order is ascending, built upon converting the items into strings, then comparing their sequences of UTF-16 code units values.</dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_to-string.sass"><code>to-string ( $list )</code></a></dt>
