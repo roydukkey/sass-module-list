@@ -28,7 +28,7 @@ $_order: list.join($_order, '{' '|' '}' '~')
 
 
 ///
-/// Used to compare two non-null list items by converting them to strings and comparing strings in ascending UTF-16 code units order from `feff0020` to `feff007e`. For example, 'banana' comes before 'cherry'. In a numeric sort, 9 comes before 80, but because numbers are converted to strings, '80' comes before '9' in the Unicode order. All null items are sorted to the end of the list.
+/// Used to compare two list items by converting them to strings, then comparing the value's sequences of UTF-16 code units values in ascending order. All null items are shifted right.
 ///
 /// @param {*} $first-item - The first item for the comparison.
 /// @param {*} $second-item - The second item for the comparison.
@@ -70,7 +70,7 @@ $_order: list.join($_order, '{' '|' '}' '~')
 
 
 ///
-/// Used to compare two non-null list items by converting them to strings and comparing strings in descending UTF-16 code units order from `feff0020` to `feff007e`. For example, 'banana' comes before 'cherry'. In a numeric sort, 9 comes before 80, but because numbers are converted to strings, '80' comes before '9' in the Unicode order. All null items are sorted to the end of the list.
+/// Used to compare two list items by converting them to strings, then comparing the value's sequences of UTF-16 code units values in descending order. All null items are shifted left.
 ///
 /// @param {*} $first-item - The first item for the comparison.
 /// @param {*} $second-item - The second item for the comparison.

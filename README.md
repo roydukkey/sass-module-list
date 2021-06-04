@@ -138,3 +138,8 @@ In order to avoid constantly declaring both the native 'sass:list' module and th
 ```
 
 *Note:* Since their functionality is enhanced by this library, the combined API hides the native `join` and `index` functions.
+
+## Further Reading
+
+1. [Comparison Logic](//github.com/roydukkey/sass-module-list/tree/master/spec/compare-logic.md)
+1. [List Configuration Modifiers](//github.com/roydukkey/sass-module-list/tree/master/spec/modifiers-params.md)

@@ -19,7 +19,7 @@
 ///
 /// @param {List} $list - The list to sort.
 /// @param {Function} $compare [compare.string()] - The function that defines the sort order. The first parameter is the first item for comparison. The second parameter is the second item for comparison. The returned value must be a number.
-/// @param {Number | String} $center [auto] - For numeric comparison, the value indicating the center (zero) position between positive and negative values. Based on either the specified center value or the first non-unitless value in the source list or zero, incompatible values will be automatically transformed into compatibility for comparison.
+/// @param {Number | String} $center [auto] - For numeric comparison, the value indicating the center (zero) position between positive and negative values.
 /// @return {List}
 ///
 /// @throw `#{$compare}` is not a function.
@@ -34,7 +34,7 @@
 /// 	sort(1cm 5mm 1 1mm 2em, src.compare-numeric-desc(), 0mm) //=> 1cm 5mm 2em 1mm 1
 /// 	sort(1cm 5mm 1 1mm 2em, src.compare-numeric-desc(), 0) //=> 5mm 2em 1mm 1 1cm
 ///
-/// @see @link https://github.com/roydukkey/sass-module-list/issues/7 for more information on `$center`.
+/// @see @link //github.com/roydukkey/sass-module-list/tree/master/spec/compare-logic.md for more information on comparison methods.
 ///
 /// @access public
 /// @require _order
@@ -113,7 +113,7 @@
 
 
 ///
-/// Tests whether a value is a number and is not unitless.
+/// Determines whether a value is a number and is not unitless.
 ///
 /// @param {*} $value - The value to be tested.
 ///
