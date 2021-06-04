@@ -48,10 +48,16 @@
 		$expected: (3 4) (2 'a') (2 1) (1 3) (1 2 3)
 		@include true.assert-equal($assert, $expected)
 
+	$null-list: 'Three' null 'Two' 'Five' null 'Six' 'Four' 'One'
+
 	@include true.it('Order null items last')
-		$assert: src.sort('Three' null 'Two' 'Five' null 'Six' 'Four' 'One')
+		$assert: src.sort($null-list)
 		$expected: 'Five' 'Four' 'One' 'Six' 'Three' 'Two' null null
-		@include true.assert-equal($assert, $expected)
+		@include true.assert-equal($assert, $expected, '[asc]')
+
+		$assert: src.sort($null-list, src.compare-string-desc())
+		$expected: null null "Two" "Three" "Six" "One" "Four" "Five"
+		@include true.assert-equal($assert, $expected, '[desc]')
 
 	@include true.it('Order unsupported characters last')
 		$assert: src.sort('Three' '¿' 'Two' 1 'F¿ive' false 'Six' true 'Four' null 'One')
