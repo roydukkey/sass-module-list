@@ -32,6 +32,8 @@ Depending on your setup, you may need to use the module by its full path:
 
 ## Public API
 
+### Functions
+
 <dl>
   <dt><code><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_concat.sass">concat ( $values... [, $separator] [, $bracketed] )</a></code></dt>
   <dd>Merges two or more lists into a new list.</dd>
@@ -108,10 +110,16 @@ Depending on your setup, you may need to use the module by its full path:
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_to-string.sass"><code>to-string ( $list )</code></a></dt>
   <dd>Returns a string representing the specified list and its items.</dd>
 
-  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_sort.sass"><code>$compare</code>, <code>$compare-desc</code></a></dt>
-  <dd>The default comparison method used by the sort function.</dd>
+</dl>
 
-  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_sort.sass"><code>$compare-numeric</code>, <code>$compare-numeric-desc</code></a></dt>
+### Comparison Methods
+
+<dl>
+
+  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/compare/_string.sass"><code>compare-string()</code>, <code>compare-string-desc()</code></a></dt>
+  <dd>The string comparison method used by the sort function.</dd>
+
+  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/compare/_numeric.sass"><code>compare-numeric()</code>, <code>compare-numeric-desc()</code></a></dt>
   <dd>The numeric comparison method used by the sort function.</dd>
 
 </dl>

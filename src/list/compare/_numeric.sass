@@ -1,0 +1,87 @@
+// Copyright (c) roydukkey. All rights reserved.
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
+////
+/// @author roydukkey
+/// @group api
+////
+
+@use 'sass:math'
+@use 'sass:meta'
+@use '../../internal'
+
+
+///
+/// Used to compare two list items as numbers in ascending sort.
+///
+/// @param {*} $first-item - The first item for the comparison.
+/// @param {*} $second-item - The second item for the comparison.
+/// @param {Number} $center - The value indicating the center (zero) position between positive and negative values. Based on either the specified center value or the first non-unitless value in the source list or zero, incompatible values will be automatically transformed into compatibility for comparison.
+/// @return {Number}
+///
+/// @throw `#{$first-item}` is not a number.
+/// @throw `#{$second-item}` is not a number.
+///
+/// @access private
+/// @require internal.$exception-function
+/// @require internal.exception-type
+///
+@function _numeric($first-item, $second-item, $center)
+	internal.$exception-function: '_numeric'
+
+	@if meta.type-of($first-item) != 'number'
+		@error internal.exception-type('first-item', $first-item, 'number')
+
+	@if meta.type-of($second-item) != 'number'
+		@error internal.exception-type('second-item', $second-item, 'number')
+
+	$center-test: math.is-unitless($center)
+	$first-test: math.is-unitless($first-item)
+	$second-test: math.is-unitless($second-item)
+
+	// Strip units -OR- normalize units for incompatible and unitless numbers
+	@if $center-test and not $first-test or $first-test or not math.compatible($first-item, $center)
+		$first-item: math.div($first-item, $first-item * 0 + 1) * ($center + 1)
+
+	@if $center-test and not $second-test or $second-test or not math.compatible($second-item, $center)
+		$second-item: math.div($second-item, $second-item * 0 + 1) * ($center + 1)
+
+	@return $first-item - $second-item
+
+
+///
+/// Used to compare two list items as numbers in descending sort.
+///
+/// @param {*} $first-item - The first item for the comparison.
+/// @param {*} $second-item - The second item for the comparison.
+/// @param {Number} $center - The value indicating the center (zero) position between positive and negative values. Based on either the specified center value or the first non-unitless value in the source list or zero, incompatible values will be automatically transformed into compatibility for comparison.
+/// @return {Number}
+///
+/// @access private
+/// @require _numeric
+///
+@function _numeric-desc($first-item, $second-item, $center)
+	@return _numeric($second-item, $first-item, $center)
+
+
+///
+/// The numeric comparison method used by the sort function.
+///
+/// @return {Function}
+///
+/// @access public
+/// @require _numeric
+///
+@function numeric()
+	@return meta.get-function('_numeric')
+
+
+///
+/// The descending numeric comparison method used by the sort function.
+///
+/// @return {Function}
+///
+/// @access public
+/// @require _numeric-desc
+///
+@function numeric-desc()
+	@return meta.get-function('_numeric-desc')
