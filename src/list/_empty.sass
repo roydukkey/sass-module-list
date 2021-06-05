@@ -62,4 +62,4 @@
 		@if internal.param-separator-is-invalid($separator)
 			@error internal.exception-separator()
 
-	@return list.join([], [], $separator, $bracketed)
+	@return list.join((), (), $separator, $bracketed)

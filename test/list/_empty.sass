@@ -55,6 +55,10 @@
 		$assert: list.separator($result) == space and not list.is-bracketed($result)
 		@include true.assert-true($assert, '[space]')
 
+		$result: src.empty(space, auto)
+		$assert: list.separator($result) == space and not list.is-bracketed($result)
+		@include true.assert-true($assert, '[space,auto]')
+
 		$result: src.empty(space, false)
 		$assert: list.separator($result) == space and not list.is-bracketed($result)
 		@include true.assert-true($assert, '[space,false]')
@@ -68,10 +72,6 @@
 		$assert: list.separator($result) == space and list.is-bracketed($result)
 		@include true.assert-true($assert, '[space,true]')
 
-		$result: src.empty(space, auto)
-		$assert: list.separator($result) == space and list.is-bracketed($result)
-		@include true.assert-true($assert, '[space,auto]')
-
 		$result: src.empty($bracketed: true, $separator: space)
 		$assert: list.separator($result) == space and list.is-bracketed($result)
 		@include true.assert-true($assert, '[true,space]')
@@ -80,6 +80,10 @@
 		$result: src.empty(slash)
 		$assert: list.separator($result) == slash and not list.is-bracketed($result)
 		@include true.assert-true($assert, '[slash]')
+
+		$result: src.empty(slash, auto)
+		$assert: list.separator($result) == slash and not list.is-bracketed($result)
+		@include true.assert-true($assert, '[slash,auto]')
 
 		$result: src.empty(slash, false)
 		$assert: list.separator($result) == slash and not list.is-bracketed($result)
@@ -93,10 +97,6 @@
 		$result: src.empty(slash, true)
 		$assert: list.separator($result) == slash and list.is-bracketed($result)
 		@include true.assert-true($assert, '[slash,true]')
-
-		$result: src.empty(slash, auto)
-		$assert: list.separator($result) == slash and list.is-bracketed($result)
-		@include true.assert-true($assert, '[slash,auto]')
 
 		$result: src.empty($bracketed: true, $separator: slash)
 		$assert: list.separator($result) == slash and list.is-bracketed($result)
