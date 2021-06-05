@@ -101,3 +101,35 @@
 		$result: src.empty($bracketed: true, $separator: slash)
 		$assert: list.separator($result) == slash and list.is-bracketed($result)
 		@include true.assert-true($assert, '[true,slash]')
+
+	@include true.it('Creates a comma-separated, unbracketed list from a source list')
+		$result: src.empty((a, b))
+		$assert: list.separator($result) == comma and not list.is-bracketed($result)
+		@include true.assert-true($assert)
+
+	@include true.it('Creates a comma-separated, bracketed list from a source list')
+		$result: src.empty([a, b])
+		$assert: list.separator($result) == comma and list.is-bracketed($result)
+		@include true.assert-true($assert)
+
+	@include true.it('Creates a space-separated, unbracketed list from a source list')
+		$result: src.empty(a b)
+		$assert: list.separator($result) == space and not list.is-bracketed($result)
+		@include true.assert-true($assert)
+
+	@include true.it('Creates a space-separated, bracketed list from a source list')
+		$result: src.empty([a b])
+		$assert: list.separator($result) == space and list.is-bracketed($result)
+		@include true.assert-true($assert)
+
+	@include true.it('Creates a slash-separated, unbracketed list from a source list')
+		$list: list.slash(a, b)
+		$result: src.empty($list)
+		$assert: list.separator($result) == slash and not list.is-bracketed($result)
+		@include true.assert-true($assert)
+
+	@include true.it('Creates a slash-separated, bracketed list from a source list')
+		$list: list.join(list.slash(a, b), [], $bracketed: true)
+		$result: src.empty($list)
+		$assert: list.separator($result) == slash and list.is-bracketed($result)
+		@include true.assert-true($assert, '[slash,true]')

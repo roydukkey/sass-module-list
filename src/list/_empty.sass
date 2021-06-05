@@ -6,6 +6,7 @@
 ////
 
 @use 'sass:list'
+@use 'sass:meta'
 @use '../internal'
 
 
@@ -23,8 +24,38 @@
 /// @require internal.param-separator-is-invalid
 /// @require internal.exception-separator
 ///
-@function empty($separator: comma, $bracketed: false)
+	@overload empty($separator: comma, $bracketed: false)
+
+
+///
+/// Creates an empty list based on the characteristics of the specified list.
+///
+/// @param {List} $list - The list from which to determine separator and bracket style.
+/// @return {List}
+///
+/// @access public
+///
+	@overload empty($list)
+
+
+///
+/// Creates an empty list.
+///
+/// @return {List}
+///
+/// @access private
+/// @require internal.$exception-function
+/// @require internal.param-separator-is-invalid
+/// @require internal.exception-separator
+///
+@function empty($list: comma, $bracketed: false, $separator: null)
+	@if meta.type-of($list) == 'list'
+		@return list.join($list, [])
+
 	internal.$exception-function: 'empty'
+
+	@if $separator == null
+		$separator: $list
 
 	@if internal.param-separator-is-invalid($separator)
 		@error internal.exception-separator()
