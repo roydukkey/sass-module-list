@@ -7,6 +7,7 @@
 
 @use 'sass:list'
 @use 'sass:meta'
+@use 'empty'
 @use '../internal'
 
 
@@ -23,13 +24,13 @@
 /// @throw Must be "space", "comma", "slash", or "auto".
 ///
 /// @access public
+/// @require empty.empty
 /// @require internal.$exception-function
 /// @require internal.exception-separator
 /// @require internal.exception-type
-/// @require internal.init
 /// @require internal.param-separator-is-invalid
 ///
-@function filter($list, $predicate, $separator: list.separator($list), $args...)
+@function filter($list, $predicate, $separator: auto, $args...)
 	internal.$exception-function: 'filter'
 
 	@if meta.type-of($predicate) != 'function'
@@ -38,13 +39,13 @@
 	@if internal.param-separator-is-invalid($separator)
 		@error internal.exception-separator()
 
-	$result: internal.init($list)
+	$result: empty.empty($separator, $list: $list)
 	$index: 1
 
 	@each $item in $list
 
 		@if meta.call($predicate, $item, $index, $list, $args...)
-			$result: list.append($result, $item, $separator)
+			$result: list.append($result, $item)
 
 		$index: $index + 1
 

@@ -7,6 +7,7 @@
 
 @use 'sass:list'
 @use 'sass:meta'
+@use 'empty'
 @use '../internal'
 
 
@@ -34,14 +35,14 @@
 /// 	slice([a, b, c, d], 2, -3) //=> [b]
 ///
 /// @access public
+/// @require empty.empty
 /// @require internal.$exception-function
 /// @require internal.exception-param
 /// @require internal.exception-separator
-/// @require internal.init
 /// @require internal.param-separator-is-invalid
 /// @require internal.param-validate-index
 ///
-@function slice($list, $start-at, $end-at: list.length($list), $separator: list.separator($list))
+@function slice($list, $start-at, $end-at: list.length($list), $separator: auto)
 	internal.$exception-function: 'slice'
 
 	$length: list.length($list)
@@ -61,9 +62,9 @@
 	@if internal.param-separator-is-invalid($separator)
 		@error internal.exception-separator()
 
-	$result: internal.init($list)
+	$result: empty.empty($separator, $list: $list)
 
 	@for $i from $start-at through $end-at
-		$result: list.append($result, list.nth($list, $i), $separator)
+		$result: list.append($result, list.nth($list, $i))
 
 	@return $result

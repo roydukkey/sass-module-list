@@ -6,18 +6,7 @@
 ////
 
 @use 'sass:list'
-
-
-///
-/// Initialize a new list matching the bracket style of another list.
-///
-/// @param {List} $list - The list to match.
-/// @return {List}
-///
-/// @access public
-///
-@function init($list)
-	@return if(list.is-bracketed($list), [], ())
+@use '../list/empty'
 
 
 ///
@@ -30,14 +19,15 @@
 /// @return {List}
 ///
 /// @access public
+/// @require empty.empty
 ///
-@function insert-nth($list, $index, $value, $separator: list.separator($list))
-	$result: init($list)
+@function insert-nth($list, $index, $value, $separator: auto)
+	$result: empty.empty($separator, $list: $list)
 
 	@for $n from 1 through list.length($list)
 
 		@if $n == $index
-			$result: list.append($result, $value, $separator)
+			$result: list.append($result, $value)
 
 		$result: list.append($result, list.nth($list, $n))
 

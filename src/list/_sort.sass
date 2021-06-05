@@ -8,9 +8,10 @@
 @use 'sass:list'
 @use 'sass:math'
 @use 'sass:meta'
+@use 'compare'
+@use 'empty'
 @use 'find'
 @use 'slice'
-@use 'compare'
 @use '../internal'
 
 
@@ -85,11 +86,11 @@
 /// @return {List}
 ///
 /// @access private
-/// @require internal.init
+/// @require empty.empty
 /// @require slice.slice
 ///
 @function _order($left, $right, $compare, $center)
-	$result: internal.init($left)
+	$result: empty.empty($list: $left)
 	$left-index: 1
 	$right-index: 1
 	$left-length: list.length($left)
@@ -109,7 +110,7 @@
 
 	$remainder: if($left-index < $right-index, slice.slice($left, $left-index), slice.slice($right, $right-index))
 
-	@return list.join($result, $remainder, $separator: list.separator($left))
+	@return list.join($result, $remainder)
 
 
 ///

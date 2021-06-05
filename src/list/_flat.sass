@@ -7,6 +7,7 @@
 
 @use 'sass:list'
 @use 'sass:meta'
+@use 'empty'
 @use '../internal'
 
 
@@ -29,7 +30,7 @@
 /// @require internal.exception-type
 /// @require internal.param-separator-is-invalid
 ///
-@function flat($list, $depth: 1, $separator: list.separator($list))
+@function flat($list, $depth: 1, $separator: auto)
 	internal.$exception-function: 'flat'
 
 	@if meta.type-of($depth) != 'number'
@@ -41,7 +42,7 @@
 	@if internal.param-separator-is-invalid($separator)
 		@error internal.exception-separator()
 
-	@return _flat($list, $depth, $separator, 1)
+	@return _flat($list, $depth, 1, $separator)
 
 
 ///
@@ -49,25 +50,25 @@
 ///
 /// @param {List} $list - The list to be flattened.
 /// @param {Number} $depth - The value indicating how deep a nested list structure should be flattened.
-/// @param {String} $separator [auto] - The type of separator to be used by the flattened list.
 /// @param {Number} $at-depth - The depth at which the current list is being flattened.
+/// @param {String} $separator [auto] - The type of separator to be used by the flattened list.
 /// @return {List}
 ///
 /// @access private
-/// @require internal.init
+/// @require empty.empty
 ///
-@function _flat($list, $depth, $separator, $at-depth)
-	$result: internal.init($list)
+@function _flat($list, $depth, $at-depth, $separator: auto)
+	$result: empty.empty($separator, $list: $list)
 
 	@each $item in $list
 
 		@if list.length($item) > 1 and $at-depth <= $depth
-			$sub-list: _flat($item, $depth, $separator, $at-depth + 1)
+			$sub-list: _flat($item, $depth, $at-depth + 1)
 
 			@each $sub-item in $sub-list
-				$result: list.append($result, $sub-item, $separator)
+				$result: list.append($result, $sub-item)
 
 		@else
-			$result: list.append($result, $item, $separator)
+			$result: list.append($result, $item)
 
 	@return $result
