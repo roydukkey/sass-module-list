@@ -34,13 +34,12 @@
 
 	@include true.it('Exclude nested lists')
 		$list: [10px 20px 'a' (#fff, rgb(127, 127, 127), #000)]
-
 		$assert: src.join($list, ' ?? ')
 		$expected: '10px ?? 20px ?? a ?? #fff, #7f7f7f, #000'
 		@include true.assert-equal($assert, $expected)
 
-		$assert: src.flat($list)
-		$assert: src.join($assert, ' ?? ')
+		$list: [10px 20px 'a' #fff rgb(127, 127, 127) #000]
+		$assert: src.join($list, ' ?? ')
 		$expected: '10px ?? 20px ?? a ?? #fff ?? #7f7f7f ?? #000'
 		@include true.assert-equal($assert, $expected)
 
