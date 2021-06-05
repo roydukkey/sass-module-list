@@ -11,8 +11,9 @@
 
 
 ///
-/// Creates an empty list with the specified characteristics.
+/// Creates an empty list with the specified characteristics or the characteristics of the specified list.
 ///
+/// @param {List} $list [null] - The list from which to determine separator and bracket style.
 /// @param {String} $separator [comma] - The type of separator to be used by the empty list.
 /// @param {Boolean} $bracketed [false] - Whether the empty list has square brackets or no brackets.
 /// @return {List}
@@ -24,42 +25,24 @@
 /// @require internal.param-separator-is-invalid
 /// @require internal.exception-separator
 ///
-	@overload empty($separator: comma, $bracketed: false)
+@function empty($separator: null, $bracketed: null, $list: null)
+	internal.$exception-function: 'empty'
 
-
-///
-/// Creates an empty list based on the characteristics of the specified list.
-///
-/// @param {List} $list - The list from which to determine separator and bracket style.
-/// @return {List}
-///
-/// @access public
-///
-	@overload empty($list)
-
-
-///
-/// Creates an empty list.
-///
-/// @return {List}
-///
-/// @access private
-/// @require internal.$exception-function
-/// @require internal.param-separator-is-invalid
-/// @require internal.exception-separator
-///
-@function empty($list: comma, $bracketed: false, $separator: null)
 	@if meta.type-of($list) == 'list'
-		$separator: list.separator($list)
-		$bracketed: list.is-bracketed($list)
+		@if $separator == auto or $separator == null
+			$separator: list.separator($list)
+
+		@if $bracketed == auto or $bracketed == null
+			$bracketed: list.is-bracketed($list)
 
 	@else
-		internal.$exception-function: 'empty'
-
 		@if $separator == null
-			$separator: $list
+			$separator: comma
 
-		@if internal.param-separator-is-invalid($separator)
-			@error internal.exception-separator()
+		@if $bracketed == null
+			$bracketed: false
+
+	@if internal.param-separator-is-invalid($separator)
+		@error internal.exception-separator()
 
 	@return list.join((), (), $separator, $bracketed)
