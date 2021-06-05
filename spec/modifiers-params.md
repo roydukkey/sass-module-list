@@ -1,12 +1,12 @@
 # List Configuration Modifiers
 
-The follow designates when functions are to accepts parameters which modify list configuration, ie. delimiting and enclosing punctuation.
+The follow designates when functions are to accepts parameters that modify list configuration.
 
-## `$separator` Parameter
+## Delimiting Punctuation
 
 The `$separator` parameter should be accepted when returning an list.
 
-## `$bracketed` Parameter
+## Enclosing Punctuation
 
 The `$bracketed` parameter should be accepted when returning a list...
 
