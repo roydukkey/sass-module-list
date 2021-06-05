@@ -50,14 +50,16 @@
 ///
 @function empty($list: comma, $bracketed: false, $separator: null)
 	@if meta.type-of($list) == 'list'
-		@return list.join($list, [])
+		$separator: list.separator($list)
+		$bracketed: list.is-bracketed($list)
 
-	internal.$exception-function: 'empty'
+	@else
+		internal.$exception-function: 'empty'
 
-	@if $separator == null
-		$separator: $list
+		@if $separator == null
+			$separator: $list
 
-	@if internal.param-separator-is-invalid($separator)
-		@error internal.exception-separator()
+		@if internal.param-separator-is-invalid($separator)
+			@error internal.exception-separator()
 
 	@return list.join([], [], $separator, $bracketed)
