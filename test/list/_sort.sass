@@ -171,7 +171,18 @@
 		@include true.assert-equal($assert, $expected, '[0]')
 
 	@include true.it('Determines proper units for automatic numeric sort with leading unitless numbers')
-		$incompatible: list.join(0 1 2 3 4 5, $incompatible)
-		$assert: src.sort($incompatible, src.compare-numeric())
+		$list: list.join(0 1 2 3 4 5, $incompatible)
+		$assert: src.sort($list, src.compare-numeric())
 		$expected: -3cm -9mm -4px 0 2px 1 1 2 3 4em 4 5 6mm 25px 1.25cm 2cm 20mm
 		@include true.assert-equal($assert, $expected, '[auto => 0mm]')
+
+	$numeric-null-list: list.join(null a null, $incompatible)
+
+	@include true.it('Shift non-numeric values to end of list with numeric sort')
+		$assert: src.sort($numeric-null-list, src.compare-numeric())
+		$expected: -3cm -9mm -4px 2px 1 4em 6mm 25px 1.25cm 2cm 20mm null a null
+		@include true.assert-equal($assert, $expected, '[asc]')
+
+		$assert: src.sort($assert, src.compare-numeric-desc())
+		$expected: null a null 4em 20mm 2cm 1.25cm 1 25px 6mm 2px -4px -9mm -3cm
+		@include true.assert-equal($assert, $expected, '[desc]')

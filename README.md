@@ -124,6 +124,8 @@ Depending on your setup, you may need to use the module by its full path:
 
 </dl>
 
+More information on [comparison logic](//github.com/roydukkey/sass-module-list/tree/master/spec/compare-logic.md).
+
 ## Combined API
 
 In order to avoid constantly declaring both the native 'sass:list' module and this library, the combined API has been added which merges the two.
