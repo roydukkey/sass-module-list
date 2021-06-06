@@ -2,15 +2,15 @@
 
 There are two methods of comparison provided by `sass-list`: string and numeric. The string and default comparison method is equivalent to the default functionality of [`Array.prototype.sort()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort). While on the other hand, the numeric comparison method is unique to how Sass handles numbers.
 
-Each method offers ascending and descending variants with the later being suffixed with `-desc`, e.g. `sass-list.compare-desc()`.
+Each method offers ascending and descending variants, the later of which being suffixed with `-desc`, e.g. `sass-list.compare-string-desc()`.
 
 ## String Comparison
 
-This method orders a list by converting its values to strings, then comparing each value's sequences of UTF-16 code units values from `feff0020` to `feff007e`; otherwise, shifting all null items to the end of the list for ascending comparison or beginning for descending. For example, 'banana' comes before 'cherry'. Likewise, number `9` comes before `80`, however because numbers are converted to strings, `'80'` comes before `'9'` in the Unicode order.
+This method orders a list by converting its values to strings, then comparing each value's sequences of UTF-16 code units values from `feff0020` to `feff007e`; otherwise, shifting all null items to the end of the list for ascending comparison or the beginning for descending. For example, `'banana'` comes before `'cherry'`. However, because numbers are converted to strings, `'80'` comes before `'9'` in the Unicode order.
 
 ## Numeric Comparison
 
-This method orders a list of numeric values by transforming incompatible units to compatible units before comparing each value, shifting smaller values left and larger values right. Any values which are not numbers will be shifted to the end the list for ascending comparison or beginning for descending.
+This method orders a list of numeric values by transforming incompatible units to compatible units before comparing each value, shifting smaller values left and larger values right for ascending comparison and vice versa for descending. Any values which are not numbers will be shifted to the end the list for ascending comparison or beginning for descending.
 
 ### Automatic Behavior
 
