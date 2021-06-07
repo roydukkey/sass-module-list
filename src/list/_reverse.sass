@@ -7,17 +7,29 @@
 
 @use 'sass:list'
 @use 'sass:math'
+@use '../internal'
 
 
 ///
 /// Reverses a list in place. The first item becomes the last, and the last item becomes the first.
 ///
 /// @param {List} $list - The list to reverse.
+/// @param {String} $separator [auto] - The type of separator to be used by the reversed list.
 /// @return {List}
 ///
-/// @access public
+/// @throw Must be "space", "comma", "slash", or "auto".
 ///
-@function reverse($list)
+/// @access public
+/// @require internal.$exception-function
+/// @require internal.exception-separator
+/// @require internal.param-separator-is-invalid
+///
+@function reverse($list, $separator: auto)
+	internal.$exception-function: 'reverse'
+
+	@if internal.param-separator-is-invalid($separator)
+		@error internal.exception-separator()
+
 	$length: list.length($list)
 
 	@if $length < 2
@@ -28,4 +40,4 @@
 		$list: list.set-nth($list, $i, list.nth($list, $i * -1))
 		$list: list.set-nth($list, $i * -1, $item)
 
-	@return $list
+	@return list.join($list, (), $separator)

@@ -25,7 +25,7 @@
 /// @require internal.insert-nth
 /// @require internal.param-separator-is-invalid
 ///
-@function prepend($list, $value, $separator: list.separator($list))
+@function prepend($list, $value, $separator: auto)
 	internal.$exception-function: 'prepend'
 
 	@if internal.param-separator-is-invalid($separator)

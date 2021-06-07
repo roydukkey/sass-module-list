@@ -5,7 +5,6 @@
 /// @group tests
 ////
 
-@use 'sass:meta'
 @use 'src'
 @use 'true'
 
@@ -16,4 +15,9 @@
 	@include true.it('Replace values in a list')
 		$assert: src.replace($list, 38, 'replaced')
 		$expected: 9 1 -2 'replaced' 4 9 'replaced' -2 2
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Return a list with a different separator')
+		$assert: src.replace($list, 38, 'replaced', comma)
+		$expected: 9, 1, -2, 'replaced', 4, 9, 'replaced', -2, 2
 		@include true.assert-equal($assert, $expected)

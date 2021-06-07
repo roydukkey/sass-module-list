@@ -41,3 +41,8 @@
 		$assert: src.remove-nth($list, -1)
 		$expected: ['ant', 'bison', 'camel', 'duck']
 		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Return a list with a different separator')
+		$assert: src.remove-nth($list, 2, space)
+		$expected: ['ant' 'camel' 'duck' 'elephant']
+		@include true.assert-equal($assert, $expected)

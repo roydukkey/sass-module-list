@@ -186,3 +186,8 @@
 		$assert: src.sort($assert, src.compare-numeric-desc())
 		$expected: null a null 4em 20mm 2cm 1.25cm 1 25px 6mm 2px -4px -9mm -3cm
 		@include true.assert-equal($assert, $expected, '[desc]')
+
+	@include true.it('Return a list with a different separator')
+		$assert: src.sort($strings, $separator: comma)
+		$expected: 'Five', 'Four', 'One', 'Six', 'Three', 'Two'
+		@include true.assert-equal($assert, $expected)

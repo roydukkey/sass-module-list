@@ -16,3 +16,8 @@
 		$assert: src.remove($list, 'bison')
 		$expected: ['ant', 'camel', 'duck']
 		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Return a list with a different separator')
+		$assert: src.remove($list, 'bison', space)
+		$expected: ['ant' 'camel' 'duck']
+		@include true.assert-equal($assert, $expected)

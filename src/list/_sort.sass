@@ -21,11 +21,13 @@
 /// @param {List} $list - The list to sort.
 /// @param {Function} $compare [compare.string()] - The function that defines the sort order. The first parameter is the first item for comparison. The second parameter is the second item for comparison. The returned value must be a number.
 /// @param {Number | String} $center [auto] - For numeric comparison, the value indicating the center (zero) position between positive and negative values.
+/// @param {String} $separator [auto] - The type of separator to be used by the sorted list.
 /// @return {List}
 ///
 /// @throw `#{$compare}` is not a function.
 /// @throw `#{$center}` is not a number.
 /// @throw Must be "auto" or zero with or without units.
+/// @throw Must be "space", "comma", "slash", or "auto".
 ///
 /// @example scss
 /// 	sort(c b e d a f) //=> a b c d e f
@@ -43,14 +45,19 @@
 /// @require find.find
 /// @require internal.$exception-function
 /// @require internal.exception-param
+/// @require internal.exception-separator
 /// @require internal.exception-type
+/// @require internal.param-separator-is-invalid
 /// @require slice.slice
 ///
-@function sort($list, $compare: compare.string(), $center: auto)
+@function sort($list, $compare: compare.string(), $center: auto, $separator: auto)
 	internal.$exception-function: 'sort'
 
 	@if meta.type-of($compare) != 'function'
 		@error internal.exception-type('compare', $compare, 'function')
+
+	@if internal.param-separator-is-invalid($separator)
+		@error internal.exception-separator()
 
 	$length: list.length($list)
 
@@ -73,7 +80,7 @@
 	$left: slice.slice($list, 1, $middle)
 	$right: slice.slice($list, $middle + 1)
 
-	@return _order(sort($left, $compare, $center), sort($right, $compare, $center), $compare, $center)
+	@return _order(sort($left, $compare, $center), sort($right, $compare, $center), $compare, $center, $separator)
 
 
 ///
@@ -83,13 +90,14 @@
 /// @param {List} $right - The right side of the list being sorted.
 /// @param {Function} $compare - The function that defines the sort order.
 /// @param {Number} $center - For numeric comparison, the value indicating the center (zero) position between positive and negative values.
+/// @param {String} $separator [auto] - The type of separator to be used by the returned list.
 /// @return {List}
 ///
 /// @access private
 /// @require empty.empty
 /// @require slice.slice
 ///
-@function _order($left, $right, $compare, $center)
+@function _order($left, $right, $compare, $center, $separator)
 	$result: empty.empty($list: $left)
 	$left-index: 1
 	$right-index: 1
@@ -110,7 +118,7 @@
 
 	$remainder: if($left-index < $right-index, slice.slice($left, $left-index), slice.slice($right, $right-index))
 
-	@return list.join($result, $remainder)
+	@return list.join($result, $remainder, $separator)
 
 
 ///

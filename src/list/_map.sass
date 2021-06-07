@@ -7,6 +7,7 @@
 
 @use 'sass:list'
 @use 'sass:meta'
+@use 'empty'
 @use '../internal'
 
 
@@ -15,27 +16,33 @@
 ///
 /// @param {List} $list - The list from which items will be processed.
 /// @param {Function} $transformer - The transform function to apply to each item. The first parameter is the current item being processed in the list. The second parameter is the index of the current item being processed in the list. The third parameter is the list being processed. The returned value may be any type.
+/// @param {String} $separator [auto] - The type of separator to be used by the new list.
 /// @param {ArgList} $args - Additional parameters which are provided to transform function.
-///
 /// @return {List}
 ///
 /// @throw `#{$transformer}` is not a function.
+/// @throw Must be "space", "comma", "slash", or "auto".
 ///
 /// @access public
 /// @require internal.$exception-function
+/// @require internal.exception-separator
 /// @require internal.exception-type
+/// @require internal.param-separator-is-invalid
 ///
-@function map($list, $transformer, $args...)
+@function map($list, $transformer, $separator: auto, $args...)
 	internal.$exception-function: 'map'
 
 	@if meta.type-of($transformer) != 'function'
 		@error internal.exception-type('transformer', $transformer, 'function')
 
-	$source: $list
+	@if internal.param-separator-is-invalid($separator)
+		@error internal.exception-separator()
+
+	$result: empty.empty($separator, $list: $list)
 	$index: 1
 
 	@each $item in $list
-		$list: list.set-nth($list, $index, meta.call($transformer, $item, $index, $source, $args...))
+		$result: list.append($result, meta.call($transformer, $item, $index, $list, $args...))
 		$index: $index + 1
 
-	@return $list
+	@return $result

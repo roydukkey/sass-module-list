@@ -24,3 +24,8 @@
 		$assert: src.reverse([1 (2 'c') 4 'd'])
 		$expected: ['d' 4 (2 'c') 1]
 		@include true.assert-equal($assert, $expected, "[[1 (2 'c') 4 'd']]")
+
+	@include true.it('Return a list with a different separator')
+		$assert: src.reverse([1 2 'c' 4 'd'], comma)
+		$expected: ['d', 4, 'c', 2, 1]
+		@include true.assert-equal($assert, $expected)

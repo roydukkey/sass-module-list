@@ -15,13 +15,13 @@
 /// @param {List} $list - The list to which the value is to be inserted.
 /// @param {Number} $index - The index at which the value is to be inserted.
 /// @param {*} $value - The value which is to be inserted.
-/// @param {String} $separator [auto] - The type of separator to be used by the copied list.
+/// @param {String} $separator - The type of separator to be used by the copied list.
 /// @return {List}
 ///
 /// @access public
 /// @require empty.empty
 ///
-@function insert-nth($list, $index, $value, $separator: auto)
+@function insert-nth($list, $index, $value, $separator)
 	$result: empty.empty($separator, $list: $list)
 
 	@for $n from 1 through list.length($list)

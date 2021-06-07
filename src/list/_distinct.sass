@@ -27,7 +27,7 @@
 /// @require internal.exception-separator
 /// @require internal.param-separator-is-invalid
 ///
-@function distinct($list, $separator: list.separator($list))
+@function distinct($list, $separator: auto)
 	internal.$exception-function: 'distinct'
 
 	@if internal.param-separator-is-invalid($separator)

@@ -45,3 +45,8 @@
 		$assert: src.map(1 2 1 2 1 2 1 2, meta.get-function('_add-2n-plus-index'))
 		$expected: 2 4 2 4 2 4 2 4
 		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Return a list with a different separator')
+		$assert: src.map(1 2 1 2 1 2 1 2, meta.get-function('_add-2n-plus-index'), comma)
+		$expected: 2, 4, 2, 4, 2, 4, 2, 4
+		@include true.assert-equal($assert, $expected)
