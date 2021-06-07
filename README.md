@@ -80,11 +80,11 @@ Depending on your setup, you may need to use the module by its full path:
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_prepend.sass"><code>prepend ( $list, $value [, $separator] )</code></a></dt>
   <dd>Returns a copy of a list with the specified value added to the beginning.</dd>
 
-  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_reduce-right.sass"><code>reduce-right ( $list, $transformer [, $initial-value] [, $args...] )</code></a></dt>
-  <dd>Reduces a list to a single value as the product of calling a specified function on every item in a list, starting with the last item to the first.</dd>
-
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_reduce.sass"><code>reduce ( $list, $transformer [, $initial-value] [, $args...] )</code></a></dt>
   <dd>Reduces a list to a single value as the product of calling a specified function on every item in a list.</dd>
+
+  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_reduce-right.sass"><code>reduce-right ( $list, $transformer [, $initial-value] [, $args...] )</code></a></dt>
+  <dd>Reduces a list to a single value as the product of calling a specified function on every item in a list, starting with the last item to the first.</dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_remove.sass"><code>remove ( $list, $value [, $separator] )</code></a></dt>
   <dd>Returns a copy of a list without the specified value.</dd>
