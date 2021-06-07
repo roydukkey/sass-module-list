@@ -71,7 +71,7 @@ Depending on your setup, you may need to use the module by its full path:
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_join.sass"><code>join ( $list [, $glue] )</code></a></dt>
   <dd>Concatenates all of the items in an list to a string, separated by the list's separator or a specified glue string. If the list has only one item, then that item will be returned without using the glue.</dd>
 
-  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_last-index.sass"><code>last-index ( $list [, $from-index] )</code></a></dt>
+  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_last-index.sass"><code>last-index ( $list, $value [, $from-index] )</code></a></dt>
   <dd>Returns the last index at which a specified item can be found in a list; otherwise, 0 is returned, indicating that the item is not present. The list is searched backwards, starting at a given index when specified.</dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_map.sass"><code>map ( $list, $transformer [, $separator] [, $args...] )</code></a></dt>
@@ -92,7 +92,7 @@ Depending on your setup, you may need to use the module by its full path:
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_remove-nth.sass"><code>remove-nth ( $list, $index [, $separator] )</code></a></dt>
   <dd>Returns a copy of a list without the value at a given index.</dd>
 
-  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_replace.sass"><code>replace ( $list, $value [, $separator] )</code></a></dt>
+  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_replace.sass"><code>replace ( $list, $value, $replacement [, $separator] )</code></a></dt>
   <dd>Returns a copy of a list with all occurrences of the specified value replaced by the specified replacement.</dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_reverse.sass"><code>reverse ( $list [, $separator] )</code></a></dt>
@@ -107,7 +107,7 @@ Depending on your setup, you may need to use the module by its full path:
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_some.sass"><code>some ( $list, $predicate [, $args...] )</code></a></dt>
   <dd>Tests whether at least one item in a list satisfies the test implemented by the specified function.</dd>
 
-  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_sort.sass"><code>sort ( $list, $compare [, $center] [, $separator] )</code></a></dt>
+  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_sort.sass"><code>sort ( $list [, $compare] [, $center] [, $separator] )</code></a></dt>
   <dd>Sorts the items of a list in place. The default sort order is ascending, built upon converting the items into strings, then comparing their sequences of UTF-16 code units values.</dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_to-string.sass"><code>to-string ( $list )</code></a></dt>
