@@ -12,9 +12,11 @@
 
 
 ///
-/// Reverses a list in place. The first item becomes the last, and the last item becomes the first.
+/// Returns a copy of a list with all occurrences of the specified value replaced by the specified replacement.
 ///
-/// @param {List} $list - The list to reverse.
+/// @param {List} $list - The list from which the value is to be replaced.
+/// @param {*} $value - The value to be replace by the replacement.
+/// @param {*} $replacement - The value that replaces the specified value.
 /// @param {String} $separator [auto] - The type of separator to be used by the copied list.
 /// @return {List}
 ///
@@ -37,7 +39,7 @@
 
 
 ///
-/// A filter function that tests equality of the current item's index to the index of the first instance of current item in the list.
+/// Used to compare two list values for equality, returning the replacement when true, otherwise returning the original value.
 ///
 /// @param {*} $item - The current item being processed in the list.
 /// @param {Number} $index - The index of the current item being processed in the list.

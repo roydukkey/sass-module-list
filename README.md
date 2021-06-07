@@ -93,7 +93,7 @@ Depending on your setup, you may need to use the module by its full path:
   <dd>Returns a copy of a list without the value at a given index.</dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_replace.sass"><code>replace ( $list, $value [, $separator] )</code></a></dt>
-  <dd>Reverses a list in place. The first item becomes the last, and the last item becomes the first.</dd>
+  <dd>Returns a copy of a list with all occurrences of the specified value replaced by the specified replacement.</dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_reverse.sass"><code>reverse ( $list [, $separator] )</code></a></dt>
   <dd>Reverses a list in place. The first item becomes the last, and the last item becomes the first.</dd>
