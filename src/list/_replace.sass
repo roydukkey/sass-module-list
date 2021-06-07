@@ -5,7 +5,6 @@
 /// @group api
 ////
 
-@use 'sass:list'
 @use 'sass:meta'
 @use 'map'
 @use '../internal'
@@ -44,10 +43,11 @@
 /// @param {*} $item - The current item being processed in the list.
 /// @param {Number} $index - The index of the current item being processed in the list.
 /// @param {List} $list - The list being processed.
-/// @param {ArgList} $args - Additional parameters which are provided to transform function.
+/// @param {*} $value - The value to be replace by the replacement.
+/// @param {*} $replacement - The value that replaces the specified value.
 /// @return {*}
 ///
 /// @access private
 ///
-@function _replace-transformer($item, $index, $list, $args...)
-	@return if($item == list.nth($args, 1), list.nth($args, 2), $item)
+@function _replace-transformer($item, $index, $list, $value, $replacement)
+	@return if($item == $value, $replacement, $item)
