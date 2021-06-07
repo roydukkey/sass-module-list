@@ -98,6 +98,9 @@ Depending on your setup, you may need to use the module by its full path:
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_reverse.sass"><code>reverse ( $list [, $separator] )</code></a></dt>
   <dd>Reverses a list in place. The first item becomes the last, and the last item becomes the first.</dd>
 
+  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_set-nth.sass"><code>set-nth ( $list, $index, $value [, $separator] )</code></a></dt>
+  <dd>Returns a copy of a list with the value at the given index replaced with the specified value.</dd>
+
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_slice.sass"><code>slice ( $list, $start-at [, $end-at] [, $separator] )</code></a></dt>
   <dd>Extracts a portion of a list into a new list selected from a starting index through a ending index.</dd>
 
@@ -139,7 +142,7 @@ In order to avoid constantly declaring both the native 'sass:list' module and th
 @use 'sass-list/list';
 ```
 
-*Note:* Since their functionality is enhanced by this library, the combined API hides the native `join` and `index` functions.
+*Note:* Since their functionality is enhanced by this library, the combined API hides the native `list.index()`, `list.join()` and `list.set-nth()` functions.
 
 ## Further Reading
 
