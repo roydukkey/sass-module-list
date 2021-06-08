@@ -7,6 +7,53 @@
 
 @use 'sass:math'
 @use 'sass:meta'
+@use '../../internal'
+
+
+///
+/// The numeric comparison method used by the sort function.
+///
+/// @return {Function}
+///
+	@overload numeric()
+///
+/// Used to compare two list items as numbers in ascending order. All non-numeric items are shifted right.
+///
+/// @param {*} $first-item - The first item for the comparison.
+/// @param {*} $second-item - The second item for the comparison.
+/// @param {Number} $center - The value indicating the center (zero) position between positive and negative values.
+/// @return {Number}
+///
+	@overload numeric($first-item, $second-item, $center)
+///
+/// @access public
+/// @require _numeric
+///
+@function numeric($args...)
+	@return internal.call-or-reference(meta.get-function('_numeric'), $args...)
+
+
+///
+/// The descending numeric comparison method used by the sort function.
+///
+/// @return {Function}
+///
+	@overload numeric-desc()
+///
+/// Used to compare two list items as numbers in descending order. All non-numeric items are shifted left.
+///
+/// @param {*} $first-item - The first item for the comparison.
+/// @param {*} $second-item - The second item for the comparison.
+/// @param {Number} $center - The value indicating the center (zero) position between positive and negative values.
+/// @return {Number}
+///
+	@overload numeric-desc($first-item, $second-item, $center)
+///
+/// @access public
+/// @require _numeric-desc
+///
+@function numeric-desc($args...)
+	@return internal.call-or-reference(meta.get-function('_numeric-desc'), $args...)
 
 
 ///
@@ -54,27 +101,3 @@
 ///
 @function _numeric-desc($first-item, $second-item, $center)
 	@return _numeric($second-item, $first-item, $center)
-
-
-///
-/// The numeric comparison method used by the sort function.
-///
-/// @return {Function}
-///
-/// @access public
-/// @require _numeric
-///
-@function numeric()
-	@return meta.get-function('_numeric')
-
-
-///
-/// The descending numeric comparison method used by the sort function.
-///
-/// @return {Function}
-///
-/// @access public
-/// @require _numeric-desc
-///
-@function numeric-desc()
-	@return meta.get-function('_numeric-desc')

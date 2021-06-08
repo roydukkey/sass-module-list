@@ -9,6 +9,53 @@
 @use 'sass:math'
 @use 'sass:meta'
 @use 'sass:string'
+@use '../../internal'
+
+
+///
+/// The string comparison method used by the sort function.
+///
+/// @return {Function}
+///
+	@overload string()
+///
+/// Used to compare two list items by converting them to strings, then comparing the value's sequences of UTF-16 code units values in ascending order. All null items are shifted right.
+///
+/// @param {*} $first-item - The first item for the comparison.
+/// @param {*} $second-item - The second item for the comparison.
+/// @ignore @param {Number} $center - Irrelevant for this function.
+/// @return {Number}
+///
+	@overload string($first-item, $second-item, $center)
+///
+/// @access public
+/// @require _string
+///
+@function string($args...)
+	@return internal.call-or-reference(meta.get-function('_string'), $args...)
+
+
+///
+/// The descending string comparison method used by the sort function.
+///
+/// @return {Function}
+///
+	@overload string-desc()
+///
+/// Used to compare two list items by converting them to strings, then comparing the value's sequences of UTF-16 code units values in descending order. All null items are shifted left.
+///
+/// @param {*} $first-item - The first item for the comparison.
+/// @param {*} $second-item - The second item for the comparison.
+/// @ignore @param {Number} $center - Irrelevant for this function.
+/// @return {Number}
+///
+	@overload string($first-item, $second-item, $center)
+///
+/// @access public
+/// @require _string-desc
+///
+@function string-desc($args...)
+	@return internal.call-or-reference(meta.get-function('_string-desc'), $args...)
 
 
 ///
@@ -82,27 +129,3 @@ $_order: list.join($_order, '{' '|' '}' '~')
 ///
 @function _string-desc($first-item, $second-item, $center)
 	@return _string($second-item, $first-item, $center)
-
-
-///
-/// The string comparison method used by the sort function.
-///
-/// @return {Function}
-///
-/// @access public
-/// @require _string
-///
-@function string()
-	@return meta.get-function('_string')
-
-
-///
-/// The descending string comparison method used by the sort function.
-///
-/// @return {Function}
-///
-/// @access public
-/// @require _string-desc
-///
-@function string-desc()
-	@return meta.get-function('_string-desc')
