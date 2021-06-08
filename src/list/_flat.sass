@@ -17,6 +17,7 @@
 /// @param {List} $list - The list to be flattened.
 /// @param {Number} $depth - The value indicating how deep a nested list structure should be flattened.
 /// @param {String} $separator [auto] - The type of separator to be used by the flattened list.
+/// @param {Boolean | String} $bracketed [auto] - Whether the flattened list has square brackets or no brackets.
 /// @return {List}
 ///
 /// @throw `#{$depth}` is not a number.
@@ -30,7 +31,7 @@
 /// @require internal.exception-type
 /// @require internal.param-separator-is-invalid
 ///
-@function flat($list, $depth: 1, $separator: auto)
+@function flat($list, $depth: 1, $separator: auto, $bracketed: auto)
 	internal.$exception-function: 'flat'
 
 	@if meta.type-of($depth) != 'number'
@@ -42,7 +43,7 @@
 	@if internal.param-separator-is-invalid($separator)
 		@error internal.exception-separator()
 
-	@return _flat($list, $depth, 1, $separator)
+	@return _flat($list, $depth, 1, $separator, $bracketed)
 
 
 ///
@@ -52,13 +53,14 @@
 /// @param {Number} $depth - The value indicating how deep a nested list structure should be flattened.
 /// @param {Number} $at-depth - The depth at which the current list is being flattened.
 /// @param {String} $separator [auto] - The type of separator to be used by the flattened list.
+/// @param {Boolean | String} $bracketed [auto] - Whether the flattened list has square brackets or no brackets.
 /// @return {List}
 ///
 /// @access private
 /// @require empty.empty
 ///
-@function _flat($list, $depth, $at-depth, $separator: auto)
-	$result: empty.empty($separator, $list: $list)
+@function _flat($list, $depth, $at-depth, $separator: auto, $bracketed: auto)
+	$result: empty.empty($separator, $bracketed, $list)
 
 	@each $item in $list
 

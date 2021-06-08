@@ -34,7 +34,7 @@
 	@if internal.param-separator-is-invalid($separator)
 		@error internal.exception-separator()
 
-	@return map.map($list, meta.get-function('_replace-transformer'), $separator, $value, $replacement)
+	@return map.map($list, meta.get-function('_replace-transformer'), $separator, auto, $value, $replacement)
 
 
 ///

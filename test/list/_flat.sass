@@ -35,3 +35,13 @@
 		$assert: src.flat($list, 2, slash)
 		$expected: list.slash(15, 14, 13, 12, 11, 10, (9 8), 7, (6 5), 4, 3, 2, 1)
 		@include true.assert-equal($assert, $expected, '[slash]')
+
+	@include true.it('Return a list with a different bracket style')
+		$assert: src.flat($list, $bracketed: true)
+		$expected: [15 14 13 12 (11 10 (9 8)) 7 ((6 5) 4) 3 2 1]
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Return a list with a different separator and bracket style')
+		$assert: src.flat($list, $separator: comma, $bracketed: true)
+		$expected: [15, 14, 13, 12, (11 10 (9 8)), 7, ((6 5) 4), 3, 2, 1]
+		@include true.assert-equal($assert, $expected)

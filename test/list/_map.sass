@@ -30,23 +30,36 @@
 
 
 @include true.describe('@function src.map')
+	$list: 2 4 6 8 16
 
 	@include true.it('Transform the items in a list')
-		$assert: src.map(2 4 6 8 16, meta.get-function('_add-one'))
+		$assert: src.map($list, meta.get-function('_add-one'))
 		$expected: 3 5 7 9 17
 		@include true.assert-equal($assert, $expected)
 
 	@include true.it('Transformer receives the item indexes')
-		$assert: src.map(2 4 6 8 16, meta.get-function('_add-index'))
+		$assert: src.map($list, meta.get-function('_add-index'))
 		$expected: 1 2 3 4 5
 		@include true.assert-equal($assert, $expected)
 
+	$list: 1 2 1 2 1 2 1 2
+
 	@include true.it('Transformer receives the calling list')
-		$assert: src.map(1 2 1 2 1 2 1 2, meta.get-function('_add-2n-plus-index'))
+		$assert: src.map($list, meta.get-function('_add-2n-plus-index'))
 		$expected: 2 4 2 4 2 4 2 4
 		@include true.assert-equal($assert, $expected)
 
 	@include true.it('Return a list with a different separator')
-		$assert: src.map(1 2 1 2 1 2 1 2, meta.get-function('_add-2n-plus-index'), comma)
+		$assert: src.map($list, meta.get-function('_add-2n-plus-index'), comma)
 		$expected: 2, 4, 2, 4, 2, 4, 2, 4
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Return a list with a different bracket style')
+		$assert: src.map($list, meta.get-function('_add-2n-plus-index'), $bracketed: true)
+		$expected: [2 4 2 4 2 4 2 4]
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Return a list with a different separator and bracket style')
+		$assert: src.map($list, meta.get-function('_add-2n-plus-index'), slash, true)
+		$expected: list.join(list.slash(2, 4, 2, 4, 2, 4, 2, 4), (), $bracketed: true)
 		@include true.assert-equal($assert, $expected)

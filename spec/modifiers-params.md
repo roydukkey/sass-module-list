@@ -16,7 +16,7 @@ The `$bracketed` parameter should be accepted when returning a list...
     2. `.empty()`
     3. etc.
 
-  * that is not a subset of an source list.
+  * that is not a subset of an source list and a potential input value.
 
     1. `.map()`
     2. etc.

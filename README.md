@@ -56,7 +56,7 @@ Depending on your setup, you may need to use the module by its full path:
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_find-nth.sass"><code>find-nth ( $list, $predicate [, $args...] )</code></a></dt>
   <dd>Returns the index of the first item from a list that satisfies the test implemented by the specified function; otherwise, 0 is returned, indicating that no item satisfies the test.</dd>
 
-  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_flat.sass"><code>flat ( $list [, $depth] [, $separator] )</code></a></dt>
+  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_flat.sass"><code>flat ( $list [, $depth] [, $separator] [, $bracketed] )</code></a></dt>
   <dd>Creates a new list with all sub-list items concatenated into it recursively up to a specified depth.</dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_includes.sass"><code>includes ( $list, $value [, $start-at] )</code></a></dt>
@@ -74,7 +74,7 @@ Depending on your setup, you may need to use the module by its full path:
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_last-index.sass"><code>last-index ( $list, $value [, $from-index] )</code></a></dt>
   <dd>Returns the last index at which a specified item can be found in a list; otherwise, 0 is returned, indicating that the item is not present. The list is searched backwards, starting at a given index when specified.</dd>
 
-  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_map.sass"><code>map ( $list, $transformer [, $separator] [, $args...] )</code></a></dt>
+  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_map.sass"><code>map ( $list, $transformer [, $separator] [, $bracketed] [, $args...] )</code></a></dt>
   <dd>Creates a new list populated with the results of calling a specified function on every item in a list.</dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_prepend.sass"><code>prepend ( $list, $value [, $separator] )</code></a></dt>
