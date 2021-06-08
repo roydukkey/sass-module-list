@@ -33,7 +33,6 @@
 	internal.$exception-function: 'concat'
 
 	$separator: internal.param-get($values, 'separator', auto)
-	$bracketed: internal.param-get($values, 'bracketed', auto)
 
 	@if internal.param-separator-is-invalid($separator)
 		@error internal.exception-separator()
@@ -41,6 +40,7 @@
 	@if list.length($values) < 2
 		@error internal.exception-param('Two or more values are required', 'values')
 
+	$bracketed: internal.param-get($values, 'bracketed', auto)
 	$result: empty.empty($separator, $bracketed, list.nth($values, 1))
 
 	@each $value in $values
