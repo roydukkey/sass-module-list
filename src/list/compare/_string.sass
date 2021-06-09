@@ -23,10 +23,10 @@
 ///
 /// @param {*} $first-item - The first item for the comparison.
 /// @param {*} $second-item - The second item for the comparison.
-/// @ignore @param {Number} $center - Irrelevant for this function.
+/// @ignore @param {Number} $center [never] - Irrelevant for this function.
 /// @return {Number}
 ///
-	@overload string($first-item, $second-item, $center)
+	@overload string($first-item, $second-item, $center: never)
 ///
 /// @access public
 /// @require _string
@@ -46,10 +46,10 @@
 ///
 /// @param {*} $first-item - The first item for the comparison.
 /// @param {*} $second-item - The second item for the comparison.
-/// @ignore @param {Number} $center - Irrelevant for this function.
+/// @ignore @param {Number} $center [never] - Irrelevant for this function.
 /// @return {Number}
 ///
-	@overload string($first-item, $second-item, $center)
+	@overload string($first-item, $second-item, $center: never)
 ///
 /// @access public
 /// @require _string-desc
@@ -79,13 +79,13 @@ $_order: list.join($_order, '{' '|' '}' '~')
 ///
 /// @param {*} $first-item - The first item for the comparison.
 /// @param {*} $second-item - The second item for the comparison.
-/// @ignore @param {Number} $center - Irrelevant for this function.
+/// @ignore @param {Number} $center: never - Irrelevant for this function.
 /// @return {Number}
 ///
 /// @access private
 /// @require $_order
 ///
-@function _string($first-item, $second-item, $center)
+@function _string($first-item, $second-item, $center: never)
 
 	@if $first-item == null
 		@return 1
@@ -121,11 +121,11 @@ $_order: list.join($_order, '{' '|' '}' '~')
 ///
 /// @param {*} $first-item - The first item for the comparison.
 /// @param {*} $second-item - The second item for the comparison.
-/// @ignore @param {Number} $center - Irrelevant for this function.
+/// @ignore @param {Number} $center [never] - Irrelevant for this function.
 /// @return {Number}
 ///
 /// @access private
 /// @require _string
 ///
-@function _string-desc($first-item, $second-item, $center)
+@function _string-desc($first-item, $second-item, $center: never)
 	@return _string($second-item, $first-item, $center)

@@ -21,10 +21,10 @@
 ///
 /// @param {*} $first-item - The first item for the comparison.
 /// @param {*} $second-item - The second item for the comparison.
-/// @param {Number} $center - The value indicating the center (zero) position between positive and negative values.
+/// @param {Number} $center [0] - The value indicating the center (zero) position between positive and negative values.
 /// @return {Number}
 ///
-	@overload numeric($first-item, $second-item, $center)
+	@overload numeric($first-item, $second-item, $center: 0)
 ///
 /// @access public
 /// @require _numeric
@@ -44,10 +44,10 @@
 ///
 /// @param {*} $first-item - The first item for the comparison.
 /// @param {*} $second-item - The second item for the comparison.
-/// @param {Number} $center - The value indicating the center (zero) position between positive and negative values.
+/// @param {Number} $center [0] - The value indicating the center (zero) position between positive and negative values.
 /// @return {Number}
 ///
-	@overload numeric-desc($first-item, $second-item, $center)
+	@overload numeric-desc($first-item, $second-item, $center: 0)
 ///
 /// @access public
 /// @require _numeric-desc
@@ -61,12 +61,12 @@
 ///
 /// @param {*} $first-item - The first item for the comparison.
 /// @param {*} $second-item - The second item for the comparison.
-/// @param {Number} $center - The value indicating the center (zero) position between positive and negative values.
+/// @param {Number} $center [0] - The value indicating the center (zero) position between positive and negative values.
 /// @return {Number}
 ///
 /// @access private
 ///
-@function _numeric($first-item, $second-item, $center)
+@function _numeric($first-item, $second-item, $center: 0)
 
 	@if meta.type-of($first-item) != 'number'
 		@return 1
@@ -93,11 +93,11 @@
 ///
 /// @param {*} $first-item - The first item for the comparison.
 /// @param {*} $second-item - The second item for the comparison.
-/// @param {Number} $center - The value indicating the center (zero) position between positive and negative values.
+/// @param {Number} $center [0] - The value indicating the center (zero) position between positive and negative values.
 /// @return {Number}
 ///
 /// @access private
 /// @require _numeric
 ///
-@function _numeric-desc($first-item, $second-item, $center)
+@function _numeric-desc($first-item, $second-item, $center: 0)
 	@return _numeric($second-item, $first-item, $center)
