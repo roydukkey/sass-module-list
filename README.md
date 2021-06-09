@@ -130,7 +130,7 @@ Depending on your setup, you may need to use the module by its full path:
     </dl>
   </dd>
 
-  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/compare/_numeric.sass"><code>compare-numeric()</code>, <code>compare-numeric-desc()</code></a></dt>
+  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/compare/_numeric.sass"><code>compare-numeric ()</code>, <code>compare-numeric-desc ()</code></a></dt>
   <dd>
     Returns a function reference to the numeric comparison method used by the sort function.
     <dl>
