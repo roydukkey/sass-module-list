@@ -119,15 +119,31 @@ Depending on your setup, you may need to use the module by its full path:
 
 <dl>
 
-  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/compare/_string.sass"><code>compare-string()</code>, <code>compare-string-desc()</code></a></dt>
-  <dd>The string comparison method used by the sort function.</dd>
+  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/compare/_string.sass"><code>compare-string ()</code>, <code>compare-string-desc ()</code></a></dt>
+  <dd>
+    Returns a function reference to the string comparison method used by the sort function.
+    <dl>
+      <dt><code>compare-string ( $first-item, $second-item )</code></dt>
+      <dd>Used to compare two list items by converting them to strings, then comparing the value's sequences of UTF-16 code units values in ascending order. All null items are shifted right.</dd>
+      <dt><code>compare-string-desc ( $first-item, $second-item )</code><dt>
+      <dd>Used to compare two list items by converting them to strings, then comparing the value's sequences of UTF-16 code units values in descending order. All null items are shifted left.</dd>
+    </dl>
+  </dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/compare/_numeric.sass"><code>compare-numeric()</code>, <code>compare-numeric-desc()</code></a></dt>
-  <dd>The numeric comparison method used by the sort function.</dd>
+  <dd>
+    Returns a function reference to the numeric comparison method used by the sort function.
+    <dl>
+      <dt><code>compare-numeric ( $first-item, $second-item [, $center] )</code></dt>
+      <dd>Used to compare two list items as numbers in ascending order. All non-numeric items are shifted right.</dd>
+      <dt><code>compare-numeric-desc ( $first-item, $second-item [, $center] )</code><dt>
+      <dd>Used to compare two list items as numbers in descending order. All non-numeric items are shifted left.</dd>
+    </dl>
+  </dd>
 
 </dl>
 
-More information on [comparison logic](//github.com/roydukkey/sass-module-list/tree/master/spec/compare-logic.md).
+More information on [comparison logic](//github.com/roydukkey/sass-module-list/tree/master/spec/compare-logic.md) and [reference functions](//github.com/roydukkey/sass-module-list/tree/master/spec/reference-functions.md).
 
 ## Combined API
 
@@ -147,4 +163,5 @@ In order to avoid constantly declaring both the native 'sass:list' module and th
 ## Further Reading
 
 1. [Comparison Logic](//github.com/roydukkey/sass-module-list/tree/master/spec/compare-logic.md)
+1. [Reference Functions](//github.com/roydukkey/sass-module-list/tree/master/spec/reference-functions.md)
 1. [List Configuration Modifiers](//github.com/roydukkey/sass-module-list/tree/master/spec/modifiers-params.md)
