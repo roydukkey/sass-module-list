@@ -19,7 +19,7 @@
 /// Sorts the items of a list in place. The default sort order is ascending, built upon converting the items into strings, then comparing their sequences of UTF-16 code units values.
 ///
 /// @param {List} $list - The list to sort.
-/// @param {Function} $compare [compare.string()] - The function that defines the sort order. The first parameter is the first item for comparison. The second parameter is the second item for comparison. The returned value must be a number.
+/// @param {Function} $compare [compare.string()] - The function that defines the sort order. The first parameter is the first item for comparison. The second parameter is the second item for comparison. The third parameter is for centering numeric values. The returned value must be a number.
 /// @param {Number | String} $center [auto] - For numeric comparison, the value indicating the center (zero) position between positive and negative values.
 /// @param {String} $separator [auto] - The type of separator to be used by the sorted list.
 /// @return {List}
