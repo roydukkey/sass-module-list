@@ -25,13 +25,10 @@
 ///
 /// @access public
 /// @require index.index
-/// @require internal.$exception-function
 /// @require internal.param-validate-index
 ///
 @function includes($list, $value, $start-at: 1)
-	internal.$exception-function: 'includes'
-
-	$start-at: internal.param-validate-index('start-at', $start-at, list.length($list))
+	$start-at: internal.param-validate-index('includes', 'start-at', $start-at, list.length($list))
 
 	@if meta.type-of($start-at) != 'number'
 		@error $start-at

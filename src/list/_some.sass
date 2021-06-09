@@ -20,14 +20,12 @@
 /// @throw `#{$predicate}` is not a function.
 ///
 /// @access public
-/// @require internal.$exception-function
-/// @require internal.exception-type
+/// @require internal.exception-param-type
 ///
 @function some($list, $predicate, $args...)
-	internal.$exception-function: 'some'
 
 	@if meta.type-of($predicate) != 'function'
-		@error internal.exception-type('predicate', $predicate, 'function')
+		@error internal.exception-param-type('some', 'predicate', $predicate, 'function')
 
 	$index: 1
 

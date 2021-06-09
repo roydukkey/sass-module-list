@@ -23,22 +23,19 @@
 ///
 /// @access public
 /// @require empty.empty
-/// @require internal.$exception-function
 /// @require internal.exception-param
 /// @require internal.exception-separator
 /// @require internal.param-get
 /// @require internal.param-separator-is-invalid
 ///
 @function concat($values...)
-	internal.$exception-function: 'concat'
-
 	$separator: internal.param-get($values, 'separator', auto)
 
 	@if internal.param-separator-is-invalid($separator)
-		@error internal.exception-separator()
+		@error internal.exception-separator('concat')
 
 	@if list.length($values) < 2
-		@error internal.exception-param('Two or more values are required', 'values')
+		@error internal.exception-param('Two or more values are required', 'concat', 'values')
 
 	$bracketed: internal.param-get($values, 'bracketed', auto)
 	$result: empty.empty($separator, $bracketed, list.nth($values, 1))

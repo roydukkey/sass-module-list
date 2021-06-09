@@ -21,6 +21,9 @@
 		"slice"
 	],
 	"main": "./index.sass",
+	"dependencies": {
+		"sass-exception": "^1.0.0"
+	},
 	"devDependencies": {
 		"clean-package": "^1.0.1",
 		"cspell": "^5.4.1",

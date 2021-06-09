@@ -23,15 +23,13 @@
 /// @access public
 /// @require _distinct-predicate
 /// @require filter.filter
-/// @require internal.$exception-function
 /// @require internal.exception-separator
 /// @require internal.param-separator-is-invalid
 ///
 @function distinct($list, $separator: auto)
-	internal.$exception-function: 'distinct'
 
 	@if internal.param-separator-is-invalid($separator)
-		@error internal.exception-separator()
+		@error internal.exception-separator('distinct')
 
 	@return filter.filter($list, meta.get-function('_distinct-predicate'), $separator)
 

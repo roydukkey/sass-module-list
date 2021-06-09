@@ -23,18 +23,16 @@
 /// @throw Reduce of empty list with no initial value.
 ///
 /// @access public
-/// @require internal.$exception-function
 /// @require internal.exception-param
-/// @require internal.exception-type
+/// @require internal.exception-param-type
 ///
 @function reduce($list, $transformer, $initial-value: null, $args...)
-	internal.$exception-function: 'reduce'
 
 	@if meta.type-of($transformer) != 'function'
-		@error internal.exception-type('transformer', $transformer, 'function')
+		@error internal.exception-param-type('reduce', 'transformer', $transformer, 'function')
 
 	@if $initial-value == null and not list.length($list)
-		@error internal.exception-param('Reduce of empty list with no initial value', 'list', 'initial-value')
+		@error internal.exception-param('Reduce of empty list with no initial value', 'reduce', 'list', 'initial-value')
 
 	$accumulator: $initial-value
 	$index: 1
