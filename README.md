@@ -23,11 +23,15 @@ Use the package like any other Sass module:
 @use 'sass-list';
 ```
 
-Depending on your setup, you may need to use the module by its full path:
+Depending on your setup, you may need to configure `node_modules` as include path:
 
-```scss
-// This is only an example
-@use '../node_modules/sass-list';
+```js
+const sass = require('sass');
+
+sass.render({
+  file: scss_filename,
+  includePaths: ['node_modules']
+});
 ```
 
 ## Public API
