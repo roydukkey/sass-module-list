@@ -39,7 +39,7 @@ sass.render({
 ### Functions
 
 <dl>
-  <dt><code><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_concat.sass">concat ( $values... [, $separator] [, $bracketed] )</a></code></dt>
+  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_concat.sass"><code>concat ( $values... [, $separator] [, $bracketed] )</code></a></dt>
   <dd>Merges two or more lists into a new list.</dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_distinct.sass"><code>distinct ( $list [, $separator] )</code></a></dt>
