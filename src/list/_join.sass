@@ -9,22 +9,7 @@
 
 
 ///
-/// Concatenates all of the items in an list to a string, separated by the list's separator or a specified glue string. If the list has only one item, then that item will be returned without using the glue.
+/// Abstracted to `sass-exception` to avoid circular dependency.
+/// @see @link https://github.com/roydukkey/sass-module-exception/blob/master/src/internal/_join.sass
 ///
-/// @param {List} $list - The list to join.
-/// @param {String} $glue [if(list.separator($list) == space, ' ', if(list.separator($list) == comma, ',', '/'))] - The string to separate each pair of adjacent items of the list. The value is converted to a string if necessary.
-/// @return {String}
-///
-/// @access public
-///
-@function join($list, $glue: if(list.separator($list) == space, ' ', if(list.separator($list) == comma, ',', '/')))
-	$result: ''
-	$last-item: list.nth($list, -1)
-
-	@each $item in $list
-		$result: $result + $item
-
-		@if $item != $last-item
-			$result: $result + $glue
-
-	@return $result
+@forward 'sass-exception/src/internal/join'
