@@ -5,24 +5,8 @@
 /// @group internal
 ////
 
-@use 'sass:map'
 @use 'sass:meta'
 @use 'exception'
-
-
-///
-/// Gets the value of a named parameter from an argument lists.
-///
-/// @param {List} $params - The argument list from which to get the named parameter.
-///	@param {String} $param - The name of the parameter to get.
-/// @param {*} $default - The value of the parameter when not contained in the argument list.
-/// @return {*}
-///
-/// @access public
-///
-@function get($params, $param, $default)
-	$params: meta.keywords($params)
-	@return if(map.has-key($params, $param), map.get($params, $param), $default)
 
 
 ///
