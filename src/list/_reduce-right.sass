@@ -20,7 +20,7 @@
 /// @return {*}
 ///
 /// @throw `#{$transformer}` is not a function.
-/// @throw Reduce of empty list with no initial value.
+/// @throw Reduction of empty list with no initial value.
 ///
 /// @access public
 /// @require internal.exception-param
@@ -34,7 +34,7 @@
 	$length: list.length($list)
 
 	@if $initial-value == null and not $length
-		@error internal.exception-param('Reduce of empty list with no initial value', 'reduce-right', 'list', 'initial-value')
+		@error internal.exception-param('Reduction of empty list with no initial value', 'reduce-right', 'list', 'initial-value')
 
 	$accumulator: $initial-value
 
