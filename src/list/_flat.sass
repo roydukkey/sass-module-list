@@ -26,14 +26,14 @@
 ///
 /// @access public
 /// @require internal.exception-param
-/// @require internal.exception-param-type
+/// @require internal.exception-parameter-type
 /// @require internal.exception-separator
 /// @require internal.param-separator-is-invalid
 ///
 @function flat($list, $depth: 1, $separator: auto, $bracketed: auto)
 
 	@if meta.type-of($depth) != 'number'
-		@error internal.exception-param-type('flat', 'depth', $depth, 'number')
+		@error internal.exception-parameter-type('flat', 'depth', $depth, 'number')
 
 	@if $depth < 1
 		@error internal.exception-param('The depth may not be less than 1', 'flat', 'depth')

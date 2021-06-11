@@ -25,14 +25,14 @@
 ///
 /// @access public
 /// @require empty.empty
-/// @require internal.exception-param-type
+/// @require internal.exception-parameter-type
 /// @require internal.exception-separator
 /// @require internal.param-separator-is-invalid
 ///
 @function filter($list, $predicate, $separator: auto, $args...)
 
 	@if meta.type-of($predicate) != 'function'
-		@error internal.exception-param-type('filter', 'predicate', $predicate, 'function')
+		@error internal.exception-parameter-type('filter', 'predicate', $predicate, 'function')
 
 	@if internal.param-separator-is-invalid($separator)
 		@error internal.exception-separator('filter')

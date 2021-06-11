@@ -24,12 +24,12 @@
 ///
 /// @access public
 /// @require internal.exception-param
-/// @require internal.exception-param-type
+/// @require internal.exception-parameter-type
 ///
 @function reduce($list, $transformer, $initial-value: null, $args...)
 
 	@if meta.type-of($transformer) != 'function'
-		@error internal.exception-param-type('reduce', 'transformer', $transformer, 'function')
+		@error internal.exception-parameter-type('reduce', 'transformer', $transformer, 'function')
 
 	@if $initial-value == null and not list.length($list)
 		@error internal.exception-param('Reduction of empty list with no initial value', 'reduce', 'list', 'initial-value')

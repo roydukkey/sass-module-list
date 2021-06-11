@@ -24,7 +24,7 @@
 ///
 /// @access public
 /// @require empty.empty
-/// @require internal.exception-param
+/// @require internal.exception-parameter
 /// @require internal.exception-separator
 /// @require internal.param-separator-is-invalid
 /// @require sass-meta.get-keyword
@@ -36,7 +36,7 @@
 		@error internal.exception-separator('concat')
 
 	@if list.length($values) < 2
-		@error internal.exception-param('Two or more values are required', 'concat', 'values')
+		@error internal.exception-parameter('Two or more values are required', 'concat', 'values')
 
 	$bracketed: sass-meta.get-keyword($values, 'bracketed', auto)
 	$result: empty.empty($separator, $bracketed, list.nth($values, 1))

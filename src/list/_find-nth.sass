@@ -20,12 +20,12 @@
 /// @throw `#{$predicate}` is not a function.
 ///
 /// @access public
-/// @require internal.exception-param-type
+/// @require internal.exception-parameter-type
 ///
 @function find-nth($list, $predicate, $args...)
 
 	@if meta.type-of($predicate) != 'function'
-		@error internal.exception-param-type('find-nth', 'predicate', $predicate, 'function')
+		@error internal.exception-parameter-type('find-nth', 'predicate', $predicate, 'function')
 
 	$index: 1
 

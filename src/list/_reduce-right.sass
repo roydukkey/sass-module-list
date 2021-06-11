@@ -24,12 +24,12 @@
 ///
 /// @access public
 /// @require internal.exception-param
-/// @require internal.exception-param-type
+/// @require internal.exception-parameter-type
 ///
 @function reduce-right($list, $transformer, $initial-value: null, $args...)
 
 	@if meta.type-of($transformer) != 'function'
-		@error internal.exception-param-type('reduce-right', 'transformer', $transformer, 'function')
+		@error internal.exception-parameter-type('reduce-right', 'transformer', $transformer, 'function')
 
 	$length: list.length($list)
 
