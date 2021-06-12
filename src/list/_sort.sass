@@ -43,10 +43,10 @@
 /// @require _order
 /// @require compare.string
 /// @require find.find
-/// @require internal.exception-param
+/// @require internal.exception-parameter
 /// @require internal.exception-parameter-type
 /// @require internal.exception-separator
-/// @require internal.param-separator-is-invalid
+/// @require internal.separator-is-invalid
 /// @require slice.slice
 ///
 @function sort($list, $compare: compare.string(), $center: auto, $separator: auto)
@@ -54,7 +54,7 @@
 	@if meta.type-of($compare) != 'function'
 		@error internal.exception-parameter-type('sort', 'compare', $compare, 'function')
 
-	@if internal.param-separator-is-invalid($separator)
+	@if internal.separator-is-invalid($separator)
 		@error internal.exception-separator('sort')
 
 	$length: list.length($list)
@@ -68,7 +68,7 @@
 			@error internal.exception-parameter-type('sort', 'center', $center, 'number')
 
 		@if $center < 0 or $center > 0
-			@error internal.exception-param('Must be "auto" or zero with or without units', 'sort', 'center')
+			@error internal.exception-parameter('Must be "auto" or zero with or without units', 'sort', 'center')
 
 	@else
 		$item: find.find($list, meta.get-function('_is-number-and-not-unitless'))

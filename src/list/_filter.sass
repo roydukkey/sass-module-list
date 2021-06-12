@@ -27,14 +27,14 @@
 /// @require empty.empty
 /// @require internal.exception-parameter-type
 /// @require internal.exception-separator
-/// @require internal.param-separator-is-invalid
+/// @require internal.separator-is-invalid
 ///
 @function filter($list, $predicate, $separator: auto, $args...)
 
 	@if meta.type-of($predicate) != 'function'
 		@error internal.exception-parameter-type('filter', 'predicate', $predicate, 'function')
 
-	@if internal.param-separator-is-invalid($separator)
+	@if internal.separator-is-invalid($separator)
 		@error internal.exception-separator('filter')
 
 	$result: empty.empty($separator, $list: $list)

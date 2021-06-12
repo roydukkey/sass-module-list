@@ -23,11 +23,11 @@
 /// @throw Invalid index #{$from-index} for a list with #{$length} elements.
 ///
 /// @access public
-/// @require internal.param-validate-index
+/// @require internal.validate-index
 ///
 @function last-index($list, $value, $from-index: list.length($list))
 	$length: list.length($list)
-	$from-index: internal.param-validate-index('last-index', 'from-index', $from-index, $length)
+	$from-index: internal.validate-index('last-index', 'from-index', $from-index, $length)
 
 	@if meta.type-of($from-index) != 'number'
 		@error $from-index

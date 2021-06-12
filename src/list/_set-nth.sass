@@ -26,16 +26,16 @@
 ///
 /// @access public
 /// @require internal.exception-separator
-/// @require internal.param-separator-is-invalid
-/// @require internal.param-validate-index
+/// @require internal.separator-is-invalid
+/// @require internal.validate-index
 ///
 @function set-nth($list, $index, $value, $separator: auto)
-	$index: internal.param-validate-index('set-nth', 'index', $index, list.length($list))
+	$index: internal.validate-index('set-nth', 'index', $index, list.length($list))
 
 	@if meta.type-of($index) != 'number'
 		@error $index
 
-	@if internal.param-separator-is-invalid($separator)
+	@if internal.separator-is-invalid($separator)
 		@error internal.exception-separator('set-nth')
 
 	@return list.join(list.set-nth($list, $index, $value), (), $separator)

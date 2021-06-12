@@ -7,6 +7,7 @@
 
 @use 'sass:meta'
 @use 'sass:string'
+@use 'sass-exception/src/exception/parameter' as sass-exception
 
 
 @forward 'sass-exception/src/exception/parameter'
@@ -20,7 +21,7 @@
 /// @return {String}
 ///
 /// @access public
-/// @require param
+/// @require sass-exception.parameter
 ///
 @function separator($context)
-	@return sass-exception.param('Must be "space", "comma", "slash", or "auto"', $context, 'separator')
+	@return sass-exception.parameter('Must be "space", "comma", "slash", or "auto"', $context, 'separator')

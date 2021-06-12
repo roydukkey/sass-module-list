@@ -23,7 +23,7 @@
 /// @throw Reduction of empty list with no initial value.
 ///
 /// @access public
-/// @require internal.exception-param
+/// @require internal.exception-parameter
 /// @require internal.exception-parameter-type
 ///
 @function reduce-right($list, $transformer, $initial-value: null, $args...)
@@ -34,7 +34,7 @@
 	$length: list.length($list)
 
 	@if $initial-value == null and not $length
-		@error internal.exception-param('Reduction of empty list with no initial value', 'reduce-right', 'list', 'initial-value')
+		@error internal.exception-parameter('Reduction of empty list with no initial value', 'reduce-right', 'list', 'initial-value')
 
 	$accumulator: $initial-value
 
