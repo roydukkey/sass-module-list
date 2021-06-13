@@ -32,6 +32,9 @@
 	@if internal.separator-is-invalid($separator)
 		@error internal.exception-separator('replace')
 
+	@if $value == $replacement and ($separator != auto or $separator == list.separator($list))
+		@return $list
+
 	@return map.map($list, meta.get-function('_replace-transformer'), $separator, auto, $value, $replacement)
 
 
