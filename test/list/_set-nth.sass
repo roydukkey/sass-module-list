@@ -16,3 +16,27 @@
 		$assert: src.set-nth($list, -2, 'set', comma)
 		$expected: 9, "set", dude
 		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Throws when $index is not an number')
+		$assert: src.set-nth(null, null, null)
+		$expected: 'ERROR: $index: `null` is not a number for `set-nth()`.'
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Throws when $index index is zero')
+		$assert: src.set-nth(null, 0, null)
+		$expected: 'ERROR: $index: List index may not be 0 for `set-nth()`.'
+		@include true.assert-equal($assert, $expected, '[0]')
+
+	@include true.it('Throws when $index index is invalid for length')
+		$assert: src.set-nth(null, 2, null)
+		$expected: 'ERROR: $index: Invalid index 2 for a list with 1 elements for `set-nth()`.'
+		@include true.assert-equal($assert, $expected, '[2]')
+
+		$assert: src.set-nth(null, -2, null)
+		$expected: 'ERROR: $index: Invalid index -2 for a list with 1 elements for `set-nth()`.'
+		@include true.assert-equal($assert, $expected, '[-2]')
+
+	@include true.it('Throws when $separator is invalid')
+		$assert: src.set-nth(null, 1, null, null)
+		$expected: 'ERROR: $separator: Must be "space", "comma", "slash", or "auto" for `set-nth()`.'
+		@include true.assert-equal($assert, $expected)

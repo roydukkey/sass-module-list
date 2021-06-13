@@ -35,3 +35,22 @@
 	@include true.it('List does not include a value from a negative (-) index')
 		$assert: src.includes($list, 'camel', -2)
 		@include true.assert-false($assert)
+
+	@include true.it('Throws when $start-at is not an number')
+		$assert: src.includes(null, null, null)
+		$expected: 'ERROR: $start-at: `null` is not a number for `includes()`.'
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Throws when $start-at index is zero')
+		$assert: src.includes(null, null, 0)
+		$expected: 'ERROR: $start-at: List index may not be 0 for `includes()`.'
+		@include true.assert-equal($assert, $expected, '[0]')
+
+	@include true.it('Throws when $start-at index is invalid for length')
+		$assert: src.includes(null, null, 2)
+		$expected: 'ERROR: $start-at: Invalid index 2 for a list with 1 elements for `includes()`.'
+		@include true.assert-equal($assert, $expected, '[2]')
+
+		$assert: src.includes(null, null, -2)
+		$expected: 'ERROR: $start-at: Invalid index -2 for a list with 1 elements for `includes()`.'
+		@include true.assert-equal($assert, $expected, '[-2]')

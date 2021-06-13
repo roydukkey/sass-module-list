@@ -41,3 +41,8 @@
 		$assert: src.find-nth(1 3 4 6 7 7 8 -3 10, meta.get-function('_greater-than-1n-plus-index'))
 		$expected: 7
 		@include true.assert-equal($assert, $expected, '[1 3 4 6 7 7 8 -3 10]')
+
+	@include true.it('Throws when $predicate is not an function')
+		$assert: src.find-nth(null, null)
+		$expected: 'ERROR: $predicate: `null` is not a function for `find-nth()`.'
+		@include true.assert-equal($assert, $expected)

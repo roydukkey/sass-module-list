@@ -6,8 +6,8 @@
 ////
 
 @use 'sass:list'
-@use 'empty'
 @use 'sass-meta/src/meta/get-keyword' as sass-meta
+@use 'empty'
 @use '../internal'
 
 
@@ -30,13 +30,14 @@
 /// @require sass-meta.get-keyword
 ///
 @function concat($values...)
+
+	@if list.length($values) < 2
+		@error internal.exception-parameter('Two or more values are required', 'concat', 'values')
+
 	$separator: sass-meta.get-keyword($values, 'separator', auto)
 
 	@if internal.separator-is-invalid($separator)
 		@error internal.exception-separator('concat')
-
-	@if list.length($values) < 2
-		@error internal.exception-parameter('Two or more values are required', 'concat', 'values')
 
 	$bracketed: sass-meta.get-keyword($values, 'bracketed', auto)
 	$result: empty.empty($separator, $bracketed, list.nth($values, 1))

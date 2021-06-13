@@ -45,3 +45,22 @@
 		$assert: src.flat($list, $separator: comma, $bracketed: true)
 		$expected: [15, 14, 13, 12, (11 10 (9 8)), 7, ((6 5) 4), 3, 2, 1]
 		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Throws when $depth is not an number')
+		$assert: src.flat(null, null)
+		$expected: 'ERROR: $depth: `null` is not a number for `flat()`.'
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Throws when depth is less than 1')
+		$assert: src.flat(null, 0)
+		$expected: 'ERROR: $depth: The depth may not be less than 1 for `flat()`.'
+		@include true.assert-equal($assert, $expected, '[0]')
+
+		$assert: src.flat(null, -1)
+		$expected: 'ERROR: $depth: The depth may not be less than 1 for `flat()`.'
+		@include true.assert-equal($assert, $expected, '[-1]')
+
+	@include true.it('Throws when $separator is invalid')
+		$assert: src.flat(null, $separator: null)
+		$expected: 'ERROR: $separator: Must be "space", "comma", "slash", or "auto" for `flat()`.'
+		@include true.assert-equal($assert, $expected)

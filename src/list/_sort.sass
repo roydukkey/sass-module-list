@@ -59,9 +59,6 @@
 
 	$length: list.length($list)
 
-	@if $length < 2
-		@return $list
-
 	@if $center != auto
 
 		@if meta.type-of($center) != 'number'
@@ -73,6 +70,9 @@
 	@else
 		$item: find.find($list, meta.get-function('_is-number-and-not-unitless'))
 		$center: if($item == null, 0, $item - $item)
+
+	@if $length < 2
+		@return $list
 
 	$middle: math.floor(math.div($length, 2))
 	$left: slice.slice($list, 1, $middle)

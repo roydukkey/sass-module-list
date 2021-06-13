@@ -54,3 +54,13 @@
 		$assert: src.filter($list, meta.get-function('_even-index'), $separator: slash)
 		$expected: list.slash('a', 1, null, 4, 10)
 		@include true.assert-equal($assert, $expected, '[slash]')
+
+	@include true.it('Throws when $predicate is not an function')
+		$assert: src.filter(null, null)
+		$expected: 'ERROR: $predicate: `null` is not a function for `filter()`.'
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Throws when $separator is invalid')
+		$assert: src.filter(null, meta.get-function('_not-number'), null)
+		$expected: 'ERROR: $separator: Must be "space", "comma", "slash", or "auto" for `filter()`.'
+		@include true.assert-equal($assert, $expected)

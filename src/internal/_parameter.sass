@@ -25,28 +25,28 @@
 /// Returns a valid index for a list of a given length; otherwise, an error message stating the reason the index is invalid.
 ///
 /// @param {String} $context - The name of the function or mixin issuing the error.
-/// @param {String} $param - The name of the index parameter which is being validated.
+/// @param {String} $name - The name of the index parameter which is being validated.
 ///	@param {Number} $value - The value of the index parameter which is being validated. A negative value will be transformed to the respective positive index value.
 ///	@param {String} $length - The length of the list for which the index is validated against.
 /// @return {String | Number}
 ///
 /// @access public
-/// @require exception.type
+/// @require exception.parameter-type
 /// @require exception.parameter
 ///
-@function validate-index($context, $param, $value, $length)
+@function validate-index($context, $name, $value, $length)
 
 	@if meta.type-of($value) != 'number'
-		@return exception.type($param, $value, 'number')
+		@return exception.parameter-type($context, $name, $value, 'number')
 
 	@if $value == 0
-		@return exception.parameter('List index may not be 0', $context, $param)
+		@return exception.parameter('List index may not be 0', $context, $name)
 
 	// Transform negative index to positive index.
 	@if $value < 1 and $value + $length + 1 > 0
 		$value: $value + $length + 1
 
 	@if $value > $length or $value < 0
-		@return exception.parameter('Invalid index #{$value} for a list with #{$length} elements', $context, $param)
+		@return exception.parameter('Invalid index #{$value} for a list with #{$length} elements', $context, $name)
 
 	@return $value

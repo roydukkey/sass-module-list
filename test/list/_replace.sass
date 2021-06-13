@@ -21,3 +21,8 @@
 		$assert: src.replace($list, 38, 'replaced', comma)
 		$expected: 9, 1, -2, 'replaced', 4, 9, 'replaced', -2, 2
 		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Throws when $separator is invalid')
+		$assert: src.replace(null, null, null, null)
+		$expected: 'ERROR: $separator: Must be "space", "comma", "slash", or "auto" for `replace()`.'
+		@include true.assert-equal($assert, $expected)

@@ -53,3 +53,13 @@
 		$assert: src.reduce(2 4 6 8 16, meta.get-function('_add'), 20)
 		$expected: 20 + 2 + 4 + 6 + 8 + 16
 		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Throws when $transformer is not an function')
+		$assert: src.reduce(null, null)
+		$expected: 'ERROR: $transformer: `null` is not a function for `reduce()`.'
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Throws when reducing and empty list with no initial value')
+		$assert: src.reduce((), meta.get-function('_add'))
+		$expected: 'ERROR: $list, $initial-value: Reduction of empty list with no initial value for `reduce()`.'
+		@include true.assert-equal($assert, $expected)

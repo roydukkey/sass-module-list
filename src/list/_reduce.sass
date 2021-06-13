@@ -31,7 +31,7 @@
 	@if meta.type-of($transformer) != 'function'
 		@error internal.exception-parameter-type('reduce', 'transformer', $transformer, 'function')
 
-	@if $initial-value == null and not list.length($list)
+	@if $initial-value == null and list.length($list) == 0
 		@error internal.exception-parameter('Reduction of empty list with no initial value', 'reduce', 'list', 'initial-value')
 
 	$accumulator: $initial-value

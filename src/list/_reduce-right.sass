@@ -33,7 +33,7 @@
 
 	$length: list.length($list)
 
-	@if $initial-value == null and not $length
+	@if $initial-value == null and $length == 0
 		@error internal.exception-parameter('Reduction of empty list with no initial value', 'reduce-right', 'list', 'initial-value')
 
 	$accumulator: $initial-value
