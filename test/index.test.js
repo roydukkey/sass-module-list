@@ -8,10 +8,9 @@ const sassTrue = require('sass-true');
 
 
 // Configuration
-const entry = './test/index.sass';
 const source = './src';
 const sassConfig = {
-	file: entry,
+	file: './test/index.sass',
 	includePaths: ['node_modules']
 };
 const backupSlug = '.testing-backup';
