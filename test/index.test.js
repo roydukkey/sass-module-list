@@ -20,8 +20,8 @@ const backupSlug = '.testing-backup';
 fs.copySync(source, `${source}${backupSlug}`);
 replace.sync({
 	files: `${source}/**/*.sass`,
-	from: [/(.)/, /^(\s*)@error\s(.*)$/gm],
-	to: ["@use 'throw'\n$1", '$1@return throw.error($2)'],
+	from: [/(.)/, /^(?<!^\s*\/\/\s*true:cannot-test\s*$\n)(\s*)@error\s(.*)$/gm],
+	to: ["@use 'throw'\n$1", '$1@return throw.error($2)']
 });
 
 
