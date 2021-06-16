@@ -5,6 +5,7 @@
 /// @group api
 ////
 
+@use 'flat'
 @use 'join'
 
 
@@ -18,4 +19,6 @@
 /// @require join.join
 ///
 @function to-string($list)
-	@return join.join($list)
+	// Change depth to infinity when available through language.
+	// @see @link https://github.com/sass/sass/issues/2954
+	@return join.join(flat.flat($list, 10))
