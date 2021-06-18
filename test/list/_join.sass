@@ -6,7 +6,7 @@
 ////
 
 @use 'sass:meta'
-@use 'sass-exception/src/core/join' as exception
+@use 'sass-exception/src/core/join' as core
 @use 'src'
 @use 'true'
 
@@ -14,6 +14,6 @@
 @include true.describe('@function src.join')
 
 	@include true.it('Provides the same function as received from `sass-exception`')
-		$assert: meta.get-function('join', $module: 'exception')
+		$assert: meta.get-function('join', $module: 'core')
 		$expected: meta.get-function('join', $module: 'src')
 		@include true.assert-equal($assert, $expected)
