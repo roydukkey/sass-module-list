@@ -48,7 +48,7 @@
 		$expected: '10px 20px {a:1;2:b}'
 		@include true.assert-equal($assert, $expected)
 
-	@include true.it('Returns the representation of a arglist')
+	@include true.it('Returns the representation of a arglist without keywords')
 		$assert: src.to-string(arglist(a, 1, b, 2, c, 3, $new: 'okay', $separator: 'comma'))
 		$expected: 'a,1,b,2,c,3'
 		@include true.assert-equal($assert, $expected)
