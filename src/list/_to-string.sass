@@ -5,8 +5,9 @@
 /// @group api
 ////
 
-@use 'flat'
-@use 'join'
+@use 'sass:meta'
+@use 'sass-exception/src/core/from' as core
+@use '../internal'
 
 
 ///
@@ -16,9 +17,13 @@
 /// @return {String}
 ///
 /// @access public
-/// @require join.join
+/// @require core.to-string
+/// @require internal.exception-parameter-type
 ///
 @function to-string($list)
-	// Change depth to infinity when available through language.
-	// @see @link https://github.com/sass/sass/issues/2954
-	@return join.join(flat.flat($list, 10))
+	$type: meta.type-of($list)
+
+	@if $type != 'list' and $type != 'map' and $type != 'arglist'
+		@error internal.exception-parameter-type('to-string', 'list', $list, 'list', 'map', 'arglist')
+
+	@return core.to-string($list, 'list')

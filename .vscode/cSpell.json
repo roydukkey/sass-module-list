@@ -16,6 +16,7 @@
 	// Before adding a word, see if there is already a dictionary in which it is contained.
 	// http://github.com/streetsidesoftware/cspell-dicts
 	"words": [
+		"arglist",
 		"editorconfig",
 		"prepend",
 		"prepended",
