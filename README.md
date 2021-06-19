@@ -120,6 +120,8 @@ sass.render({
 
 </dl>
 
+Don't see the function you're looking for? Request a [new feature](//github.com/roydukkey/sass-module-list/issues/new) describing a use case.
+
 ### Comparison Methods
 
 <dl>
