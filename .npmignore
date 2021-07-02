@@ -16,4 +16,5 @@ npm-debug.log
 .jest
 
 # Source Code
+spec
 test
