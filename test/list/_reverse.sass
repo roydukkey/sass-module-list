@@ -29,3 +29,8 @@
 		$assert: src.reverse([1 2 'c' 4 'd'], comma)
 		$expected: ['d', 4, 'c', 2, 1]
 		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Throws when $separator is invalid')
+		$assert: src.reverse(null, null)
+		$expected: 'ERROR: $separator: Must be "space", "comma", "slash", or "auto" for `reverse()`.'
+		@include true.assert-equal($assert, $expected)

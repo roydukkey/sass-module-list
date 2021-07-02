@@ -74,3 +74,17 @@
 		$assert: src.concat($expected, 50% 25%, $separator: slash, $bracketed: true)
 		$expected: list.join(list.slash(10px, 20px, 30px, 'a', 'b', 50%, 25%), (), $bracketed: true)
 		@include true.assert-equal($assert, $expected, '[slash, true]')
+
+	@include true.it('Throws when less than two values are provided.')
+		$assert: src.concat()
+		$expected: 'ERROR: $values: Two or more values are required for `concat()`.'
+		@include true.assert-equal($assert, $expected, '[none]')
+
+		$assert: src.concat(null)
+		$expected: 'ERROR: $values: Two or more values are required for `concat()`.'
+		@include true.assert-equal($assert, $expected, '[one]')
+
+	@include true.it('Throws when $separator is invalid')
+		$assert: src.concat(null, null, $separator: null)
+		$expected: 'ERROR: $separator: Must be "space", "comma", "slash", or "auto" for `concat()`.'
+		@include true.assert-equal($assert, $expected)

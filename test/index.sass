@@ -5,6 +5,8 @@
 /// @group tests
 ////
 
+@use 'true' with ($catch-errors: true)
+
 
 // Required by 'src/list/concat'
 // Required by 'src/list/filter'
@@ -16,15 +18,17 @@
 // Required by 'src/internal/exception'
 // Required by 'src/list/to-string'
 @use 'list/join'
-// Required by 'src/list/includes'
-@use 'list/index'
 // Required by 'src/list/remove-nth'
 // Required by 'src/list/sort'
 @use 'list/slice'
+// Required by 'src/list/to-string'
+@use 'list/flat'
 // Required by 'src/list/distinct'
 @use 'list/filter'
 // Required by 'src/list/sort'
 @use 'list/find'
+// Required by 'src/list/includes'
+@use 'list/index'
 // Required by 'src/list/replace'
 @use 'list/map'
 // Required by 'src/list/remove'
@@ -33,7 +37,6 @@
 @use 'list/distinct'
 @use 'list/every'
 @use 'list/find-nth'
-@use 'list/flat'
 @use 'list/includes'
 @use 'list/insert-nth'
 @use 'list/last-index'

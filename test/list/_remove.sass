@@ -21,3 +21,8 @@
 		$assert: src.remove($list, 'bison', space)
 		$expected: ['ant' 'camel' 'duck']
 		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Throws when $separator is invalid')
+		$assert: src.remove(null, null, null)
+		$expected: 'ERROR: $separator: Must be "space", "comma", "slash", or "auto" for `remove()`.'
+		@include true.assert-equal($assert, $expected)

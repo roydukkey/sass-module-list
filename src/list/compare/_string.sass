@@ -9,6 +9,7 @@
 @use 'sass:math'
 @use 'sass:meta'
 @use 'sass:string'
+@use 'sass-meta/src/meta/call-or-reference' as sass-meta
 @use '../../internal'
 
 
@@ -30,9 +31,10 @@
 ///
 /// @access public
 /// @require _string
+/// @require sass-meta.call-or-reference
 ///
 @function string($args...)
-	@return internal.call-or-reference(meta.get-function('_string'), $args...)
+	@return sass-meta.call-or-reference(meta.get-function('_string'), $args...)
 
 
 ///
@@ -53,9 +55,10 @@
 ///
 /// @access public
 /// @require _string-desc
+/// @require sass-meta.call-or-reference
 ///
 @function string-desc($args...)
-	@return internal.call-or-reference(meta.get-function('_string-desc'), $args...)
+	@return sass-meta.call-or-reference(meta.get-function('_string-desc'), $args...)
 
 
 ///

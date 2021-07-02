@@ -8,7 +8,7 @@
 @use 'sass:list'
 @use 'sass:meta'
 @use '../internal/exception'
-@use '../internal/param'
+@use '../internal/parameter'
 
 
 ///
@@ -22,12 +22,10 @@
 /// @throw Must be "space", "comma", "slash", or "auto".
 ///
 /// @access public
-/// @require exception.$function
 /// @require exception.separator
-/// @require param.separator-is-invalid
+/// @require parameter.separator-is-invalid
 ///
 @function empty($separator: null, $bracketed: null, $list: null)
-	exception.$function: 'empty'
 
 	@if meta.type-of($list) == 'list'
 		@if $separator == auto or $separator == null
@@ -43,7 +41,7 @@
 		@if $bracketed == null
 			$bracketed: false
 
-	@if param.separator-is-invalid($separator)
-		@error exception.separator()
+	@if parameter.separator-is-invalid($separator)
+		@error exception.separator('empty')
 
 	@return list.join((), (), $separator, $bracketed)

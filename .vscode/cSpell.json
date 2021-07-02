@@ -10,10 +10,13 @@
 		"*.lock",
 		"*.tgz"
 	],
+	"dictionaries": [
+		"fullstack"
+	],
 	// Before adding a word, see if there is already a dictionary in which it is contained.
 	// http://github.com/streetsidesoftware/cspell-dicts
 	"words": [
-		"concat",
+		"arglist",
 		"editorconfig",
 		"prepend",
 		"prepended",

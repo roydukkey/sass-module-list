@@ -31,3 +31,27 @@
 		$assert: src.insert-nth($list, 2, 'deer', $separator: space)
 		$expected: ['ant' 'deer' 'bison' 'camel' 'duck' 'elephant']
 		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Throws when $index is not an number')
+		$assert: src.insert-nth(null, null, null)
+		$expected: 'ERROR: $index: `null` is not a number for `insert-nth()`.'
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Throws when $index index is zero')
+		$assert: src.insert-nth(null, 0, null)
+		$expected: 'ERROR: $index: List index may not be 0 for `insert-nth()`.'
+		@include true.assert-equal($assert, $expected, '[0]')
+
+	@include true.it('Throws when $index index is invalid for length')
+		$assert: src.insert-nth(null, 2, null)
+		$expected: 'ERROR: $index: Invalid index 2 for a list with 1 elements for `insert-nth()`.'
+		@include true.assert-equal($assert, $expected, '[2]')
+
+		$assert: src.insert-nth(null, -2, null)
+		$expected: 'ERROR: $index: Invalid index -2 for a list with 1 elements for `insert-nth()`.'
+		@include true.assert-equal($assert, $expected, '[-2]')
+
+	@include true.it('Throws when $separator is invalid')
+		$assert: src.insert-nth(null, 1, null, null)
+		$expected: 'ERROR: $separator: Must be "space", "comma", "slash", or "auto" for `insert-nth()`.'
+		@include true.assert-equal($assert, $expected)

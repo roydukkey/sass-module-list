@@ -5,24 +5,8 @@
 /// @group internal
 ////
 
-@use 'sass:map'
 @use 'sass:meta'
 @use 'exception'
-
-
-///
-/// Gets the value of a named parameter from an argument lists.
-///
-/// @param {List} $params - The argument list from which to get the named parameter.
-///	@param {String} $param - The name of the parameter to get.
-/// @param {*} $default - The value of the parameter when not contained in the argument list.
-/// @return {*}
-///
-/// @access public
-///
-@function get($params, $param, $default)
-	$params: meta.keywords($params)
-	@return if(map.has-key($params, $param), map.get($params, $param), $default)
 
 
 ///
@@ -40,28 +24,29 @@
 ///
 /// Returns a valid index for a list of a given length; otherwise, an error message stating the reason the index is invalid.
 ///
-/// @param {String} $param - The name of the index parameter which is being validated.
+/// @param {String} $context - The name of the function or mixin issuing the error.
+/// @param {String} $name - The name of the index parameter which is being validated.
 ///	@param {Number} $value - The value of the index parameter which is being validated. A negative value will be transformed to the respective positive index value.
 ///	@param {String} $length - The length of the list for which the index is validated against.
 /// @return {String | Number}
 ///
 /// @access public
-/// @require exception.type
-/// @require exception.param
+/// @require exception.parameter-type
+/// @require exception.parameter
 ///
-@function validate-index($param, $value, $length)
+@function validate-index($context, $name, $value, $length)
 
 	@if meta.type-of($value) != 'number'
-		@return exception.type($param, $value, 'number')
+		@return exception.parameter-type($context, $name, $value, 'number')
 
 	@if $value == 0
-		@return exception.param('List index may not be 0', $param)
+		@return exception.parameter('List index may not be 0', $context, $name)
 
 	// Transform negative index to positive index.
 	@if $value < 1 and $value + $length + 1 > 0
 		$value: $value + $length + 1
 
 	@if $value > $length or $value < 0
-		@return exception.param('Invalid index #{$value} for a list with #{$length} elements', $param)
+		@return exception.parameter('Invalid index #{$value} for a list with #{$length} elements', $context, $name)
 
 	@return $value

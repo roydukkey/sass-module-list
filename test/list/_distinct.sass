@@ -31,3 +31,8 @@
 		$assert: src.distinct($expected, $separator: slash)
 		$expected: list.slash(9, 1, -2, 38, 4, 2)
 		@include true.assert-equal($assert, $expected, '[slash]')
+
+	@include true.it('Throws when $separator is invalid')
+		$assert: src.distinct(null, null)
+		$expected: 'ERROR: $separator: Must be "space", "comma", "slash", or "auto" for `distinct()`.'
+		@include true.assert-equal($assert, $expected)

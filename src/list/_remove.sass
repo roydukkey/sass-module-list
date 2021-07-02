@@ -18,17 +18,17 @@
 /// @param {String} $separator [auto] - The type of separator to be used by the copied list.
 /// @return {List}
 ///
+/// @throw Must be "space", "comma", "slash", or "auto".
+///
 /// @access public
-/// @require internal.$exception-function
 /// @require internal.exception-separator
-/// @require internal.param-separator-is-invalid
+/// @require internal.separator-is-invalid
 /// @require remove-nth.remove-nth
 ///
 @function remove($list, $value, $separator: auto)
-	internal.$exception-function: 'remove'
 
-	@if internal.param-separator-is-invalid($separator)
-		@error internal.exception-separator()
+	@if internal.separator-is-invalid($separator)
+		@error internal.exception-separator('remove')
 
 	$index: list.index($list, $value)
 

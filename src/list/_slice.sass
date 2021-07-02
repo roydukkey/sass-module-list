@@ -23,8 +23,8 @@
 /// @throw `#{$start-at}` is not a number.
 /// @throw `#{$end-at}` is not a number.
 /// @throw List index may not be 0.
-/// @throw Invalid index #{$start-at} for a list with #{$length} elements.
-/// @throw Invalid index #{$end-at} for a list with #{$length} elements.
+/// @throw Invalid index #{$start-at} for a list with #{length} elements.
+/// @throw Invalid index #{$end-at} for a list with #{length} elements.
 /// @throw The starting index is not less than the ending index.
 /// @throw Must be "space", "comma", "slash", or "auto".
 ///
@@ -36,31 +36,28 @@
 ///
 /// @access public
 /// @require empty.empty
-/// @require internal.$exception-function
-/// @require internal.exception-param
+/// @require internal.exception-parameter
 /// @require internal.exception-separator
-/// @require internal.param-separator-is-invalid
-/// @require internal.param-validate-index
+/// @require internal.separator-is-invalid
+/// @require internal.validate-index
 ///
 @function slice($list, $start-at, $end-at: list.length($list), $separator: auto)
-	internal.$exception-function: 'slice'
-
 	$length: list.length($list)
-	$start-at: internal.param-validate-index('start-at', $start-at, $length)
+	$start-at: internal.validate-index('slice', 'start-at', $start-at, $length)
 
 	@if meta.type-of($start-at) != 'number'
 		@error $start-at
 
-	$end-at: internal.param-validate-index('end-at', $end-at, $length)
+	$end-at: internal.validate-index('slice', 'end-at', $end-at, $length)
 
 	@if meta.type-of($end-at) != 'number'
 		@error $end-at
 
 	@if $start-at > $end-at
-		@error internal.exception-param('The starting index is not less than the ending index', 'start-at', 'end-at')
+		@error internal.exception-parameter('The starting index is not less than the ending index', 'slice', 'start-at', 'end-at')
 
-	@if internal.param-separator-is-invalid($separator)
-		@error internal.exception-separator()
+	@if internal.separator-is-invalid($separator)
+		@error internal.exception-separator('slice')
 
 	$result: empty.empty($separator, $list: $list)
 

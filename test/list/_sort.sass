@@ -191,3 +191,27 @@
 		$assert: src.sort($strings, $separator: comma)
 		$expected: 'Five', 'Four', 'One', 'Six', 'Three', 'Two'
 		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Throws when $compare is not an function')
+		$assert: src.sort(null, null)
+		$expected: 'ERROR: $compare: `null` is not a function for `sort()`.'
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Throws when $center is not an number')
+		$assert: src.sort(null, $center: null)
+		$expected: 'ERROR: $center: `null` is not a number for `sort()`.'
+		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Throws when $center is not "auto" or zero with or without units')
+		$assert: src.sort(null, $center: 10)
+		$expected: 'ERROR: $center: Must be "auto" or zero with or without units for `sort()`.'
+		@include true.assert-equal($assert, $expected, '[10]')
+
+		$assert: src.sort(null, $center: 10mm)
+		$expected: 'ERROR: $center: Must be "auto" or zero with or without units for `sort()`.'
+		@include true.assert-equal($assert, $expected, '[10mm]')
+
+	@include true.it('Throws when $separator is invalid')
+		$assert: src.sort(null, $separator: null)
+		$expected: 'ERROR: $separator: Must be "space", "comma", "slash", or "auto" for `sort()`.'
+		@include true.assert-equal($assert, $expected)

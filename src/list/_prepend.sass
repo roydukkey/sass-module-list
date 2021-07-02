@@ -20,15 +20,13 @@
 /// @throw Must be "space", "comma", "slash", or "auto".
 ///
 /// @access public
-/// @require internal.$exception-function
 /// @require internal.exception-separator
 /// @require internal.insert-nth
-/// @require internal.param-separator-is-invalid
+/// @require internal.separator-is-invalid
 ///
 @function prepend($list, $value, $separator: auto)
-	internal.$exception-function: 'prepend'
 
-	@if internal.param-separator-is-invalid($separator)
-		@error internal.exception-separator()
+	@if internal.separator-is-invalid($separator)
+		@error internal.exception-separator('prepend')
 
 	@return internal.insert-nth($list, 1, $value, $separator)

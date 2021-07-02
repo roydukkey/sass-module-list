@@ -213,3 +213,8 @@
 		$result: src.empty(slash, true, a b)
 		$assert: list.separator($result) == slash and list.is-bracketed($result)
 		@include true.assert-true($assert)
+
+	@include true.it('Throws when $separator is invalid')
+		$assert: src.empty('test')
+		$expected: 'ERROR: $separator: Must be "space", "comma", "slash", or "auto" for `empty()`.'
+		@include true.assert-equal($assert, $expected)

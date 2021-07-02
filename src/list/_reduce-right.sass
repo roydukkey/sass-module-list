@@ -20,23 +20,21 @@
 /// @return {*}
 ///
 /// @throw `#{$transformer}` is not a function.
-/// @throw Reduce of empty list with no initial value.
+/// @throw Reduction of empty list with no initial value.
 ///
 /// @access public
-/// @require internal.$exception-function
-/// @require internal.exception-param
-/// @require internal.exception-type
+/// @require internal.exception-parameter
+/// @require internal.exception-parameter-type
 ///
 @function reduce-right($list, $transformer, $initial-value: null, $args...)
-	internal.$exception-function: 'reduce-right'
 
 	@if meta.type-of($transformer) != 'function'
-		@error internal.exception-type('transformer', $transformer, 'function')
+		@error internal.exception-parameter-type('reduce-right', 'transformer', $transformer, 'function')
 
 	$length: list.length($list)
 
-	@if $initial-value == null and not $length
-		@error internal.exception-param('Reduce of empty list with no initial value', 'list', 'initial-value')
+	@if $initial-value == null and $length == 0
+		@error internal.exception-parameter('Reduction of empty list with no initial value', 'reduce-right', 'list', 'initial-value')
 
 	$accumulator: $initial-value
 

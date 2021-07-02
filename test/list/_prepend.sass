@@ -53,3 +53,8 @@
 		$assert: src.prepend(null, 'a')
 		$expected: 'a' null
 		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Throws when $separator is invalid')
+		$assert: src.prepend(null, null, null)
+		$expected: 'ERROR: $separator: Must be "space", "comma", "slash", or "auto" for `prepend()`.'
+		@include true.assert-equal($assert, $expected)
