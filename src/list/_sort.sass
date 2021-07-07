@@ -57,6 +57,9 @@
 	@if internal.separator-is-invalid($separator)
 		@error internal.exception-separator('sort')
 
+	@if $separator == 'auto' and meta.type-of($list) == 'map'
+		$separator: 'comma'
+
 	$length: list.length($list)
 
 	@if $center != auto
@@ -72,7 +75,10 @@
 		$center: if($item == null, 0, $item - $item)
 
 	@if $length < 2
-		@return $list
+		@if meta.type-of($list) == 'map'
+			@return list.join($list, (), $separator)
+		@else
+			@return $list
 
 	$middle: math.floor(math.div($length, 2))
 	$left: slice.slice($list, 1, $middle)
