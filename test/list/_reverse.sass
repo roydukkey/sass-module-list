@@ -5,6 +5,7 @@
 /// @group tests
 ////
 
+@use 'sass:list'
 @use 'src'
 @use 'true'
 
@@ -29,6 +30,31 @@
 		$assert: src.reverse([1 2 'c' 4 'd'], comma)
 		$expected: ['d', 4, 'c', 2, 1]
 		@include true.assert-equal($assert, $expected)
+
+	@include true.it('Return a list when given a map')
+		$assert: src.reverse((a: 1))
+		$expected: (a 1,)
+		@include true.assert-equal($assert, $expected, '[single value; auto]')
+
+		$assert: src.reverse((a: 1), $separator: comma)
+		$expected: (a 1,)
+		@include true.assert-equal($assert, $expected, '[single value; comma]')
+
+		$assert: src.reverse((a: 1), $separator: space)
+		$expected: list.append((), a 1)
+		@include true.assert-equal($assert, $expected, '[single value; space]')
+
+		$assert: src.reverse((a: 1, b: 2))
+		$expected: (b 2, a 1)
+		@include true.assert-equal($assert, $expected, '[multiple values; auto]')
+
+		$assert: src.reverse((a: 1, b: 2))
+		$expected: (b 2, a 1)
+		@include true.assert-equal($assert, $expected, '[multiple values; comma]')
+
+		$assert: src.reverse((a: 1, b: 2), $separator: space)
+		$expected: (b 2) (a 1)
+		@include true.assert-equal($assert, $expected, '[multiple values; space]')
 
 	@include true.it('Throws when $separator is invalid')
 		$assert: src.reverse(null, null)
