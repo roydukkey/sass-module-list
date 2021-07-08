@@ -1,7 +1,12 @@
 # Changelog
 
 [//]: # (>>   The order of list items should be: Critical/Fixes, New, Update, Remove, Underpinnings   <<)
-[//]: # (>>   ## [UNRELEASED]https://github.com/roydukkey/sass-module-list/compare/v2.0.0...master   <<)
+[//]: # (>>   ## [UNRELEASED]https://github.com/roydukkey/sass-module-list/compare/v2.0.1...master   <<)
+
+## [2.0.1](https://github.com/roydukkey/sass-module-list/compare/v2.0.0...v2.0.1)
+
+* Fix `.reverse()` and `.sort()` to always return a list when given a map [#9](https://github.com/roydukkey/sass-module-list/issues/9)
+* Remove the `.github`, `.vscode`, and `spec` folders from release package
 
 ## [2.0.0](https://github.com/roydukkey/sass-module-list/compare/v1.3.0...v2.0.0)
 
