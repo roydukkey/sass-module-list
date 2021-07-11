@@ -5,10 +5,9 @@
 /// @group api
 ////
 
-@use 'sass:list'
 @use 'sass:meta'
+@use 'sass-exception/src/exception/validate-index'
 @use 'index'
-@use '../internal'
 
 
 ///
@@ -25,10 +24,10 @@
 ///
 /// @access public
 /// @require index.index
-/// @require internal.validate-index
+/// @require validate-index.validate-index
 ///
 @function includes($list, $value, $start-at: 1)
-	$start-at: internal.validate-index('includes', 'start-at', $start-at, list.length($list))
+	$start-at: validate-index.validate-index('includes', 'start-at', $start-at, $list)
 
 	@if meta.type-of($start-at) != 'number'
 		@error $start-at

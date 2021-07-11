@@ -7,7 +7,7 @@
 
 @use 'sass:list'
 @use 'sass:meta'
-@use '../internal'
+@use 'sass-exception/src/exception/validate-index'
 
 
 ///
@@ -23,11 +23,10 @@
 /// @throw Invalid index #{$from-index} for a list with #{length} elements.
 ///
 /// @access public
-/// @require internal.validate-index
+/// @require validate-index.validate-index
 ///
 @function last-index($list, $value, $from-index: list.length($list))
-	$length: list.length($list)
-	$from-index: internal.validate-index('last-index', 'from-index', $from-index, $length)
+	$from-index: validate-index.validate-index('last-index', 'from-index', $from-index, $list)
 
 	@if meta.type-of($from-index) != 'number'
 		@error $from-index

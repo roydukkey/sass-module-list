@@ -7,7 +7,8 @@
 
 @use 'sass:list'
 @use 'sass:meta'
-@use '../internal'
+@use 'sass-exception/src/exception/parameter'
+@use 'sass-exception/src/exception/parameter-type'
 
 
 ///
@@ -23,16 +24,16 @@
 /// @throw Reduction of empty list with no initial value.
 ///
 /// @access public
-/// @require internal.exception-parameter
-/// @require internal.exception-parameter-type
+/// @require parameter.parameter
+/// @require parameter-type.parameter-type
 ///
 @function reduce($list, $transformer, $initial-value: null, $args...)
 
 	@if meta.type-of($transformer) != 'function'
-		@error internal.exception-parameter-type('reduce', 'transformer', $transformer, 'function')
+		@error parameter-type.parameter-type('reduce', 'transformer', $transformer, 'function')
 
 	@if $initial-value == null and list.length($list) == 0
-		@error internal.exception-parameter('Reduction of empty list with no initial value', 'reduce', 'list', 'initial-value')
+		@error parameter.parameter('Reduction of empty list with no initial value', 'reduce', 'list', 'initial-value')
 
 	$accumulator: $initial-value
 	$index: 1

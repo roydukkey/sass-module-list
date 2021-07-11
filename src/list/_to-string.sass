@@ -7,7 +7,7 @@
 
 @use 'sass:meta'
 @use 'sass-exception/src/core/from' as core
-@use '../internal'
+@use 'sass-exception/src/exception/parameter-type'
 
 
 ///
@@ -18,12 +18,12 @@
 ///
 /// @access public
 /// @require core.to-string
-/// @require internal.exception-parameter-type
+/// @require parameter-type.parameter-type
 ///
 @function to-string($list)
 	$type: meta.type-of($list)
 
 	@if $type != 'list' and $type != 'map' and $type != 'arglist'
-		@error internal.exception-parameter-type('to-string', 'list', $list, 'list', 'map', 'arglist')
+		@error parameter-type.parameter-type('to-string', 'list', $list, 'list', 'map', 'arglist')
 
 	@return core.to-string($list, 'list')

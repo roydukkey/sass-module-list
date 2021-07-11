@@ -8,11 +8,14 @@
 @use 'sass:list'
 @use 'sass:math'
 @use 'sass:meta'
+@use 'sass-exception/src/exception/is-separator-invalid'
+@use 'sass-exception/src/exception/parameter'
+@use 'sass-exception/src/exception/parameter-type'
+@use 'sass-exception/src/exception/separator'
 @use 'compare'
 @use 'empty'
 @use 'find'
 @use 'slice'
-@use '../internal'
 
 
 ///
@@ -43,19 +46,19 @@
 /// @require _order
 /// @require compare.string
 /// @require find.find
-/// @require internal.exception-parameter
-/// @require internal.exception-parameter-type
-/// @require internal.exception-separator
-/// @require internal.separator-is-invalid
+/// @require is-separator-invalid.is-separator-invalid
+/// @require parameter-type.parameter-type
+/// @require parameter.parameter
+/// @require separator.separator
 /// @require slice.slice
 ///
 @function sort($list, $compare: compare.string(), $center: auto, $separator: auto)
 
 	@if meta.type-of($compare) != 'function'
-		@error internal.exception-parameter-type('sort', 'compare', $compare, 'function')
+		@error parameter-type.parameter-type('sort', 'compare', $compare, 'function')
 
-	@if internal.separator-is-invalid($separator)
-		@error internal.exception-separator('sort')
+	@if is-separator-invalid.is-separator-invalid($separator)
+		@error separator.separator('sort')
 
 	@if $separator == 'auto' and meta.type-of($list) == 'map'
 		$separator: 'comma'
@@ -65,10 +68,10 @@
 	@if $center != auto
 
 		@if meta.type-of($center) != 'number'
-			@error internal.exception-parameter-type('sort', 'center', $center, 'number')
+			@error parameter-type.parameter-type('sort', 'center', $center, 'number')
 
 		@if $center < 0 or $center > 0
-			@error internal.exception-parameter('Must be "auto" or zero with or without units', 'sort', 'center')
+			@error parameter.parameter('Must be "auto" or zero with or without units', 'sort', 'center')
 
 	@else
 		$item: find.find($list, meta.get-function('_is-number-and-not-unitless'))

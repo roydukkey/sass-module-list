@@ -22,7 +22,7 @@
 	],
 	"main": "./index.sass",
 	"dependencies": {
-		"sass-exception": "^1.0.0",
+		"sass-exception": "^1.1.0",
 		"sass-meta": "^1.0.0"
 	},
 	"devDependencies": {
