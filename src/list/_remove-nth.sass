@@ -9,8 +9,8 @@
 @use 'sass:meta'
 @use 'sass-exception/src/exception/is-separator-invalid'
 @use 'sass-exception/src/exception/separator'
+@use 'sass-exception/src/exception/validate-index'
 @use 'slice'
-@use '../internal'
 
 
 ///
@@ -27,14 +27,13 @@
 /// @throw Must be "space", "comma", "slash", or "auto".
 ///
 /// @access public
-/// @require internal.validate-index
 /// @require is-separator-invalid.is-separator-invalid
 /// @require separator.separator
 /// @require slice.slice
+/// @require validate-index.validate-index
 ///
 @function remove-nth($list, $index, $separator: auto)
-	$length: list.length($list)
-	$index: internal.validate-index('remove-nth', 'index', $index, $length)
+	$index: validate-index.validate-index('remove-nth', 'index', $index, $list)
 
 	@if meta.type-of($index) != 'number'
 		@error $index
@@ -44,6 +43,8 @@
 
 	@if $index == 1
 		@return slice.slice($list, $index + 1)
+
+	$length: list.length($list)
 
 	@if $index == $length
 		@return slice.slice($list, 1, $length - 1)

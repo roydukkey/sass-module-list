@@ -5,10 +5,10 @@
 /// @group api
 ////
 
-@use 'sass:list'
 @use 'sass:meta'
 @use 'sass-exception/src/exception/is-separator-invalid'
 @use 'sass-exception/src/exception/separator'
+@use 'sass-exception/src/exception/validate-index'
 @use '../internal'
 
 
@@ -28,12 +28,12 @@
 ///
 /// @access public
 /// @require internal.insert-nth
-/// @require internal.validate-index
 /// @require is-separator-invalid.is-separator-invalid
 /// @require separator.separator
+/// @require validate-index.validate-index
 ///
 @function insert-nth($list, $index, $value, $separator: auto)
-	$index: internal.validate-index('insert-nth', 'index', $index, list.length($list))
+	$index: validate-index.validate-index('insert-nth', 'index', $index, $list)
 
 	@if meta.type-of($index) != 'number'
 		@error $index

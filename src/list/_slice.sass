@@ -10,8 +10,8 @@
 @use 'sass-exception/src/exception/is-separator-invalid'
 @use 'sass-exception/src/exception/parameter'
 @use 'sass-exception/src/exception/separator'
+@use 'sass-exception/src/exception/validate-index'
 @use 'empty'
-@use '../internal'
 
 
 ///
@@ -39,19 +39,18 @@
 ///
 /// @access public
 /// @require empty.empty
-/// @require internal.validate-index
 /// @require is-separator-invalid.is-separator-invalid
 /// @require parameter.parameter
 /// @require separator.separator
+/// @require validate-index.validate-index
 ///
 @function slice($list, $start-at, $end-at: list.length($list), $separator: auto)
-	$length: list.length($list)
-	$start-at: internal.validate-index('slice', 'start-at', $start-at, $length)
+	$start-at: validate-index.validate-index('slice', 'start-at', $start-at, $list)
 
 	@if meta.type-of($start-at) != 'number'
 		@error $start-at
 
-	$end-at: internal.validate-index('slice', 'end-at', $end-at, $length)
+	$end-at: validate-index.validate-index('slice', 'end-at', $end-at, $list)
 
 	@if meta.type-of($end-at) != 'number'
 		@error $end-at
