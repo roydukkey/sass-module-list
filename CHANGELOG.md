@@ -3,6 +3,10 @@
 [//]: # (>>   The order of list items should be: Critical/Fixes, New, Update, Remove, Underpinnings   <<)
 [//]: # (>>   ## [UNRELEASED]https://github.com/roydukkey/sass-module-list/compare/v2.0.1...master   <<)
 
+## [UNRELEASED](https://github.com/roydukkey/sass-module-list/compare/v2.0.1...master)
+
+* Replace internals with `.is-separator-invalid()`, `.separator()`, and `.validate-index()` abstractions to `sass-exception` [#11](https://github.com/roydukkey/sass-module-list/issues/11)
+
 ## [2.0.1](https://github.com/roydukkey/sass-module-list/compare/v2.0.0...v2.0.1)
 
 * Fix `.reverse()` and `.sort()` to always return a list when given a map [#9](https://github.com/roydukkey/sass-module-list/issues/9)
