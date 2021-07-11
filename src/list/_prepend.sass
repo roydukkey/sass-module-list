@@ -8,7 +8,7 @@
 @use 'sass:list'
 @use 'sass-exception/src/exception/is-separator-invalid'
 @use 'sass-exception/src/exception/separator'
-@use '../internal'
+@use '../internal/insert-nth'
 
 
 ///
@@ -22,7 +22,7 @@
 /// @throw Must be "space", "comma", "slash", or "auto".
 ///
 /// @access public
-/// @require internal.insert-nth
+/// @require insert-nth.insert-nth
 /// @require is-separator-invalid.is-separator-invalid
 /// @require separator.separator
 ///
@@ -31,4 +31,4 @@
 	@if is-separator-invalid.is-separator-invalid($separator)
 		@error separator.separator('prepend')
 
-	@return internal.insert-nth($list, 1, $value, $separator)
+	@return insert-nth.insert-nth($list, 1, $value, $separator)
