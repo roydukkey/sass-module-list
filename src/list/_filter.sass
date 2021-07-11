@@ -7,8 +7,10 @@
 
 @use 'sass:list'
 @use 'sass:meta'
+@use 'sass-exception/src/exception/is-separator-invalid'
+@use 'sass-exception/src/exception/parameter-type'
+@use 'sass-exception/src/exception/separator'
 @use 'empty'
-@use '../internal'
 
 
 ///
@@ -25,17 +27,17 @@
 ///
 /// @access public
 /// @require empty.empty
-/// @require internal.exception-parameter-type
-/// @require internal.exception-separator
-/// @require internal.separator-is-invalid
+/// @require parameter-type.parameter-type
+/// @require is-separator-invalid.is-separator-invalid
+/// @require separator.separator
 ///
 @function filter($list, $predicate, $separator: auto, $args...)
 
 	@if meta.type-of($predicate) != 'function'
-		@error internal.exception-parameter-type('filter', 'predicate', $predicate, 'function')
+		@error parameter-type.parameter-type('filter', 'predicate', $predicate, 'function')
 
-	@if internal.separator-is-invalid($separator)
-		@error internal.exception-separator('filter')
+	@if is-separator-invalid.is-separator-invalid($separator)
+		@error separator.separator('filter')
 
 	$result: empty.empty($separator, $list: $list)
 	$index: 1

@@ -8,7 +8,10 @@
 @use 'sass:list'
 @use 'sass:meta'
 @use 'empty'
-@use '../internal'
+@use 'sass-exception/src/exception/is-separator-invalid'
+@use 'sass-exception/src/exception/parameter'
+@use 'sass-exception/src/exception/parameter-type'
+@use 'sass-exception/src/exception/separator'
 
 
 ///
@@ -25,21 +28,21 @@
 /// @throw Must be "space", "comma", "slash", or "auto".
 ///
 /// @access public
-/// @require internal.exception-parameter
-/// @require internal.exception-parameter-type
-/// @require internal.exception-separator
-/// @require internal.separator-is-invalid
+/// @require is-separator-invalid.is-separator-invalid
+/// @require parameter.parameter
+/// @require parameter-type.parameter-type
+/// @require separator.separator
 ///
 @function flat($list, $depth: 1, $separator: auto, $bracketed: auto)
 
 	@if meta.type-of($depth) != 'number'
-		@error internal.exception-parameter-type('flat', 'depth', $depth, 'number')
+		@error parameter-type.parameter-type('flat', 'depth', $depth, 'number')
 
 	@if $depth < 1
-		@error internal.exception-parameter('The depth may not be less than 1', 'flat', 'depth')
+		@error parameter.parameter('The depth may not be less than 1', 'flat', 'depth')
 
-	@if internal.separator-is-invalid($separator)
-		@error internal.exception-separator('flat')
+	@if is-separator-invalid.is-separator-invalid($separator)
+		@error separator.separator('flat')
 
 	@return _flat($list, $depth, 1, $separator, $bracketed)
 

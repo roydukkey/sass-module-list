@@ -7,6 +7,8 @@
 
 @use 'sass:list'
 @use 'sass:meta'
+@use 'sass-exception/src/exception/is-separator-invalid'
+@use 'sass-exception/src/exception/separator'
 @use '../internal'
 
 
@@ -25,9 +27,9 @@
 /// @throw Must be "space", "comma", "slash", or "auto".
 ///
 /// @access public
-/// @require internal.exception-separator
-/// @require internal.separator-is-invalid
 /// @require internal.validate-index
+/// @require is-separator-invalid.is-separator-invalid
+/// @require separator.separator
 ///
 @function set-nth($list, $index, $value, $separator: auto)
 	$index: internal.validate-index('set-nth', 'index', $index, list.length($list))
@@ -35,8 +37,8 @@
 	@if meta.type-of($index) != 'number'
 		@error $index
 
-	@if internal.separator-is-invalid($separator)
-		@error internal.exception-separator('set-nth')
+	@if is-separator-invalid.is-separator-invalid($separator)
+		@error separator.separator('set-nth')
 
 	@return list.join(list.set-nth($list, $index, $value), (), $separator)
 

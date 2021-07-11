@@ -6,19 +6,8 @@
 ////
 
 @use 'sass:meta'
-@use 'exception'
-
-
-///
-/// Indicates whether a specified value is invalid for a separator parameter.
-///
-///	@param {String} $value - The value which is being validated.
-/// @return {Boolean}
-///
-/// @access public
-///
-@function separator-is-invalid($value)
-	@return $value != space and $value != comma and $value != slash and $value != auto
+@use 'sass-exception/src/exception/parameter'
+@use 'sass-exception/src/exception/parameter-type'
 
 
 ///
@@ -31,22 +20,22 @@
 /// @return {String | Number}
 ///
 /// @access public
-/// @require exception.parameter-type
-/// @require exception.parameter
+/// @require parameter.parameter
+/// @require parameter-type.parameter-type
 ///
 @function validate-index($context, $name, $value, $length)
 
 	@if meta.type-of($value) != 'number'
-		@return exception.parameter-type($context, $name, $value, 'number')
+		@return parameter-type.parameter-type($context, $name, $value, 'number')
 
 	@if $value == 0
-		@return exception.parameter('List index may not be 0', $context, $name)
+		@return parameter.parameter('List index may not be 0', $context, $name)
 
 	// Transform negative index to positive index.
 	@if $value < 1 and $value + $length + 1 > 0
 		$value: $value + $length + 1
 
 	@if $value > $length or $value < 0
-		@return exception.parameter('Invalid index #{$value} for a list with #{$length} elements', $context, $name)
+		@return parameter.parameter('Invalid index #{$value} for a list with #{$length} elements', $context, $name)
 
 	@return $value

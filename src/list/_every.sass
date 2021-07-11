@@ -6,7 +6,7 @@
 ////
 
 @use 'sass:meta'
-@use '../internal'
+@use 'sass-exception/src/exception/parameter-type'
 
 
 ///
@@ -20,12 +20,12 @@
 /// @throw `#{$predicate}` is not a function.
 ///
 /// @access public
-/// @require internal.exception-parameter-type
+/// @require parameter-type.parameter-type
 ///
 @function every($list, $predicate, $args...)
 
 	@if meta.type-of($predicate) != 'function'
-		@error internal.exception-parameter-type('every', 'predicate', $predicate, 'function')
+		@error parameter-type.parameter-type('every', 'predicate', $predicate, 'function')
 
 	$index: 1
 

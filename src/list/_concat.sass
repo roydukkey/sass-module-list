@@ -7,8 +7,10 @@
 
 @use 'sass:list'
 @use 'sass-meta/src/meta/get-keyword' as sass-meta
+@use 'sass-exception/src/exception/is-separator-invalid'
+@use 'sass-exception/src/exception/parameter'
+@use 'sass-exception/src/exception/separator'
 @use 'empty'
-@use '../internal'
 
 
 ///
@@ -24,20 +26,20 @@
 ///
 /// @access public
 /// @require empty.empty
-/// @require internal.exception-parameter
-/// @require internal.exception-separator
-/// @require internal.separator-is-invalid
+/// @require is-separator-invalid.is-separator-invalid
+/// @require parameter.parameter
+/// @require separator.separator
 /// @require sass-meta.get-keyword
 ///
 @function concat($values...)
 
 	@if list.length($values) < 2
-		@error internal.exception-parameter('Two or more values are required', 'concat', 'values')
+		@error parameter.parameter('Two or more values are required', 'concat', 'values')
 
 	$separator: sass-meta.get-keyword($values, 'separator', auto)
 
-	@if internal.separator-is-invalid($separator)
-		@error internal.exception-separator('concat')
+	@if is-separator-invalid.is-separator-invalid($separator)
+		@error separator.separator('concat')
 
 	$bracketed: sass-meta.get-keyword($values, 'bracketed', auto)
 	$result: empty.empty($separator, $bracketed, list.nth($values, 1))

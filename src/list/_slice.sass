@@ -7,6 +7,9 @@
 
 @use 'sass:list'
 @use 'sass:meta'
+@use 'sass-exception/src/exception/is-separator-invalid'
+@use 'sass-exception/src/exception/parameter'
+@use 'sass-exception/src/exception/separator'
 @use 'empty'
 @use '../internal'
 
@@ -36,10 +39,10 @@
 ///
 /// @access public
 /// @require empty.empty
-/// @require internal.exception-parameter
-/// @require internal.exception-separator
-/// @require internal.separator-is-invalid
 /// @require internal.validate-index
+/// @require is-separator-invalid.is-separator-invalid
+/// @require parameter.parameter
+/// @require separator.separator
 ///
 @function slice($list, $start-at, $end-at: list.length($list), $separator: auto)
 	$length: list.length($list)
@@ -54,10 +57,10 @@
 		@error $end-at
 
 	@if $start-at > $end-at
-		@error internal.exception-parameter('The starting index is not less than the ending index', 'slice', 'start-at', 'end-at')
+		@error parameter.parameter('The starting index is not less than the ending index', 'slice', 'start-at', 'end-at')
 
-	@if internal.separator-is-invalid($separator)
-		@error internal.exception-separator('slice')
+	@if is-separator-invalid.is-separator-invalid($separator)
+		@error separator.separator('slice')
 
 	$result: empty.empty($separator, $list: $list)
 

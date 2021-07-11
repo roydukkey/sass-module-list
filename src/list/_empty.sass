@@ -7,8 +7,8 @@
 
 @use 'sass:list'
 @use 'sass:meta'
-@use '../internal/exception'
-@use '../internal/parameter'
+@use 'sass-exception/src/exception/is-separator-invalid'
+@use 'sass-exception/src/exception/separator'
 
 
 ///
@@ -22,8 +22,8 @@
 /// @throw Must be "space", "comma", "slash", or "auto".
 ///
 /// @access public
-/// @require exception.separator
-/// @require parameter.separator-is-invalid
+/// @require is-separator-invalid.is-separator-invalid
+/// @require separator.separator
 ///
 @function empty($separator: null, $bracketed: null, $list: null)
 
@@ -41,7 +41,7 @@
 		@if $bracketed == null
 			$bracketed: false
 
-	@if parameter.separator-is-invalid($separator)
-		@error exception.separator('empty')
+	@if is-separator-invalid.is-separator-invalid($separator)
+		@error separator.separator('empty')
 
 	@return list.join((), (), $separator, $bracketed)

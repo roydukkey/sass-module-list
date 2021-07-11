@@ -7,8 +7,9 @@
 
 @use 'sass:list'
 @use 'sass:meta'
+@use 'sass-exception/src/exception/is-separator-invalid'
+@use 'sass-exception/src/exception/separator'
 @use 'filter'
-@use '../internal'
 
 
 ///
@@ -23,13 +24,13 @@
 /// @access public
 /// @require _distinct-predicate
 /// @require filter.filter
-/// @require internal.exception-separator
-/// @require internal.separator-is-invalid
+/// @require is-separator-invalid.is-separator-invalid
+/// @require separator.separator
 ///
 @function distinct($list, $separator: auto)
 
-	@if internal.separator-is-invalid($separator)
-		@error internal.exception-separator('distinct')
+	@if is-separator-invalid.is-separator-invalid($separator)
+		@error separator.separator('distinct')
 
 	@return filter.filter($list, meta.get-function('_distinct-predicate'), $separator)
 
