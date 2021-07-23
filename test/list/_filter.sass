@@ -55,7 +55,7 @@
 		$expected: list.slash('a', 1, null, 4, 10)
 		@include true.assert-equal($assert, $expected, '[slash]')
 
-	@include true.it('Throws when $predicate is not an function')
+	@include true.it('Throws when $predicate is not a function')
 		$assert: src.filter(null, null)
 		$expected: 'ERROR: $predicate: `null` is not a function for `filter()`.'
 		@include true.assert-equal($assert, $expected)

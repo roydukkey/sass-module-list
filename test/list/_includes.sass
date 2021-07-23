@@ -36,7 +36,7 @@
 		$assert: src.includes($list, 'camel', -2)
 		@include true.assert-false($assert)
 
-	@include true.it('Throws when $start-at is not an number')
+	@include true.it('Throws when $start-at is not a number')
 		$assert: src.includes(null, null, null)
 		$expected: 'ERROR: $start-at: `null` is not a number for `includes()`.'
 		@include true.assert-equal($assert, $expected)

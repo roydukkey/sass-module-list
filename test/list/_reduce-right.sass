@@ -54,7 +54,7 @@
 		$expected: 20 + 2 + 4 + 6 + 8 + 16
 		@include true.assert-equal($assert, $expected)
 
-	@include true.it('Throws when $transformer is not an function')
+	@include true.it('Throws when $transformer is not a function')
 		$assert: src.reduce-right(null, null)
 		$expected: 'ERROR: $transformer: `null` is not a function for `reduce-right()`.'
 		@include true.assert-equal($assert, $expected)

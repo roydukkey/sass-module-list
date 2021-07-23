@@ -51,7 +51,7 @@
 		$assert: src.some(2 1 1 2 2 1 1 2, meta.get-function('_equals-2n-plus-index'))
 		@include true.assert-false($assert, '[2 1 1 2 2 1 1 2]')
 
-	@include true.it('Throws when $predicate is not an function')
+	@include true.it('Throws when $predicate is not a function')
 		$assert: src.some(null, null)
 		$expected: 'ERROR: $predicate: `null` is not a function for `some()`.'
 		@include true.assert-equal($assert, $expected)

@@ -74,7 +74,7 @@ sass.render({
   <dd>Returns a copy of a list with the specified value inserted into the list at a given index.</dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_join.sass"><code>join ( $list [, $glue] )</code></a></dt>
-  <dd>Concatenates all of the items in an list to a string, separated by the list's separator or a specified glue string. If the list has only one item, then that item will be returned without using the glue.</dd>
+  <dd>Concatenates all of the items in a list to a string, separated by the list's separator or a specified glue string. If the list has only one item, then that item will be returned without using the glue.</dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_last-index.sass"><code>last-index ( $list, $value [, $from-index] )</code></a></dt>
   <dd>Returns the last index at which a specified item can be found in a list; otherwise, 0 is returned, indicating that the item is not present. The list is searched backwards, starting at a given index when specified.</dd>

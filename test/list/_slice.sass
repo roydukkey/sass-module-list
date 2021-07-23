@@ -87,7 +87,7 @@
 		$expected: list.join(list.slash('duck', 'elephant'), (), $bracketed: true)
 		@include true.assert-equal($assert, $expected, '[slash]')
 
-	@include true.it('Throws when $start-at is not an number')
+	@include true.it('Throws when $start-at is not a number')
 		$assert: src.slice(null, null, null)
 		$expected: 'ERROR: $start-at: `null` is not a number for `slice()`.'
 		@include true.assert-equal($assert, $expected)
@@ -106,7 +106,7 @@
 		$expected: 'ERROR: $start-at: Invalid index -2 for a list with 1 elements for `slice()`.'
 		@include true.assert-equal($assert, $expected, '[-2]')
 
-	@include true.it('Throws when $end-at is not an number')
+	@include true.it('Throws when $end-at is not a number')
 		$assert: src.slice(null, 1, null)
 		$expected: 'ERROR: $end-at: `null` is not a number for `slice()`.'
 		@include true.assert-equal($assert, $expected)

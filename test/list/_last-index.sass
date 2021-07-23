@@ -14,17 +14,17 @@
 @include true.describe('@function src.last-index')
 	$list: 'a' true 8 'b' true 2 4 10 'b' false
 
-	@include true.it('Get an last index for an item from a list')
+	@include true.it('Get a last index for an item from a list')
 		$assert: src.last-index($list, 'b')
 		$expected: 9
 		@include true.assert-equal($assert, $expected)
 
-	@include true.it('Get an last index for an item from an positive (+) offset of the list')
+	@include true.it('Get a last index for an item from a positive (+) offset of the list')
 		$assert: src.last-index($list, 'b', 5)
 		$expected: 4
 		@include true.assert-equal($assert, $expected)
 
-	@include true.it('Get an last index for an item from an negative (-) offset of the list')
+	@include true.it('Get a last index for an item from a negative (-) offset of the list')
 		$assert: src.last-index($list, 'b', -3)
 		$expected: 4
 		@include true.assert-equal($assert, $expected)
@@ -34,7 +34,7 @@
 		$expected: 0
 		@include true.assert-equal($assert, $expected)
 
-	@include true.it('Throws when $from-index is not an number')
+	@include true.it('Throws when $from-index is not a number')
 		$assert: src.last-index(null, null, null)
 		$expected: 'ERROR: $from-index: `null` is not a number for `last-index()`.'
 		@include true.assert-equal($assert, $expected)

@@ -4,7 +4,7 @@ The follow designates when functions are to accepts parameters that modify list 
 
 ## Delimiting Punctuation
 
-The `$separator` parameter should be accepted when returning an list.
+The `$separator` parameter should be accepted when returning a list.
 
 ## Enclosing Punctuation
 
@@ -16,7 +16,7 @@ The `$bracketed` parameter should be accepted when returning a list...
     2. `.empty()`
     3. etc.
 
-  * that is not a subset of an source list and a potential input value.
+  * that is not a subset of a source list and a potential input value.
 
     1. `.map()`
     2. etc.

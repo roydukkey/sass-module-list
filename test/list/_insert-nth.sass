@@ -32,7 +32,7 @@
 		$expected: ['ant' 'deer' 'bison' 'camel' 'duck' 'elephant']
 		@include true.assert-equal($assert, $expected)
 
-	@include true.it('Throws when $index is not an number')
+	@include true.it('Throws when $index is not a number')
 		$assert: src.insert-nth(null, null, null)
 		$expected: 'ERROR: $index: `null` is not a number for `insert-nth()`.'
 		@include true.assert-equal($assert, $expected)

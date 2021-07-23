@@ -46,7 +46,7 @@
 		$expected: [15, 14, 13, 12, (11 10 (9 8)), 7, ((6 5) 4), 3, 2, 1]
 		@include true.assert-equal($assert, $expected)
 
-	@include true.it('Throws when $depth is not an number')
+	@include true.it('Throws when $depth is not a number')
 		$assert: src.flat(null, null)
 		$expected: 'ERROR: $depth: `null` is not a number for `flat()`.'
 		@include true.assert-equal($assert, $expected)

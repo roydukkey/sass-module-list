@@ -17,7 +17,7 @@
 		$expected: 9, "set", dude
 		@include true.assert-equal($assert, $expected)
 
-	@include true.it('Throws when $index is not an number')
+	@include true.it('Throws when $index is not a number')
 		$assert: src.set-nth(null, null, null)
 		$expected: 'ERROR: $index: `null` is not a number for `set-nth()`.'
 		@include true.assert-equal($assert, $expected)

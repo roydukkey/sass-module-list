@@ -47,7 +47,7 @@
 		$expected: ['ant' 'camel' 'duck' 'elephant']
 		@include true.assert-equal($assert, $expected)
 
-	@include true.it('Throws when $index is not an number')
+	@include true.it('Throws when $index is not a number')
 		$assert: src.remove-nth(null, null)
 		$expected: 'ERROR: $index: `null` is not a number for `remove-nth()`.'
 		@include true.assert-equal($assert, $expected)
