@@ -59,7 +59,7 @@ sass.render({
   <dd>Returns the value of the first element from a list that satisfies the test implemented by the specified function.</dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_find-nth.sass"><code>find-nth ( $list, $predicate [, $args...] )</code></a></dt>
-  <dd>Returns the index of the first item from a list that satisfies the test implemented by the specified function; otherwise, 0 is returned, indicating that no item satisfies the test.</dd>
+  <dd>Returns the index of the first item from a list that satisfies the test implemented by the specified function; otherwise, 0 is returned, indicating no item satisfies the test.</dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_flat.sass"><code>flat ( $list [, $depth] [, $separator] [, $bracketed] )</code></a></dt>
   <dd>Creates a new list with all sub-list items concatenated into it recursively up to a specified depth.</dd>
@@ -68,7 +68,7 @@ sass.render({
   <dd>Determines whether a list includes a certain value among its items, returning true or false as appropriate.</dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_index.sass"><code>index ( $list, $value [, $from-index] )</code></a></dt>
-  <dd>Returns the first index at which a specified item can be found in a list; otherwise, 0 is returned, indicating that the item is not present.</dd>
+  <dd>Returns the first index at which a specified item can be found in a list; otherwise, 0 is returned, indicating the item is not present.</dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_insert-nth.sass"><code>insert-nth ( $list, $index, $value [, $separator] )</code></a></dt>
   <dd>Returns a copy of a list with the specified value inserted into the list at a given index.</dd>
@@ -77,7 +77,7 @@ sass.render({
   <dd>Concatenates all of the items in a list to a string, separated by the list's separator or a specified glue string. If the list has only one item, then that item will be returned without using the glue.</dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_last-index.sass"><code>last-index ( $list, $value [, $from-index] )</code></a></dt>
-  <dd>Returns the last index at which a specified item can be found in a list; otherwise, 0 is returned, indicating that the item is not present. The list is searched backwards, starting at a given index when specified.</dd>
+  <dd>Returns the last index at which a specified item can be found in a list; otherwise, 0 is returned, indicating the item is not present. The list is searched backwards, starting at a given index when specified.</dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_map.sass"><code>map ( $list, $transformer [, $separator] [, $bracketed] [, $args...] )</code></a></dt>
   <dd>Creates a new list populated with the results of calling a specified function on every item in a list.</dd>
