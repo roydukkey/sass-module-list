@@ -5,6 +5,7 @@
 
 ## [UNRELEASED](https://github.com/roydukkey/sass-module-list/compare/v2.0.1...master)
 
+* Update several parameter defaults to use `-1` [#13](https://github.com/roydukkey/sass-module-list/issues/13)
 * Replace internals with `.is-separator-invalid()`, `.separator()`, and `.validate-index()` abstractions to `sass-exception` [#11](https://github.com/roydukkey/sass-module-list/issues/11)
 
 ## [2.0.1](https://github.com/roydukkey/sass-module-list/compare/v2.0.0...v2.0.1)
