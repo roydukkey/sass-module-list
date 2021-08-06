@@ -15,23 +15,23 @@
 ///
 /// @param {List} $list - The list from which the value is to be located.
 /// @param {*} $value - The value to locate in the list.
-/// @param {Number} $from-index [-1] - The index at which to begin the search. A negative index can be used, indicating an offset from the end of the list.
+/// @param {Number} $start-at [-1] - The index at which to begin the search. A negative index can be used, indicating an offset from the end of the list.
 /// @return {Number}
 ///
-/// @throw `#{$from-index}` is not a number.
+/// @throw `#{$start-at}` is not a number.
 /// @throw List index may not be 0.
-/// @throw Invalid index #{$from-index} for a list with #{length} elements.
+/// @throw Invalid index #{$start-at} for a list with #{length} elements.
 ///
 /// @access public
 /// @require validate-index.validate-index
 ///
-@function last-index($list, $value, $from-index: -1)
-	$from-index: validate-index.validate-index('last-index', 'from-index', $from-index, $list)
+@function last-index($list, $value, $start-at: -1)
+	$start-at: validate-index.validate-index('last-index', 'start-at', $start-at, $list)
 
-	@if meta.type-of($from-index) != 'number'
-		@error $from-index
+	@if meta.type-of($start-at) != 'number'
+		@error $start-at
 
-	@for $index from $from-index through 1
+	@for $index from $start-at through 1
 		@if list.nth($list, $index) == $value
 			@return $index
 

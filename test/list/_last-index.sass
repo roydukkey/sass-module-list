@@ -34,21 +34,21 @@
 		$expected: 0
 		@include true.assert-equal($assert, $expected)
 
-	@include true.it('Throws when $from-index is not a number')
+	@include true.it('Throws when $start-at is not a number')
 		$assert: src.last-index(null, null, null)
-		$expected: 'ERROR: $from-index: `null` is not a number for `last-index()`.'
+		$expected: 'ERROR: $start-at: `null` is not a number for `last-index()`.'
 		@include true.assert-equal($assert, $expected)
 
-	@include true.it('Throws when $from-index index is zero')
+	@include true.it('Throws when $start-at index is zero')
 		$assert: src.last-index(null, null, 0)
-		$expected: 'ERROR: $from-index: List index may not be 0 for `last-index()`.'
+		$expected: 'ERROR: $start-at: List index may not be 0 for `last-index()`.'
 		@include true.assert-equal($assert, $expected, '[0]')
 
-	@include true.it('Throws when $from-index index is invalid for length')
+	@include true.it('Throws when $start-at index is invalid for length')
 		$assert: src.last-index(null, null, 2)
-		$expected: 'ERROR: $from-index: Invalid index 2 for a list with 1 elements for `last-index()`.'
+		$expected: 'ERROR: $start-at: Invalid index 2 for a list with 1 elements for `last-index()`.'
 		@include true.assert-equal($assert, $expected, '[2]')
 
 		$assert: src.last-index(null, null, -2)
-		$expected: 'ERROR: $from-index: Invalid index -2 for a list with 1 elements for `last-index()`.'
+		$expected: 'ERROR: $start-at: Invalid index -2 for a list with 1 elements for `last-index()`.'
 		@include true.assert-equal($assert, $expected, '[-2]')

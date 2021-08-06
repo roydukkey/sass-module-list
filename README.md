@@ -67,7 +67,7 @@ sass.render({
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_includes.sass"><code>includes ( $list, $value [, $start-at] )</code></a></dt>
   <dd>Determines whether a list includes a certain value among its items, returning true or false as appropriate.</dd>
 
-  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_index.sass"><code>index ( $list, $value [, $from-index] )</code></a></dt>
+  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_index.sass"><code>index ( $list, $value [, $start-at] )</code></a></dt>
   <dd>Returns the first index at which a specified item can be found in a list; otherwise, 0 is returned, indicating the item is not present.</dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_insert-nth.sass"><code>insert-nth ( $list, $index, $value [, $separator] )</code></a></dt>
@@ -76,7 +76,7 @@ sass.render({
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_join.sass"><code>join ( $list [, $glue] )</code></a></dt>
   <dd>Concatenates all of the items in a list to a string, separated by the list's separator or a specified glue string. If the list has only one item, then that item will be returned without using the glue.</dd>
 
-  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_last-index.sass"><code>last-index ( $list, $value [, $from-index] )</code></a></dt>
+  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_last-index.sass"><code>last-index ( $list, $value [, $start-at] )</code></a></dt>
   <dd>Returns the last index at which a specified item can be found in a list; otherwise, 0 is returned, indicating the item is not present. The list is searched backwards, starting at a given index when specified.</dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_map.sass"><code>map ( $list, $transformer [, $separator] [, $bracketed] [, $args...] )</code></a></dt>
