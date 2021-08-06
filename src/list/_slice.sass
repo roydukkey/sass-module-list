@@ -19,7 +19,7 @@
 ///
 /// @param {List} $list - The list to be sliced.
 /// @param {Number} $start-at - The index at which to begin extraction. A negative index can be used, indicating an offset from the end of the list.
-/// @param {Number} $end-at [list.length($list)] - The index through which to end extraction. A negative index can be used, indicating an offset from the end of the list.
+/// @param {Number} $end-at [-1] - The index through which to end extraction. A negative index can be used, indicating an offset from the end of the list.
 /// @param {String} $separator [auto] - The type of separator to be used by the extracted list.
 /// @return {List}
 ///
@@ -44,7 +44,7 @@
 /// @require separator.separator
 /// @require validate-index.validate-index
 ///
-@function slice($list, $start-at, $end-at: list.length($list), $separator: auto)
+@function slice($list, $start-at, $end-at: -1, $separator: auto)
 	$start-at: validate-index.validate-index('slice', 'start-at', $start-at, $list)
 
 	@if meta.type-of($start-at) != 'number'

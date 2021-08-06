@@ -15,7 +15,7 @@
 ///
 /// @param {List} $list - The list from which the value is to be located.
 /// @param {*} $value - The value to locate in the list.
-/// @param {Number} $from-index [list.length($list)] - The index at which to begin the search. A negative index can be used, indicating an offset from the end of the list.
+/// @param {Number} $from-index [-1] - The index at which to begin the search. A negative index can be used, indicating an offset from the end of the list.
 /// @return {Number}
 ///
 /// @throw `#{$from-index}` is not a number.
@@ -25,7 +25,7 @@
 /// @access public
 /// @require validate-index.validate-index
 ///
-@function last-index($list, $value, $from-index: list.length($list))
+@function last-index($list, $value, $from-index: -1)
 	$from-index: validate-index.validate-index('last-index', 'from-index', $from-index, $list)
 
 	@if meta.type-of($from-index) != 'number'
