@@ -67,7 +67,7 @@ sass.render({
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_includes.sass"><code>includes ( $list, $value [, $start-at] )</code></a></dt>
   <dd>Determines whether a list includes a certain value among its items, returning true or false as appropriate.</dd>
 
-  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_index.sass"><code>index ( $list, $value [, $from-index] )</code></a></dt>
+  <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_index.sass"><code>index ( $list, $value [, $start-at] )</code></a></dt>
   <dd>Returns the first index at which a specified item can be found in a list; otherwise, 0 is returned, indicating the item is not present.</dd>
 
   <dt><a href="//github.com/roydukkey/sass-module-list/tree/master/src/list/_insert-nth.sass"><code>insert-nth ( $list, $index, $value [, $separator] )</code></a></dt>
