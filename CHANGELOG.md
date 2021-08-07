@@ -3,7 +3,7 @@
 [//]: # (>>   The order of list items should be: Critical/Fixes, New, Update, Remove, Underpinnings   <<)
 [//]: # (>>   ## [UNRELEASED]https://github.com/roydukkey/sass-module-list/compare/v2.0.2...master   <<)
 
-## [v2.0.2](https://github.com/roydukkey/sass-module-list/compare/v2.0.1...v2.0.2)
+## [2.0.2](https://github.com/roydukkey/sass-module-list/compare/v2.0.1...v2.0.2)
 
 * Update several parameter defaults to use `-1` [#13](https://github.com/roydukkey/sass-module-list/issues/13)
 * Replace internals with `.is-separator-invalid()`, `.separator()`, and `.validate-index()` abstractions to `sass-exception` [#11](https://github.com/roydukkey/sass-module-list/issues/11)
