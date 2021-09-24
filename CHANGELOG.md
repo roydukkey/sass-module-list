@@ -3,6 +3,10 @@
 [//]: # (>>   The order of list items should be: Critical/Fixes, New, Update, Remove, Underpinnings   <<)
 [//]: # (>>   ## [UNRELEASED]https://github.com/roydukkey/sass-module-list/compare/v2.0.2...master   <<)
 
+## [UNRELEASED](https://github.com/roydukkey/sass-module-list/compare/v2.0.2...master)
+
+* Use abstraction from `sass-module-math` to [change units](https://github.com/roydukkey/sass-module-math/blob/a6606d47ecac6ac020842e2da5422a6d1ff5a945/src/math/_change.sass)
+
 ## [2.0.2](https://github.com/roydukkey/sass-module-list/compare/v2.0.1...v2.0.2)
 
 * Update several parameter defaults to use `-1` [#13](https://github.com/roydukkey/sass-module-list/issues/13)

@@ -23,7 +23,8 @@
 	"main": "./index.sass",
 	"dependencies": {
 		"sass-exception": "^1.1.0",
-		"sass-meta": "^1.0.0"
+		"sass-meta": "^1.0.0",
+		"sass-module-math": "^1.0.0"
 	},
 	"devDependencies": {
 		"clean-package": "^1.0.1",
